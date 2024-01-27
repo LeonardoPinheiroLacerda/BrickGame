@@ -1,7 +1,7 @@
 import * as P5 from 'p5';
 import { PARENT_SELECTOR, BACKGROUND_COLOR } from './constants';
 
-import Body from './Body';
+import Body from './body/Body';
 
 export default new P5((p: P5) => {
     //Inicializando algumas variaveis

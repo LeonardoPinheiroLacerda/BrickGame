@@ -1,0 +1,22 @@
+@font-face {
+    font-family: retro-gamming;
+    src: url(./assets/fonts/digital-7.monoitalic.ttf);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: content-box;
+}
+
+body {
+    width: 100vw;
+    height: 100vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background: rgb(0, 158, 247);
+    background: linear-gradient(300deg, rgb(48, 179, 255) 0%, rgba(0, 158, 247, 1) 100%);
+}
