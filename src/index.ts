@@ -13,14 +13,11 @@ export default new P5((p: P5) => {
     });
 
     p.setup = () => {
-        body.build();
+        const { canvasWidth, canvasHeight } = body.build();
 
-        const canvas = p.createCanvas(200, 200);
-        canvas.parent(PARENT_SELECTOR);
-        canvas.id('brick-game-canvas');
-    };
-
-    p.draw = () => {
         p.background(BACKGROUND_COLOR);
+        p.noFill();
+        p.strokeWeight(3);
+        p.rect(1.5, 1.5, canvasWidth - 3, canvasHeight - 3);
     };
 }, document.body);

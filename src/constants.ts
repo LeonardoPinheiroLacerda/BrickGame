@@ -13,7 +13,7 @@ export const BODY_BUTTON_REFLECTION = 'rgb(250, 241, 185)';
 export const GRID_X = 11;
 export const GRID_Y = 18;
 
-export const BODY_HEIGHT_WIDTH_MULTIPLIER = 1.9;
+export const BODY_HEIGHT_WIDTH_MULTIPLIER = 2;
 export const BODY_PARENT_MARGIN = 20;
 
 //QuerySelectors

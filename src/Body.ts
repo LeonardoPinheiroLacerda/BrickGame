@@ -43,6 +43,7 @@ export default class Body {
     build() {
         const container = this.p.createDiv();
         container.parent(PARENT_SELECTOR);
+        container.id('container');
         this.calcItSelfSize(container);
 
         container.style(
@@ -50,8 +51,25 @@ export default class Body {
                 margin: auto; 
                 box-sizing:border-box;
                 background-color: ${BODY_MAIN_COLOR};
-                border-radius: ${this.width * 0.05}px
+                border-radius: ${this.width * 0.05}px;
+                position: relative;
             `,
         );
+
+        const canvasWidth = this.width * 0.7;
+        const canvasHeight = canvasWidth * 1.15;
+
+        const canvas = this.p.createCanvas(canvasWidth, canvasHeight);
+        canvas.parent(container);
+        canvas.style(
+            `
+                position:absolute;
+                top: 7.5%;
+                left: 15%
+            `,
+        );
+        canvas.id('brick-game-canvas');
+
+        return { canvasWidth, canvasHeight };
     }
 }
