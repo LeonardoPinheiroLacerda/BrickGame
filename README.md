@@ -166,7 +166,7 @@ Add ``"start": "webpack serve --open"`` in package.json and type ``npm run start
   "private": true,
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "webpack serve --open" //add
+    "start": "webpack serve --open"
   },
   "keywords": [],
   "author": "",

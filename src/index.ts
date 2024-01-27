@@ -1,15 +1,13 @@
 import * as P5 from 'p5';
+import * as constants from './constants';
 
 export const sketch = (p: P5) => {
     p.setup = () => {
-        p.createCanvas(400, 400);
+        p.createCanvas(465, 494);
     }
 
     p.draw = () => {
-        p.background(220);
-
-        p.square(100, 100, 200, 30)
-
+        p.background(constants.BACKGROUND_COLOR);
     }
 }
 
