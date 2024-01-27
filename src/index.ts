@@ -1,14 +1,26 @@
 import * as P5 from 'p5';
-import * as constants from './constants';
+import { PARENT_SELECTOR, BACKGROUND_COLOR } from './constants';
 
-export const sketch = (p: P5) => {
+import Body from './Body';
+
+export default new P5((p: P5) => {
+    //Inicializando algumas variaveis
+    const parentElement = document.querySelector(PARENT_SELECTOR);
+
+    const body = new Body({
+        parent: parentElement,
+        p,
+    });
+
     p.setup = () => {
-        p.createCanvas(465, 494);
+        body.build();
+
+        const canvas = p.createCanvas(200, 200);
+        canvas.parent(PARENT_SELECTOR);
+        canvas.id('brick-game-canvas');
     };
 
     p.draw = () => {
-        p.background(constants.BACKGROUND_COLOR);
+        p.background(BACKGROUND_COLOR);
     };
-};
-
-export const myp5 = new P5(sketch, document.body);
+}, document.body);

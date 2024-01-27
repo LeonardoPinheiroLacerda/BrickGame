@@ -1,11 +1,40 @@
 <!doctype html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <title>P5 Project</title>
-    </head>
 
-    <body>
-        <script src="bundle.js"></script>
-    </body>
+<head>
+    <meta charset="UTF-8" />
+    <title>P5 Project</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: content-box;
+        }
+
+        body {
+            width: 100vw;
+            height: 100vh;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            background: rgb(0, 158, 247);
+            background: linear-gradient(300deg, rgb(48, 179, 255) 0%, rgba(0, 158, 247, 1) 100%);
+        }
+
+        #brick-game {
+            width: 480px;
+            height: 835px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="brick-game"></div>
+
+    <script src="bundle.js"></script>
+</body>
+
 </html>

@@ -1,9 +1,10 @@
 {
   "name": "brick-game",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "Brick game simulator.",
   "scripts": {
     "start": "webpack serve --open",
+    "build": "webpack",
     "check-prettier": "npx prettier -c .",
     "write-prettier": "npx prettier -w ."
   },
