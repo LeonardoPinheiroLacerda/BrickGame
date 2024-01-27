@@ -18,27 +18,27 @@ Delete `"main":"index.js"` in package.json and add `"private":true`
 
 ```json
 {
-  "name": "p5-project",
-  "version": "1.0.0",
-  "description": "",
-  "private": true,
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "devDependencies": {
-    "@types/p5": "^1.4.2",
-    "ts-loader": "^9.3.0",
-    "typescript": "^4.6.4",
-    "webpack": "^5.72.1",
-    "webpack-cli": "^4.9.2",
-    "webpack-dev-server": "^4.9.0"
-  },
-  "dependencies": {
-    "p5": "^1.4.1"
-  }
+    "name": "p5-project",
+    "version": "1.0.0",
+    "description": "",
+    "private": true,
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "devDependencies": {
+        "@types/p5": "^1.4.2",
+        "ts-loader": "^9.3.0",
+        "typescript": "^4.6.4",
+        "webpack": "^5.72.1",
+        "webpack-cli": "^4.9.2",
+        "webpack-dev-server": "^4.9.0"
+    },
+    "dependencies": {
+        "p5": "^1.4.1"
+    }
 }
 ```
 
@@ -67,30 +67,30 @@ Each file should be written with reference to the following.
 webpack.config.js
 
 ```javascript
-const path = require("path");
+const path = require('path');
 
 module.exports = {
-  mode: "development",
-  entry: "./src/index.ts",
-  module: {
-    rules: [
-      {
-        test: /\.tsx?$/,
-        use: "ts-loader",
-        exclude: /node_modules/,
-      },
-    ],
-  },
-  resolve: {
-    extensions: [".tsx", ".ts", ".js"],
-  },
-  output: {
-    filename: "bundle.js",
-    path: path.resolve(__dirname, "dist"),
-  },
-  devServer: {
-    static: "./dist",
-  },
+    mode: 'development',
+    entry: './src/index.ts',
+    module: {
+        rules: [
+            {
+                test: /\.tsx?$/,
+                use: 'ts-loader',
+                exclude: /node_modules/,
+            },
+        ],
+    },
+    resolve: {
+        extensions: ['.tsx', '.ts', '.js'],
+    },
+    output: {
+        filename: 'bundle.js',
+        path: path.resolve(__dirname, 'dist'),
+    },
+    devServer: {
+        static: './dist',
+    },
 };
 ```
 
@@ -98,22 +98,22 @@ tsconfig.json
 
 ```json
 {
-  "compilerOptions": {
-    "outDir": "./dist/",
-    "noImplicitAny": true,
-    "module": "es6",
-    "target": "es5",
-    "jsx": "react",
-    "allowJs": true,
-    "moduleResolution": "node"
-  }
+    "compilerOptions": {
+        "outDir": "./dist/",
+        "noImplicitAny": true,
+        "module": "es6",
+        "target": "es5",
+        "jsx": "react",
+        "allowJs": true,
+        "moduleResolution": "node"
+    }
 }
 ```
 
 global.d.ts
 
 ```typescript
-import module = require("p5");
+import module = require('p5');
 export = module;
 export as namespace p5;
 ```
@@ -123,30 +123,30 @@ index.html
 ```html
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <title>P5 Project</title>
-  </head>
-  <body>
-    <script src="bundle.js"></script>
-  </body>
+    <head>
+        <meta charset="UTF-8" />
+        <title>P5 Project</title>
+    </head>
+    <body>
+        <script src="bundle.js"></script>
+    </body>
 </html>
 ```
 
 index.ts
 
 ```typescript
-import * as p5 from "p5";
+import * as p5 from 'p5';
 
 export const sketch = (p: p5) => {
-  p.setup = () => {
-    p.createCanvas(400, 400);
-  };
+    p.setup = () => {
+        p.createCanvas(400, 400);
+    };
 
-  p.draw = () => {
-    p.background(220);
-    p.ellipse(50, 50, 80, 80);
-  };
+    p.draw = () => {
+        p.background(220);
+        p.ellipse(50, 50, 80, 80);
+    };
 };
 
 export const myp5 = new p5(sketch, document.body);
@@ -160,28 +160,28 @@ Add `"start": "webpack serve --open"` in package.json and type `npm run start` i
 
 ```json
 {
-  "name": "p5-project",
-  "version": "1.0.0",
-  "description": "",
-  "private": true,
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "webpack serve --open"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "devDependencies": {
-    "@types/p5": "^1.4.2",
-    "ts-loader": "^9.3.0",
-    "typescript": "^4.6.4",
-    "webpack": "^5.72.1",
-    "webpack-cli": "^4.9.2",
-    "webpack-dev-server": "^4.9.0"
-  },
-  "dependencies": {
-    "p5": "^1.4.1"
-  }
+    "name": "p5-project",
+    "version": "1.0.0",
+    "description": "",
+    "private": true,
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "start": "webpack serve --open"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "devDependencies": {
+        "@types/p5": "^1.4.2",
+        "ts-loader": "^9.3.0",
+        "typescript": "^4.6.4",
+        "webpack": "^5.72.1",
+        "webpack-cli": "^4.9.2",
+        "webpack-dev-server": "^4.9.0"
+    },
+    "dependencies": {
+        "p5": "^1.4.1"
+    }
 }
 ```
 
@@ -197,37 +197,37 @@ npm i -D prettier
 
 ## Install prettier extension on Visual Studio Code
 
-- extension Id: **esbenp.prettier-vscode**
+-   extension Id: **esbenp.prettier-vscode**
 
 ## Configurer vs code
 
-Create a folder called .vscode on your project root and create a file inside it named .settings.json with the following content
+Create a folder called `.vscode` on your project root and create a file inside it named `.settings.json` with the following content:
 
 ```json
 {
-  "editor.codeActionsOnSave": {
-    "source.fixAll": true
-  },
-  "files.eol": "\n",
-  "editor.formatOnSave": true,
-  "editor.defaultFormatter": "esbenp.prettier-vscode",
-  "[javascript]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  }
+    "editor.codeActionsOnSave": {
+        "source.fixAll": true
+    },
+    "files.eol": "\n",
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "[javascript]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    }
 }
 ```
 
 ## Modifying prettier default configuration
 
-Create a file called .prettierrc.json with the following content
+Create a file called `.prettierrc.json` with the following content:
 
 ```json
 {
-  "trailingComma": "all",
-  "singleQuote": true,
-  "endOfLine": "lf",
-  "tabWidth": 4,
-  "arrowParens": "avoid",
-  "printWidth": 80
+    "trailingComma": "all",
+    "singleQuote": true,
+    "endOfLine": "lf",
+    "tabWidth": 4,
+    "arrowParens": "avoid",
+    "printWidth": 80
 }
 ```
