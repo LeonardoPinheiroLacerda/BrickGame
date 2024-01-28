@@ -9,15 +9,11 @@ import {
     BODY_BUTTON_REFLECTION,
     SHADOW_DISPERSION,
 } from '../constants';
+import Coordinates from '../interface/Coordinates';
 
 interface BodyElementsProps {
     parent: Element;
     p: P5;
-}
-
-interface Coordinates {
-    x: number;
-    y: number;
 }
 
 export default class BodyElements {
@@ -102,7 +98,7 @@ export default class BodyElements {
 
     createCanvas(container: P5.Element) {
         const canvasWidth = this.width * 0.7;
-        const canvasHeight = canvasWidth * 1.15;
+        const canvasHeight = canvasWidth * 1.114;
 
         const canvas = this.p.createCanvas(canvasWidth, canvasHeight);
         canvas.parent(container);
@@ -129,7 +125,7 @@ export default class BodyElements {
         frame.style('left', '7.5%');
         frame.style('border-radius', this.borderRadius);
         frame.style('width', `${this.width * 0.85}px`);
-        frame.style('height', `${this.width * 0.7 * 1.35}px`);
+        frame.style('height', `${this.width * 0.7 * 1.335}px`);
 
         const p = this.p.createP('Brick Game');
         p.parent(frame);
