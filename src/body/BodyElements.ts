@@ -2,7 +2,6 @@ import * as P5 from 'p5';
 import {
     PARENT_SELECTOR,
     BODY_HEIGHT_WIDTH_MULTIPLIER,
-    BODY_PARENT_MARGIN,
     BODY_MAIN_COLOR,
     BODY_SHADOW,
     BODY_REFLECTION,
@@ -68,8 +67,22 @@ export default class BodyElements {
         container.parent(PARENT_SELECTOR);
         container.id('container');
 
-        this.width = this.parent.clientWidth - BODY_PARENT_MARGIN * 2;
-        this.height = this.width * BODY_HEIGHT_WIDTH_MULTIPLIER;
+        let percentage = 100;
+
+        do {
+            this.width = this.parent.clientWidth * (percentage / 100);
+
+            if (this.width <= 300) {
+                this.width *= 1.25;
+            } else if (this.width <= 500) {
+                this.width *= 1.1;
+            }
+
+            this.height = this.width * BODY_HEIGHT_WIDTH_MULTIPLIER;
+
+            percentage -= 1;
+        } while (this.height * 1.05 > this.parent.clientHeight);
+        //TODO: encontrar uma forma melhor de fazer isso
 
         this.defineValues();
 
@@ -99,6 +112,7 @@ export default class BodyElements {
         canvas.style('position', 'absolute');
         canvas.style('top', '7.5%');
         canvas.style('left', '15%');
+        canvas.style('border', this.border);
 
         return { canvasWidth, canvasHeight };
     }
@@ -184,6 +198,8 @@ export default class BodyElements {
         p.style('width', `${this.width * 0.08}px`);
         p.style('margin-top', `${this.width * 0.01}px`);
 
+        p.style('line-height', `${this.width * 0.03}px`);
+
         return button;
     }
 
@@ -213,8 +229,9 @@ export default class BodyElements {
         p.style('font-weight', 'bold');
 
         p.style('font-size', `${this.width * 0.04}px`);
-
         p.style('margin-bottom', `${this.width * 0.015}px`);
+
+        p.style('line-height', `${this.width * 0.03}px`);
 
         //Button
         const button = this.p.createButton('');
@@ -264,8 +281,9 @@ export default class BodyElements {
         p.style('font-weight', 'bold');
 
         p.style('font-size', `${this.width * 0.05}px`);
-
         p.style('margin-bottom', `${this.width * 0.015}px`);
+
+        p.style('line-height', `${this.width * 0.03}px`);
 
         //Button
         const button = this.p.createButton('');
