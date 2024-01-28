@@ -21,6 +21,8 @@ export default class Body {
     rightBtn: P5.Element;
     leftBtn: P5.Element;
 
+    actionBtn: P5.Element;
+
     constructor(props: BodyProps) {
         this.elements = new BodyElements({
             p: props.p,
@@ -51,7 +53,7 @@ export default class Body {
         this.downBtn = this.elements.createButton(container, 'S', { x: 0.25, y: 0.84 });
         this.rightBtn = this.elements.createButton(container, 'D', { x: 0.4, y: 0.765 });
 
-        this.elements.createBigButton(container, 'Action', { x: 0.66, y: 0.74 });
+        this.actionBtn = this.elements.createBigButton(container, 'Action', { x: 0.66, y: 0.74 });
 
         return { canvasWidth, canvasHeight, container };
     }
