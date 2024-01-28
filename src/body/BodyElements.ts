@@ -15,6 +15,11 @@ interface BodyElementsProps {
     p: P5;
 }
 
+interface Coordinates {
+    x: number;
+    y: number;
+}
+
 export default class BodyElements {
     width: number;
     height: number;
@@ -24,6 +29,11 @@ export default class BodyElements {
     constructor(props: BodyElementsProps) {
         this.parent = props.parent;
         this.p = props.p;
+
+        const root: HTMLElement = document.querySelector(':root');
+        root.style.setProperty('--BODY_SHADOW', BODY_SHADOW);
+        root.style.setProperty('--BODY_REFLECTION', BODY_REFLECTION);
+        root.style.setProperty('--BODY_BUTTON_REFLECTION', BODY_BUTTON_REFLECTION);
     }
 
     createContainer() {
@@ -43,7 +53,7 @@ export default class BodyElements {
         container.style('margin', 'auto');
         container.style('position', 'relative');
 
-        container.style('border', `${this.width * 0.0075}px solid black`);
+        container.style('border', `${this.width * 0.006}px solid black`);
 
         return container;
     }
@@ -68,7 +78,7 @@ export default class BodyElements {
         const frame = this.p.createDiv();
         frame.parent(container);
 
-        frame.style('border', `${this.width * 0.0075}px solid black`);
+        frame.style('border', `${this.width * 0.006}px solid black`);
         frame.style('position', 'absolute');
         frame.style('top', '3.75%');
         frame.style('left', '7.5%');
@@ -87,10 +97,158 @@ export default class BodyElements {
         p.style('text-align', 'center');
 
         p.style('font-family', 'retro-gamming');
+        p.style('font-weight', 'bold');
         p.style('font-size', `${this.width * 0.07}px`);
 
         p.style('background-color', BODY_MAIN_COLOR);
         p.style('padding-right', `${this.width * 0.01}px`);
         p.style('padding-left', `${this.width * 0.01}px`);
+    }
+
+    createSmallButton(container: P5.Element, label: string, coordinates: Coordinates) {
+        //Container
+        const buttonContainer = this.p.createDiv();
+        buttonContainer.parent(container);
+
+        buttonContainer.style('position', 'absolute');
+        buttonContainer.style('top', `${this.height * coordinates.y}px`);
+        buttonContainer.style('left', `${this.width * coordinates.x}px`);
+
+        buttonContainer.style('display', 'flex');
+        buttonContainer.style('flex-direction', 'column');
+        buttonContainer.style('justify-content', 'center');
+        buttonContainer.style('align-items', 'center');
+
+        //Button
+        const button = this.p.createButton('');
+        button.parent(buttonContainer);
+
+        button.style('outline', 'none');
+
+        button.style('width', `${this.width * 0.08}px`);
+        button.style('height', `${this.width * 0.08}px`);
+
+        button.style('border-radius', '50%');
+        button.style('border', `${this.width * 0.0045}px solid black`);
+
+        button.style('transition-property', 'transform, box-shadow');
+        button.style('transition-duration', '0.15s');
+
+        button.style('background-color', BODY_BUTTON_COLOR);
+
+        //Label
+        const p = this.p.createP(label);
+        p.parent(buttonContainer);
+
+        p.style('font-family', 'retro-gamming');
+        p.style('color', 'white');
+        p.style('text-align', 'center');
+
+        p.style('user-select', 'none');
+
+        p.style('font-size', `${this.width * 0.03}px`);
+
+        p.style('width', `${this.width * 0.08}px`);
+        p.style('margin-top', `${this.width * 0.01}px`);
+
+        return button;
+    }
+
+    createButton(container: P5.Element, label: string, coordinates: Coordinates) {
+        //Container
+        const buttonContainer = this.p.createDiv();
+        buttonContainer.parent(container);
+
+        buttonContainer.style('position', 'absolute');
+        buttonContainer.style('top', `${this.height * coordinates.y}px`);
+        buttonContainer.style('left', `${this.width * coordinates.x}px`);
+
+        buttonContainer.style('display', 'flex');
+        buttonContainer.style('flex-direction', 'column');
+        buttonContainer.style('justify-content', 'center');
+        buttonContainer.style('align-items', 'center');
+
+        //Label
+        const p = this.p.createP(label);
+        p.parent(buttonContainer);
+
+        p.style('font-family', 'retro-gamming');
+        p.style('color', 'white');
+        p.style('text-align', 'center');
+
+        p.style('user-select', 'none');
+        p.style('font-weight', 'bold');
+
+        p.style('font-size', `${this.width * 0.04}px`);
+
+        p.style('margin-bottom', `${this.width * 0.015}px`);
+
+        //Button
+        const button = this.p.createButton('');
+        button.parent(buttonContainer);
+
+        button.style('outline', 'none');
+
+        button.style('width', `${this.width * 0.16}px`);
+        button.style('height', `${this.width * 0.16}px`);
+
+        button.style('border-radius', '50%');
+        button.style('border', `${this.width * 0.0045}px solid black`);
+
+        button.style('transition-property', 'transform, box-shadow');
+        button.style('transition-duration', '0.15s');
+
+        button.style('background-color', BODY_BUTTON_COLOR);
+
+        return button;
+    }
+
+    createBigButton(container: P5.Element, label: string, coordinates: Coordinates) {
+        //Container
+        const buttonContainer = this.p.createDiv();
+        buttonContainer.parent(container);
+
+        buttonContainer.style('position', 'absolute');
+        buttonContainer.style('top', `${this.height * coordinates.y}px`);
+        buttonContainer.style('left', `${this.width * coordinates.x}px`);
+
+        buttonContainer.style('display', 'flex');
+        buttonContainer.style('flex-direction', 'column');
+        buttonContainer.style('justify-content', 'center');
+        buttonContainer.style('align-items', 'center');
+
+        //Label
+        const p = this.p.createP(label);
+        p.parent(buttonContainer);
+
+        p.style('font-family', 'retro-gamming');
+        p.style('color', 'white');
+        p.style('text-align', 'center');
+
+        p.style('user-select', 'none');
+        p.style('font-weight', 'bold');
+
+        p.style('font-size', `${this.width * 0.04}px`);
+
+        p.style('margin-bottom', `${this.width * 0.015}px`);
+
+        //Button
+        const button = this.p.createButton('');
+        button.parent(buttonContainer);
+
+        button.style('outline', 'none');
+
+        button.style('width', `${this.width * 0.22}px`);
+        button.style('height', `${this.width * 0.22}px`);
+
+        button.style('border-radius', '50%');
+        button.style('border', `${this.width * 0.0045}px solid black`);
+
+        button.style('transition-property', 'transform, box-shadow');
+        button.style('transition-duration', '0.15s');
+
+        button.style('background-color', BODY_BUTTON_COLOR);
+
+        return button;
     }
 }

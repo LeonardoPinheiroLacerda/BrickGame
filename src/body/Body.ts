@@ -9,6 +9,18 @@ interface BodyProps {
 export default class Body {
     elements: BodyElements;
 
+    onOffBtn: P5.Element;
+    startPauseBtn: P5.Element;
+    soundBtn: P5.Element;
+    resetBtn: P5.Element;
+    exitBtn: P5.Element;
+    enableColorBtn: P5.Element;
+
+    upBtn: P5.Element;
+    downBtn: P5.Element;
+    rightBtn: P5.Element;
+    leftBtn: P5.Element;
+
     constructor(props: BodyProps) {
         this.elements = new BodyElements({
             p: props.p,
@@ -26,6 +38,21 @@ export default class Body {
         //Frame
         this.elements.createFrame(container);
 
-        return { canvasWidth, canvasHeight };
+        //SmallButtons
+        this.onOffBtn = this.elements.createSmallButton(container, 'On<br/>Off', { x: 0.1, y: 0.55 });
+        this.startPauseBtn = this.elements.createSmallButton(container, 'Start<br/>Pause', { x: 0.24, y: 0.6 });
+        this.soundBtn = this.elements.createSmallButton(container, 'Sound', { x: 0.38, y: 0.55 });
+        this.resetBtn = this.elements.createSmallButton(container, 'Reset', { x: 0.52, y: 0.6 });
+        this.exitBtn = this.elements.createSmallButton(container, 'Exit', { x: 0.65, y: 0.55 });
+        this.enableColorBtn = this.elements.createSmallButton(container, 'Enable<br/>Colors', { x: 0.8, y: 0.6 });
+
+        this.upBtn = this.elements.createButton(container, 'W', { x: 0.25, y: 0.69 });
+        this.leftBtn = this.elements.createButton(container, 'A', { x: 0.1, y: 0.765 });
+        this.downBtn = this.elements.createButton(container, 'S', { x: 0.25, y: 0.84 });
+        this.rightBtn = this.elements.createButton(container, 'D', { x: 0.4, y: 0.765 });
+
+        this.elements.createBigButton(container, 'Action', { x: 0.66, y: 0.74 });
+
+        return { canvasWidth, canvasHeight, container };
     }
 }

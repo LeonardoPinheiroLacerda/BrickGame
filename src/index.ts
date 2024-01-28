@@ -13,7 +13,7 @@ export default new P5((p: P5) => {
     });
 
     p.setup = () => {
-        const { canvasWidth, canvasHeight } = body.build();
+        const { canvasWidth, canvasHeight, container } = body.build();
 
         p.background(BACKGROUND_COLOR);
         p.noFill();
