@@ -21,3 +21,49 @@ body {
     background: rgb(0, 158, 247);
     background: linear-gradient(300deg, rgb(48, 179, 255) 0%, rgba(0, 158, 247, 1) 100%);
 }
+
+#container {
+    box-shadow:
+        calc(var(--width) * -0.03) calc(var(--width) * 0.03) var(--dispersion) black,
+        calc(var(--width) * -0.02) calc(var(--width) * 0.02) var(--dispersion) var(--color-shadow-reflexion) inset,
+        calc(var(--width) * 0.01) calc(var(--width) * -0.01) var(--dispersion) var(--color-shadow) inset;
+}
+
+#container > canvas {
+    box-shadow:
+        calc(var(--width) * -0.01) calc(var(--width) * 0.01) var(--dispersion) var(--color-shadow),
+        calc(var(--width) * 0.01) calc(var(--width) * -0.01) var(--dispersion) var(--color-shadow-reflexion);
+}
+
+#container > div > .sm-btn {
+    box-shadow:
+        calc(var(--width) * -0.0075) calc(var(--width) * 0.0075) var(--dispersion) var(--color-shadow),
+        calc(var(--width) * -0.01) calc(var(--width) * 0.01) var(--dispersion) var(--button-color-reflexion) inset;
+}
+
+#container > div > .sm-btn:active {
+    box-shadow: 0px 0px var(--color-shadow);
+    transform: translateX(calc(var(--width) * -0.0025)) translateY(calc(var(--width) * 0.0025));
+}
+
+#container > div > .btn {
+    box-shadow:
+        calc(var(--width) * -0.015) calc(var(--width) * 0.015) var(--dispersion) var(--color-shadow),
+        calc(var(--width) * -0.0175) calc(var(--width) * 0.0175) var(--dispersion) var(--button-color-reflexion) inset;
+}
+
+#container > div > .btn:active {
+    box-shadow: 0px 0px var(--color-shadow);
+    transform: translateX(calc(var(--width) * -0.005)) translateY(calc(var(--width) * 0.005));
+}
+
+#container > div > .lg-btn {
+    box-shadow:
+        calc(var(--width) * -0.02) calc(var(--width) * 0.02) var(--dispersion) var(--color-shadow),
+        calc(var(--width) * -0.0175) calc(var(--width) * 0.0175) var(--dispersion) var(--button-color-reflexion) inset;
+}
+
+#container > div > .lg-btn:active {
+    box-shadow: 0px 0px var(--color-shadow);
+    transform: translateX(calc(var(--width) * -0.0075)) translateY(calc(var(--width) * 0.0075));
+}

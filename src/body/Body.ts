@@ -7,21 +7,21 @@ interface BodyProps {
 }
 
 export default class Body {
-    elements: BodyElements;
+    private elements: BodyElements;
 
-    onOffBtn: P5.Element;
-    startPauseBtn: P5.Element;
-    soundBtn: P5.Element;
-    resetBtn: P5.Element;
-    exitBtn: P5.Element;
-    enableColorBtn: P5.Element;
+    private onOffBtn: P5.Element;
+    private startPauseBtn: P5.Element;
+    private soundBtn: P5.Element;
+    private resetBtn: P5.Element;
+    private exitBtn: P5.Element;
+    private enableColorBtn: P5.Element;
 
-    upBtn: P5.Element;
-    downBtn: P5.Element;
-    rightBtn: P5.Element;
-    leftBtn: P5.Element;
+    private upBtn: P5.Element;
+    private downBtn: P5.Element;
+    private rightBtn: P5.Element;
+    private leftBtn: P5.Element;
 
-    actionBtn: P5.Element;
+    private actionBtn: P5.Element;
 
     constructor(props: BodyProps) {
         this.elements = new BodyElements({

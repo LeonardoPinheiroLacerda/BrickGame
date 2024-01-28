@@ -8,6 +8,7 @@ import {
     BODY_REFLECTION,
     BODY_BUTTON_COLOR,
     BODY_BUTTON_REFLECTION,
+    SHADOW_DISPERSION,
 } from '../constants';
 
 interface BodyElementsProps {
@@ -21,19 +22,45 @@ interface Coordinates {
 }
 
 export default class BodyElements {
-    width: number;
-    height: number;
-    parent: Element;
-    p: P5;
+    private width: number;
+    private height: number;
+    private parent: Element;
+    private p: P5;
+
+    private border: string;
+    private borderRadius: string;
+
+    private smallButtonSize: string;
+    private buttonSize: string;
+    private largeButtonSize: string;
+
+    private buttonBorder: string;
+    private buttonAnimationDuration: string;
 
     constructor(props: BodyElementsProps) {
         this.parent = props.parent;
         this.p = props.p;
+    }
 
+    defineValues() {
         const root: HTMLElement = document.querySelector(':root');
-        root.style.setProperty('--BODY_SHADOW', BODY_SHADOW);
-        root.style.setProperty('--BODY_REFLECTION', BODY_REFLECTION);
-        root.style.setProperty('--BODY_BUTTON_REFLECTION', BODY_BUTTON_REFLECTION);
+        root.style.setProperty('--color-shadow', BODY_SHADOW);
+        root.style.setProperty('--color-shadow-reflexion', BODY_REFLECTION);
+        root.style.setProperty('--dispersion', SHADOW_DISPERSION);
+
+        root.style.setProperty('--button-color-reflexion', BODY_BUTTON_REFLECTION);
+
+        root.style.setProperty('--width', `${this.width}px`);
+
+        this.border = `${this.width * 0.006}px solid black`;
+        this.borderRadius = `${this.width * 0.05}px`;
+
+        this.buttonBorder = `${this.width * 0.0045}px solid black`;
+        this.buttonAnimationDuration = '0.15s';
+
+        this.smallButtonSize = `${this.width * 0.08}px`;
+        this.buttonSize = `${this.width * 0.16}px`;
+        this.largeButtonSize = `${this.width * 0.22}px`;
     }
 
     createContainer() {
@@ -44,16 +71,18 @@ export default class BodyElements {
         this.width = this.parent.clientWidth - BODY_PARENT_MARGIN * 2;
         this.height = this.width * BODY_HEIGHT_WIDTH_MULTIPLIER;
 
+        this.defineValues();
+
         container.style('width', `${this.width}px`);
         container.style('height', `${this.height}px`);
 
         container.style('background-color', BODY_MAIN_COLOR);
-        container.style('border-radius', `${this.width * 0.05}px`);
+        container.style('border-radius', this.borderRadius);
         container.style('box-sizing', 'border-box');
         container.style('margin', 'auto');
         container.style('position', 'relative');
 
-        container.style('border', `${this.width * 0.006}px solid black`);
+        container.style('border', this.border);
 
         return container;
     }
@@ -78,11 +107,13 @@ export default class BodyElements {
         const frame = this.p.createDiv();
         frame.parent(container);
 
-        frame.style('border', `${this.width * 0.006}px solid black`);
+        frame.addClass('frame');
+
+        frame.style('border', this.border);
         frame.style('position', 'absolute');
         frame.style('top', '3.75%');
         frame.style('left', '7.5%');
-        frame.style('border-radius', `${this.width * 0.05}px`);
+        frame.style('border-radius', this.borderRadius);
         frame.style('width', `${this.width * 0.85}px`);
         frame.style('height', `${this.width * 0.7 * 1.35}px`);
 
@@ -125,14 +156,16 @@ export default class BodyElements {
 
         button.style('outline', 'none');
 
-        button.style('width', `${this.width * 0.08}px`);
-        button.style('height', `${this.width * 0.08}px`);
+        button.addClass('sm-btn');
+
+        button.style('width', this.smallButtonSize);
+        button.style('height', this.smallButtonSize);
 
         button.style('border-radius', '50%');
-        button.style('border', `${this.width * 0.0045}px solid black`);
+        button.style('border', this.buttonBorder);
 
         button.style('transition-property', 'transform, box-shadow');
-        button.style('transition-duration', '0.15s');
+        button.style('transition-duration', this.buttonAnimationDuration);
 
         button.style('background-color', BODY_BUTTON_COLOR);
 
@@ -187,16 +220,18 @@ export default class BodyElements {
         const button = this.p.createButton('');
         button.parent(buttonContainer);
 
+        button.addClass('btn');
+
         button.style('outline', 'none');
 
-        button.style('width', `${this.width * 0.16}px`);
-        button.style('height', `${this.width * 0.16}px`);
+        button.style('width', this.buttonSize);
+        button.style('height', this.buttonSize);
 
         button.style('border-radius', '50%');
-        button.style('border', `${this.width * 0.0045}px solid black`);
+        button.style('border', this.buttonBorder);
 
         button.style('transition-property', 'transform, box-shadow');
-        button.style('transition-duration', '0.15s');
+        button.style('transition-duration', this.buttonAnimationDuration);
 
         button.style('background-color', BODY_BUTTON_COLOR);
 
@@ -228,7 +263,7 @@ export default class BodyElements {
         p.style('user-select', 'none');
         p.style('font-weight', 'bold');
 
-        p.style('font-size', `${this.width * 0.04}px`);
+        p.style('font-size', `${this.width * 0.05}px`);
 
         p.style('margin-bottom', `${this.width * 0.015}px`);
 
@@ -236,16 +271,18 @@ export default class BodyElements {
         const button = this.p.createButton('');
         button.parent(buttonContainer);
 
+        button.addClass('lg-btn');
+
         button.style('outline', 'none');
 
-        button.style('width', `${this.width * 0.22}px`);
-        button.style('height', `${this.width * 0.22}px`);
+        button.style('width', this.largeButtonSize);
+        button.style('height', this.largeButtonSize);
 
         button.style('border-radius', '50%');
-        button.style('border', `${this.width * 0.0045}px solid black`);
+        button.style('border', this.buttonBorder);
 
         button.style('transition-property', 'transform, box-shadow');
-        button.style('transition-duration', '0.15s');
+        button.style('transition-duration', this.buttonAnimationDuration);
 
         button.style('background-color', BODY_BUTTON_COLOR);
 
