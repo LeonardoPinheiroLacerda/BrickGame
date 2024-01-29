@@ -23,3 +23,8 @@ export const BODY_HEIGHT_WIDTH_MULTIPLIER = 2;
 
 //QuerySelectors
 export const PARENT_SELECTOR = '#brick-game';
+
+//Cell
+export const CELL_OUTER_MARGIN = 0.1;
+export const CELL_INNER_MARGIN = 0.3;
+export const CELL_STROKE_WEIGHT = 0.075;

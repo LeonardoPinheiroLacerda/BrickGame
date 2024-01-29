@@ -1,6 +1,16 @@
 import * as P5 from 'p5';
-import { GRID_X, GRID_Y, DISPLAY_MARGIN, DISPLAY_WIDTH, BACKGROUND_COLOR, FONT_COLOR, FONT_TURNED_OFF_COLOR } from './../constants';
-import CellService from '../service/CellService';
+import {
+    CELL_INNER_MARGIN,
+    CELL_OUTER_MARGIN,
+    CELL_STROKE_WEIGHT,
+    GRID_X,
+    GRID_Y,
+    DISPLAY_MARGIN,
+    DISPLAY_WIDTH,
+    BACKGROUND_COLOR,
+    FONT_COLOR,
+    FONT_TURNED_OFF_COLOR,
+} from './../constants';
 import Cell from '../interface/Cell';
 import Color from '../enum/Color';
 import Coordinates from '../interface/Coordinates';
@@ -19,8 +29,6 @@ export default class Game {
 
     private grid: Cell[][];
 
-    private cellService: CellService;
-
     private colorEnabled: boolean;
 
     private cellSize: number;
@@ -30,8 +38,6 @@ export default class Game {
         this.canvasWidth = props.canvasWidth;
         this.canvasHeight = props.canvasHeight;
 
-        this.cellService = new CellService(props.p);
-
         this.colorEnabled = true;
 
         this.cellSize = (this.canvasWidth * DISPLAY_WIDTH) / GRID_X;
@@ -40,7 +46,7 @@ export default class Game {
     }
 
     resetGrid() {
-        this.grid = Array(GRID_Y).fill(Array(GRID_X).fill({ value: 0, colorId: Color.DEFAULT }));
+        this.grid = Array(GRID_Y).fill(Array(GRID_X).fill({ value: 0, color: Color.DEFAULT }));
     }
 
     drawDisplay() {
@@ -94,14 +100,41 @@ export default class Game {
         const { p, canvasWidth, cellSize, grid, colorEnabled } = this;
 
         const displayMargin = canvasWidth * DISPLAY_MARGIN;
-        const image = this.cellService.getCellImage(grid[y][x], colorEnabled);
 
-        x = displayMargin + cellSize * x;
-        y = displayMargin + cellSize * y;
+        let posX = displayMargin + cellSize * x;
+        let posY = displayMargin + cellSize * y;
         let w = cellSize;
         let h = cellSize;
 
-        p.image(image, x, y, w, h);
+        let color: Color;
+        if (grid[y][x].value !== 0) {
+            if (colorEnabled) {
+                color = grid[y][x].color;
+            } else {
+                color = Color.DEFAULT;
+            }
+        } else {
+            color = Color.INACTIVE;
+        }
+
+        let margin = w * CELL_OUTER_MARGIN;
+        let innerMargin = w * CELL_INNER_MARGIN;
+
+        //Draw cell
+        p.push();
+
+        p.noFill();
+
+        p.stroke(color);
+        p.strokeWeight(w * CELL_STROKE_WEIGHT);
+
+        p.rect(posX + margin, posY + margin, w - margin * 2, h - margin * 2);
+
+        p.fill(color);
+
+        p.rect(posX + innerMargin, posY + innerMargin, w - innerMargin * 2, h - innerMargin * 2);
+
+        p.pop();
     }
 
     draw() {

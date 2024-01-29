@@ -1,12 +1,13 @@
 enum Color {
-    DEFAULT = 0,
-    BLUE = 1,
-    CYAN = 2,
-    GRAY = 3,
-    GREEN = 4,
-    PURPLE = 5,
-    RED = 6,
-    YELLOW = 7,
+    DEFAULT = 'rgb(19, 26, 18)',
+    BLUE = 'rgb(0, 0, 128)',
+    CYAN = 'rgb(0, 128, 128)',
+    GRAY = 'rgb(128, 128, 128)',
+    GREEN = 'rgb(0, 128, 0)',
+    PURPLE = 'rgb(128, 0, 128)',
+    RED = 'rgb(128, 0, 0)',
+    YELLOW = 'rgb(128, 128, 0)',
+    INACTIVE = 'rgb(168, 185, 167)',
 }
 
 export default Color;
