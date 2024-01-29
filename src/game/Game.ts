@@ -63,11 +63,13 @@ export default class Game {
 
         p.rect(x, y, w, h);
 
-        grid.forEach(row => {
-            row.forEach(col => {});
-        });
-
         p.pop();
+
+        grid.forEach((row, y) => {
+            row.forEach((cell, x) => {
+                this.drawCell({ y, x });
+            });
+        });
     }
 
     drawHud() {
@@ -144,11 +146,5 @@ export default class Game {
 
         this.drawDisplay();
         this.drawHud();
-
-        grid.forEach((row, y) => {
-            row.forEach((cell, x) => {
-                this.drawCell({ y, x });
-            });
-        });
     }
 }

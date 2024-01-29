@@ -19,7 +19,7 @@ export const GRID_Y = 18;
 export const DISPLAY_WIDTH = 0.65;
 export const DISPLAY_MARGIN = 0.025;
 
-export const BODY_HEIGHT_WIDTH_MULTIPLIER = 2;
+export const BODY_HEIGHT_WIDTH_MULTIPLIER = 1.9;
 
 //QuerySelectors
 export const PARENT_SELECTOR = '#brick-game';
