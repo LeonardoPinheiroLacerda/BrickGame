@@ -16,12 +16,14 @@ export default new P5((p: P5) => {
 
     let game: Game;
 
+    p.preload = () => {
+       
+    };
+
     p.setup = () => {
         const { canvasWidth, canvasHeight, container } = body.build();
 
         game = new Menu({ p, canvasWidth, canvasHeight });
-
-
     };
 
     p.draw = () => {
