@@ -23,6 +23,8 @@ export default class Body {
 
     private actionBtn: P5.Element;
 
+    private pressOnOff: Function;
+
     constructor(props: BodyProps) {
         this.elements = new BodyElements({
             p: props.p,
@@ -55,6 +57,6 @@ export default class Body {
 
         this.actionBtn = this.elements.createBigButton(container, 'Action', { x: 0.66, y: 0.74 });
 
-        return { canvasWidth, canvasHeight, container };
+        return { canvasWidth, canvasHeight };
     }
 }

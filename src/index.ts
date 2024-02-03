@@ -9,7 +9,7 @@ export default new P5((p: P5) => {
     //Inicializando algumas variaveis
     const parentElement = document.querySelector(PARENT_SELECTOR);
 
-    const body = new Body({
+    const body: Body = new Body({
         parent: parentElement,
         p,
     });
@@ -17,9 +17,9 @@ export default new P5((p: P5) => {
     let game: Game;
 
     p.setup = () => {
-        const { canvasWidth, canvasHeight, container } = body.build();
+        const { canvasWidth, canvasHeight } = body.build();
 
-        game = new Menu({ p, canvasWidth, canvasHeight });
+        game = new Menu({ p, canvasWidth, canvasHeight, body });
     };
 
     p.draw = () => {

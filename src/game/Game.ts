@@ -15,10 +15,13 @@ import Cell from '../interface/Cell';
 import Color from '../enum/Color';
 import Coordinates from '../interface/Coordinates';
 
+import Body from '../body/Body';
+
 interface GameProps {
     p: P5;
     canvasWidth: number;
     canvasHeight: number;
+    body: Body;
 }
 
 export default class Game {
@@ -26,6 +29,8 @@ export default class Game {
 
     private canvasWidth: number;
     private canvasHeight: number;
+
+    private body: Body;
 
     private grid: Cell[][];
 
@@ -37,6 +42,7 @@ export default class Game {
         this.p = props.p;
         this.canvasWidth = props.canvasWidth;
         this.canvasHeight = props.canvasHeight;
+        this.body = props.body;
 
         this.colorEnabled = true;
 
