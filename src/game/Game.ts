@@ -14,6 +14,7 @@ import {
 import Cell from '../interface/Cell';
 import Color from '../enum/Color';
 import Coordinates from '../interface/Coordinates';
+import GameState from '../interface/GameState';
 
 import Body from '../body/Body';
 
@@ -34,7 +35,13 @@ export default class Game {
 
     private grid: Cell[][];
 
-    private colorEnabled: boolean;
+    private state: GameState = {
+        on: false,
+        start: false,
+        gameOver: false,
+        colorEnabled: true,
+        soundEnabled: true,
+    };
 
     private cellSize: number;
 
@@ -44,7 +51,7 @@ export default class Game {
         this.canvasHeight = props.canvasHeight;
         this.body = props.body;
 
-        this.colorEnabled = true;
+        this.state.colorEnabled = true;
 
         this.cellSize = (this.canvasWidth * DISPLAY_WIDTH) / GRID_X;
 
@@ -105,7 +112,7 @@ export default class Game {
     }
 
     drawCell({ y, x }: Coordinates) {
-        const { p, canvasWidth, cellSize, grid, colorEnabled } = this;
+        const { p, canvasWidth, cellSize, grid, state } = this;
 
         const displayMargin = canvasWidth * DISPLAY_MARGIN;
 
@@ -116,7 +123,7 @@ export default class Game {
 
         let color: Color;
         if (grid[y][x].value !== 0) {
-            if (colorEnabled) {
+            if (state.colorEnabled) {
                 color = grid[y][x].color;
             } else {
                 color = Color.DEFAULT;
