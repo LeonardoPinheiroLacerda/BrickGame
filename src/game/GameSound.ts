@@ -15,4 +15,8 @@ export default class GameSound {
     setMute(mute: Boolean) {
         this.mute = mute;
     }
+
+    getMute() {
+        return this.mute;
+    }
 }

@@ -99,7 +99,9 @@ export default class Game {
 
         p.textFont('retro-gamming');
         p.textSize(canvasWidth * 0.065);
-        p.fill(FONT_COLOR);
+
+        if (this.state.on) p.fill(FONT_COLOR);
+        else p.fill(FONT_TURNED_OFF_COLOR);
 
         p.text('Score', canvasWidth * 0.72, canvasHeight * 0.08);
         p.text('0', canvasWidth * 0.72, canvasHeight * 0.14);
@@ -110,9 +112,14 @@ export default class Game {
         p.text('Level', canvasWidth * 0.72, canvasHeight * 0.72);
         p.text('1 -10', canvasWidth * 0.72, canvasHeight * 0.78);
 
-        p.fill(FONT_TURNED_OFF_COLOR);
+        if (this.state.start && this.state.on) p.fill(FONT_COLOR);
+        else p.fill(FONT_TURNED_OFF_COLOR);
 
         p.text('Paused', canvasWidth * 0.75, canvasHeight * 0.88);
+
+        if (!this.gameSound.getMute() && this.state.on) p.fill(FONT_COLOR);
+        else p.fill(FONT_TURNED_OFF_COLOR);
+
         p.text('Muted', canvasWidth * 0.765, canvasHeight * 0.94);
 
         p.pop();
@@ -159,7 +166,7 @@ export default class Game {
         p.pop();
     }
 
-    draw() {
+    drawFrame() {
         const { p } = this;
 
         p.background(BACKGROUND_COLOR);

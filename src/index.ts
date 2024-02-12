@@ -18,13 +18,11 @@ export default new P5((p: P5) => {
 
     p.setup = () => {
         const { canvasWidth, canvasHeight } = body.build();
-
         game = new Menu({ p, canvasWidth, canvasHeight, body });
-
         body.bound(game);
     };
 
     p.draw = () => {
-        game.draw();
+        game.drawFrame();
     };
 }, document.body);
