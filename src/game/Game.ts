@@ -17,6 +17,8 @@ import Coordinates from '../interface/Coordinates';
 import GameState from '../interface/GameState';
 
 import Body from '../body/Body';
+import GameControls from './GameControls';
+import GameSound from './GameSound';
 
 interface GameProps {
     p: P5;
@@ -31,8 +33,6 @@ export default class Game {
     private canvasWidth: number;
     private canvasHeight: number;
 
-    private body: Body;
-
     private grid: Cell[][];
 
     private state: GameState = {
@@ -45,10 +45,15 @@ export default class Game {
 
     private cellSize: number;
 
+    public gameSound: GameSound;
+    public controls: GameControls;
+    public body: Body;
+
     constructor(props: GameProps) {
         this.p = props.p;
         this.canvasWidth = props.canvasWidth;
         this.canvasHeight = props.canvasHeight;
+
         this.body = props.body;
 
         this.state.colorEnabled = true;
@@ -56,6 +61,9 @@ export default class Game {
         this.cellSize = (this.canvasWidth * DISPLAY_WIDTH) / GRID_X;
 
         this.resetGrid();
+
+        this.gameSound = new GameSound();
+        this.controls = new GameControls();
     }
 
     resetGrid() {
@@ -153,48 +161,11 @@ export default class Game {
     }
 
     draw() {
-        const { p, grid } = this;
+        const { p } = this;
 
         p.background(BACKGROUND_COLOR);
 
         this.drawDisplay();
         this.drawHud();
-    }
-
-    pressOnOff(game: Game) {
-        console.log('on off');
-    }
-    pressStartPause(game: Game) {
-        console.log('start pause');
-    }
-    pressSound(game: Game) {
-        console.log('sound');
-    }
-    pressReset(game: Game) {
-        console.log('reset');
-    }
-    pressExit(game: Game) {
-        console.log('exit');
-        game.body.unbound();
-    }
-    pressEnableColor(game: Game) {
-        console.log('enable color');
-    }
-
-    pressUp(game: Game) {
-        console.log('up');
-    }
-    pressDown(game: Game) {
-        console.log('down');
-    }
-    pressRight(game: Game) {
-        console.log('right');
-    }
-    pressLeft(game: Game) {
-        console.log('left');
-    }
-
-    pressAction(game: Game) {
-        console.log('action');
     }
 }
