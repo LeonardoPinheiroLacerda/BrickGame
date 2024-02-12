@@ -48,8 +48,8 @@ export default class Game {
     private controls: GameControls;
     private body: Body;
 
-    private frameActionInteval: number = 30;
-    private frameCount: number = 0;
+    private tickInterval: number = 30;
+    private actualFrame: number = 0;
 
     constructor(props: GameProps) {
         this.p = props.p;
@@ -171,8 +171,9 @@ export default class Game {
 
         p.background(BACKGROUND_COLOR);
 
-        this.frameCount++;
-        if (this.frameCount % this.frameActionInteval === 0) {
+        this.actualFrame++;
+
+        if (this.actualFrame % this.tickInterval === 0) {
             this.processTick();
         }
         this.processFrame();
