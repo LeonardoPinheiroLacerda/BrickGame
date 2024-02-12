@@ -48,14 +48,14 @@ export default class Game {
     private controls: GameControls;
     private body: Body;
 
+    private frameActionInteval: number = 30;
+    private frameCount: number = 0;
+
     constructor(props: GameProps) {
         this.p = props.p;
         this.canvasWidth = props.canvasWidth;
         this.canvasHeight = props.canvasHeight;
-
         this.body = props.body;
-
-        this.state.colorEnabled = true;
 
         this.cellSize = (this.canvasWidth * DISPLAY_WIDTH) / GRID_X;
 
@@ -171,6 +171,12 @@ export default class Game {
 
         p.background(BACKGROUND_COLOR);
 
+        this.frameCount++;
+        if (this.frameCount % this.frameActionInteval === 0) {
+            this.processTick();
+        }
+        this.processFrame();
+
         this.drawDisplay();
         this.drawHud();
     }
@@ -186,4 +192,7 @@ export default class Game {
     getBody() {
         return this.body;
     }
+
+    processTick() {}
+    processFrame() {}
 }
