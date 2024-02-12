@@ -5,7 +5,7 @@ export default class GameControls {
     pressOnOff(game: Game) {
         console.log('on off');
         console.log(game);
-        game.gameSound.play(Sound.GAME_OVER);
+        game.getGameSound().play(Sound.GAME_OVER);
     }
     pressStartPause(game: Game) {
         console.log('start pause');
@@ -18,7 +18,7 @@ export default class GameControls {
     }
     pressExit(game: Game) {
         console.log('exit');
-        game.body.unbound();
+        game.getBody().unbound();
     }
     pressEnableColor(game: Game) {
         console.log('enable color');

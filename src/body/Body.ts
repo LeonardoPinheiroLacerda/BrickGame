@@ -74,19 +74,19 @@ export default class Body {
     }
 
     bound(game: Game) {
-        this.pressOnOff = game.controls.pressOnOff;
-        this.pressStartPause = game.controls.pressStartPause;
-        this.pressSound = game.controls.pressSound;
-        this.pressReset = game.controls.pressReset;
-        this.pressExit = game.controls.pressExit;
-        this.pressEnableColor = game.controls.pressEnableColor;
+        this.pressOnOff = game.getControls().pressOnOff;
+        this.pressStartPause = game.getControls().pressStartPause;
+        this.pressSound = game.getControls().pressSound;
+        this.pressReset = game.getControls().pressReset;
+        this.pressExit = game.getControls().pressExit;
+        this.pressEnableColor = game.getControls().pressEnableColor;
 
-        this.pressUp = game.controls.pressUp;
-        this.pressDown = game.controls.pressDown;
-        this.pressRight = game.controls.pressRight;
-        this.pressLeft = game.controls.pressLeft;
+        this.pressUp = game.getControls().pressUp;
+        this.pressDown = game.getControls().pressDown;
+        this.pressRight = game.getControls().pressRight;
+        this.pressLeft = game.getControls().pressLeft;
 
-        this.pressAction = game.controls.pressAction;
+        this.pressAction = game.getControls().pressAction;
 
         this.onOffBtn.mouseClicked(() => this.pressOnOff(game));
         this.startPauseBtn.mouseClicked(() => this.pressStartPause(game));

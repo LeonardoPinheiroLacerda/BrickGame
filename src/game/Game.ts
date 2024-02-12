@@ -40,14 +40,13 @@ export default class Game {
         start: false,
         gameOver: false,
         colorEnabled: true,
-        soundEnabled: true,
     };
 
     private cellSize: number;
 
-    public gameSound: GameSound;
-    public controls: GameControls;
-    public body: Body;
+    private gameSound: GameSound;
+    private controls: GameControls;
+    private body: Body;
 
     constructor(props: GameProps) {
         this.p = props.p;
@@ -167,5 +166,17 @@ export default class Game {
 
         this.drawDisplay();
         this.drawHud();
+    }
+
+    getGameSound() {
+        return this.gameSound;
+    }
+
+    getControls() {
+        return this.controls;
+    }
+
+    getBody() {
+        return this.body;
     }
 }
