@@ -10,6 +10,9 @@ import {
     BACKGROUND_COLOR,
     FONT_COLOR,
     FONT_TURNED_OFF_COLOR,
+    SMALL_FONT_SIZE,
+    MEDIUM_FONT_SIZE,
+    LARGE_FONT_SIZE,
 } from './../constants';
 import Cell from '../interface/Cell';
 import Color from '../enum/Color';
@@ -31,6 +34,10 @@ export default class Game {
     private p: P5;
 
     private defaultFontFamily: String = 'retro-gamming';
+
+    private smFontSize: number;
+    private mdFontSize: number;
+    private lgFontSize: number;
 
     private canvasWidth: number;
     private canvasHeight: number;
@@ -136,7 +143,7 @@ export default class Game {
         p.push();
 
         p.textFont(this.defaultFontFamily);
-        p.textSize(this.getRelativeValue(0.065));
+        p.textSize(this.smFontSize);
         p.textAlign(p.LEFT, p.TOP);
 
         if (this.state.on) p.fill(FONT_COLOR);
@@ -211,6 +218,10 @@ export default class Game {
         this.drawDisplay();
         this.drawHud();
 
+        this.smFontSize = this.getRelativeValue(SMALL_FONT_SIZE);
+        this.mdFontSize = this.getRelativeValue(MEDIUM_FONT_SIZE);
+        this.lgFontSize = this.getRelativeValue(LARGE_FONT_SIZE);
+
         if (!this.state.on) return;
 
         if (!this.state.start) {
@@ -231,7 +242,7 @@ export default class Game {
         const { p } = this;
 
         p.textFont(this.defaultFontFamily);
-        p.textSize(this.getRelativeValue(0.1));
+        p.textSize(this.lgFontSize);
 
         p.push();
 
@@ -248,7 +259,7 @@ export default class Game {
         const { p } = this;
 
         p.textFont(this.defaultFontFamily);
-        p.textSize(this.getRelativeValue(0.1));
+        p.textSize(this.lgFontSize);
 
         p.push();
 

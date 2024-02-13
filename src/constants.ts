@@ -21,6 +21,10 @@ export const DISPLAY_MARGIN = 0.025;
 
 export const BODY_HEIGHT_WIDTH_MULTIPLIER = 1.9;
 
+export const SMALL_FONT_SIZE = 0.055;
+export const MEDIUM_FONT_SIZE = 0.065;
+export const LARGE_FONT_SIZE = 0.1;
+
 //QuerySelectors
 export const PARENT_SELECTOR = '#brick-game';
 

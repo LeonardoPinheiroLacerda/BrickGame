@@ -42,7 +42,9 @@ body {
 }
 
 #container > div > .sm-btn:active {
-    box-shadow: 0px 0px var(--color-shadow);
+    box-shadow:
+        calc(var(--width) * -0.004) calc(var(--width) * 0.004) var(--dispersion) var(--color-shadow),
+        calc(var(--width) * -0.003) calc(var(--width) * 0.003) var(--dispersion) var(--button-color-reflexion) inset;
     transform: translateX(calc(var(--width) * -0.0025)) translateY(calc(var(--width) * 0.0025));
 }
 
@@ -53,7 +55,9 @@ body {
 }
 
 #container > div > .btn:active {
-    box-shadow: 0px 0px var(--color-shadow);
+    box-shadow:
+        calc(var(--width) * -0.005) calc(var(--width) * 0.005) var(--dispersion) var(--color-shadow),
+        calc(var(--width) * -0.004) calc(var(--width) * 0.004) var(--dispersion) var(--button-color-reflexion) inset;
     transform: translateX(calc(var(--width) * -0.005)) translateY(calc(var(--width) * 0.005));
 }
 
@@ -64,6 +68,8 @@ body {
 }
 
 #container > div > .lg-btn:active {
-    box-shadow: 0px 0px var(--color-shadow);
+    box-shadow:
+        calc(var(--width) * -0.005) calc(var(--width) * 0.005) var(--dispersion) var(--color-shadow),
+        calc(var(--width) * -0.004) calc(var(--width) * 0.004) var(--dispersion) var(--button-color-reflexion) inset;
     transform: translateX(calc(var(--width) * -0.0075)) translateY(calc(var(--width) * 0.0075));
 }
