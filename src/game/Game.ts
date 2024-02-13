@@ -30,8 +30,13 @@ interface GameProps {
 export default class Game {
     private p: P5;
 
+    private defaultFontFamily: String = 'retro-gamming';
+
     private canvasWidth: number;
     private canvasHeight: number;
+
+    private displayWidth: number;
+    private displayHeight: number;
 
     private grid: Cell[][];
 
@@ -73,14 +78,19 @@ export default class Game {
     drawDisplay() {
         const { p, canvasWidth, canvasHeight, grid } = this;
 
+        p.background(BACKGROUND_COLOR);
+
         p.push();
         p.noFill();
 
-        p.strokeWeight(canvasWidth * 0.0075);
+        p.strokeWeight(this.getRelativeValue(0.0075));
         const x = canvasWidth * DISPLAY_MARGIN;
         const y = canvasWidth * DISPLAY_MARGIN;
         const w = canvasWidth * DISPLAY_WIDTH;
         const h = canvasHeight - canvasWidth * DISPLAY_MARGIN * 2;
+
+        this.displayWidth = w;
+        this.displayHeight = h;
 
         p.rect(x, y, w, h);
 
@@ -93,35 +103,65 @@ export default class Game {
         });
     }
 
+    getDisplayPosX(x: number): number {
+        return this.displayWidth * x + this.canvasWidth * DISPLAY_MARGIN;
+    }
+    getDisplayPosY(y: number): number {
+        return this.displayHeight * y + this.canvasWidth * DISPLAY_MARGIN;
+    }
+
+    getHudPosX(x: number): number {
+        const zero = this.displayWidth + DISPLAY_MARGIN * this.canvasWidth * 2;
+        const width = this.canvasWidth - zero - DISPLAY_MARGIN * this.canvasWidth;
+        return width * x + zero;
+    }
+    getHudPosY(y: number): number {
+        return DISPLAY_MARGIN * this.canvasWidth + this.displayHeight * y;
+    }
+
+    getCanvasPosX(x: number): number {
+        return this.canvasWidth * x;
+    }
+    getCanvasPosY(y: number): number {
+        return this.canvasHeight * y;
+    }
+
+    getRelativeValue(size: number): number {
+        return this.canvasWidth * size;
+    }
+
     drawHud() {
-        const { p, canvasWidth, canvasHeight } = this;
+        const { p } = this;
 
         p.push();
 
-        p.textFont('retro-gamming');
-        p.textSize(canvasWidth * 0.065);
+        p.textFont(this.defaultFontFamily);
+        p.textSize(this.getRelativeValue(0.065));
+        p.textAlign(p.LEFT, p.TOP);
 
         if (this.state.on) p.fill(FONT_COLOR);
         else p.fill(FONT_TURNED_OFF_COLOR);
 
-        p.text('Score', canvasWidth * 0.72, canvasHeight * 0.08);
-        p.text('0', canvasWidth * 0.72, canvasHeight * 0.14);
+        p.text('Score', this.getHudPosX(0.05), this.getHudPosY(0.01));
+        p.text('0', this.getHudPosX(0.05), this.getHudPosY(0.08));
 
-        p.text('Hi-Score', canvasWidth * 0.72, canvasHeight * 0.22);
-        p.text('0', canvasWidth * 0.72, canvasHeight * 0.28);
+        p.text('Hi-Score', this.getHudPosX(0.05), this.getHudPosY(0.18));
+        p.text('0', this.getHudPosX(0.05), this.getHudPosY(0.25));
 
-        p.text('Level', canvasWidth * 0.72, canvasHeight * 0.72);
-        p.text('1 -10', canvasWidth * 0.72, canvasHeight * 0.78);
+        p.text('Level', this.getHudPosX(0.05), this.getHudPosY(0.68));
+        p.text('1 -10', this.getHudPosX(0.05), this.getHudPosY(0.75));
+
+        p.textAlign(p.CENTER, p.TOP);
 
         if (this.state.start && this.state.on) p.fill(FONT_COLOR);
         else p.fill(FONT_TURNED_OFF_COLOR);
 
-        p.text('Paused', canvasWidth * 0.75, canvasHeight * 0.88);
+        p.text('Paused', this.getHudPosX(0.5), this.getHudPosY(0.85));
 
         if (!this.gameSound.getMute() && this.state.on) p.fill(FONT_COLOR);
         else p.fill(FONT_TURNED_OFF_COLOR);
 
-        p.text('Muted', canvasWidth * 0.765, canvasHeight * 0.94);
+        p.text('Muted', this.getHudPosX(0.5), this.getHudPosY(0.92));
 
         p.pop();
     }
@@ -168,19 +208,57 @@ export default class Game {
     }
 
     drawFrame() {
-        const { p } = this;
-
-        p.background(BACKGROUND_COLOR);
-
-        this.actualFrame++;
-
-        if (this.actualFrame % this.tickInterval === 0) {
-            this.processTick();
-        }
-        this.processFrame();
-
         this.drawDisplay();
         this.drawHud();
+
+        if (!this.state.on) return;
+
+        if (!this.state.start) {
+            this.drawWelcome();
+        } else if (!this.state.gameOver && this.state.start) {
+            this.actualFrame++;
+
+            if (this.actualFrame % this.tickInterval === 0) {
+                this.processTick();
+            }
+            this.processFrame();
+        } else {
+            this.drawGameOver();
+        }
+    }
+
+    drawWelcome() {
+        const { p } = this;
+
+        p.textFont(this.defaultFontFamily);
+        p.textSize(this.getRelativeValue(0.1));
+
+        p.push();
+
+        p.fill(FONT_COLOR);
+
+        p.textAlign(p.CENTER, p.CENTER);
+
+        p.text('Game Brick', this.getDisplayPosX(0.5), this.getDisplayPosY(0.5));
+
+        p.pop();
+    }
+
+    drawGameOver() {
+        const { p } = this;
+
+        p.textFont(this.defaultFontFamily);
+        p.textSize(this.getRelativeValue(0.1));
+
+        p.push();
+
+        p.fill(FONT_COLOR);
+
+        p.textAlign(p.CENTER, p.CENTER);
+
+        p.text('Game Over', this.getDisplayPosX(0.5), this.getDisplayPosY(0.5));
+
+        p.pop();
     }
 
     getGameSound() {
