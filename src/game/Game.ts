@@ -63,6 +63,7 @@ export default class Game {
 
         this.gameSound = new GameSound();
         this.controls = new GameControls();
+        this.controls.bound(this);
     }
 
     resetGrid() {
@@ -192,6 +193,10 @@ export default class Game {
 
     getBody() {
         return this.body;
+    }
+
+    getP() {
+        return this.p;
     }
 
     processTick() {}
