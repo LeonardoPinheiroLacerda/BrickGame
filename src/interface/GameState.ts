@@ -3,4 +3,5 @@ export default interface GameState {
     start: Boolean;
     colorEnabled: Boolean;
     gameOver: Boolean;
+    running: Boolean;
 }

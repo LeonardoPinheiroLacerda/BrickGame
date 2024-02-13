@@ -56,24 +56,41 @@ export default class GameControls {
     }
 
     pressOnOff(game: Game) {
-        console.log('on off');
+        game.getState().on = !game.getState().on;
+        this.pressReset(game);
     }
     pressStartPause(game: Game) {
-        console.log('start pause');
+        if (game.getState().on) {
+            game.getState().start = !game.getState().start;
+        }
+        if (game.getState().start) {
+            game.getState().running = true;
+        }
     }
     pressSound(game: Game) {
-        console.log('sound');
+        game.getGameSound().setMute(!game.getGameSound().getMute());
     }
     pressReset(game: Game) {
-        console.log('reset');
+        game.getState().gameOver = false;
+        game.getState().start = false;
+        game.getState().running = false;
+        game.getGameSound().setMute(false);
+        game.resetGrid();
+
+        game.score = 0;
+        game.level = 1;
+        const hiScore = localStorage.getItem(game.hiScoreKey);
+        if (hiScore === null) {
+            localStorage.setItem(game.hiScoreKey, '0');
+        }
+        game.hiScoreValue = Number.parseInt(localStorage.getItem(game.hiScoreKey));
     }
     pressExit(game: Game) {
-        console.log('exit');
         game.getBody().unbound();
         this.unbound(game);
     }
     pressEnableColor(game: Game) {
-        console.log('enable color');
+        game.getState().colorEnabled = !game.getState().colorEnabled;
     }
 
     pressUp(game: Game) {

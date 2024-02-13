@@ -52,7 +52,14 @@ export default class Game {
         start: false,
         gameOver: false,
         colorEnabled: true,
+        running: false,
     };
+
+    public score: number = 0;
+    public hiScoreValue: number = 0;
+    public hiScoreKey: string = 'hiScore';
+    public level: number = 1;
+    private maxLevel: number = 10;
 
     private cellSize: number;
 
@@ -79,7 +86,13 @@ export default class Game {
     }
 
     resetGrid() {
-        this.grid = Array(GRID_Y).fill(Array(GRID_X).fill({ value: 0, color: Color.DEFAULT }));
+        this.grid = [];
+        for (let y = 0; y < GRID_Y; y++) {
+            this.grid[y] = [];
+            for (let x = 0; x < GRID_X; x++) {
+                this.grid[y][x] = this.emptyCell();
+            }
+        }
     }
 
     drawDisplay() {
@@ -150,22 +163,22 @@ export default class Game {
         else p.fill(FONT_TURNED_OFF_COLOR);
 
         p.text('Score', this.getHudPosX(0.05), this.getHudPosY(0.01));
-        p.text('0', this.getHudPosX(0.05), this.getHudPosY(0.08));
+        p.text(this.score, this.getHudPosX(0.05), this.getHudPosY(0.08));
 
         p.text('Hi-Score', this.getHudPosX(0.05), this.getHudPosY(0.18));
-        p.text('0', this.getHudPosX(0.05), this.getHudPosY(0.25));
+        p.text(this.hiScoreValue, this.getHudPosX(0.05), this.getHudPosY(0.25));
 
         p.text('Level', this.getHudPosX(0.05), this.getHudPosY(0.68));
-        p.text('1 -10', this.getHudPosX(0.05), this.getHudPosY(0.75));
+        p.text(`${this.level} - ${this.maxLevel}`, this.getHudPosX(0.05), this.getHudPosY(0.75));
 
         p.textAlign(p.CENTER, p.TOP);
 
-        if (this.state.start && this.state.on) p.fill(FONT_COLOR);
+        if (!this.state.start && this.state.on) p.fill(FONT_COLOR);
         else p.fill(FONT_TURNED_OFF_COLOR);
 
         p.text('Paused', this.getHudPosX(0.5), this.getHudPosY(0.85));
 
-        if (!this.gameSound.getMute() && this.state.on) p.fill(FONT_COLOR);
+        if (this.gameSound.getMute() && this.state.on) p.fill(FONT_COLOR);
         else p.fill(FONT_TURNED_OFF_COLOR);
 
         p.text('Muted', this.getHudPosX(0.5), this.getHudPosY(0.92));
@@ -224,16 +237,16 @@ export default class Game {
 
         if (!this.state.on) return;
 
-        if (!this.state.start) {
-            this.drawWelcome();
-        } else if (!this.state.gameOver && this.state.start) {
+        if (!this.state.gameOver && this.state.start && this.state.running) {
             this.actualFrame++;
 
             if (this.actualFrame % this.tickInterval === 0) {
                 this.processTick();
             }
             this.processFrame();
-        } else {
+        } else if (!this.state.start && !this.state.running) {
+            this.drawWelcome();
+        } else if (this.state.gameOver) {
             this.drawGameOver();
         }
     }
@@ -286,6 +299,14 @@ export default class Game {
 
     getP() {
         return this.p;
+    }
+
+    getState() {
+        return this.state;
+    }
+
+    emptyCell() {
+        return { color: Color.DEFAULT, value: 0 };
     }
 
     processTick() {}
