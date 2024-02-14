@@ -5,6 +5,8 @@ import Body from './body/Body';
 import GameMenu from './game/GameMenu';
 import Game from './game/Game';
 
+import './importResources';
+
 export default new P5((p: P5) => {
     //Inicializando algumas variaveis
     const parentElement = document.querySelector(PARENT_SELECTOR);
