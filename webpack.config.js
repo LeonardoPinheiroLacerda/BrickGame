@@ -33,7 +33,8 @@ module.exports = {
         path: path.resolve(__dirname, 'dist'),
     },
     devServer: {
-        static: './dist',
+        static: path.resolve(__dirname, 'dist'),
+        port: 9000,
     },
     plugins: [
         new HtmlWebpackPlugin({
