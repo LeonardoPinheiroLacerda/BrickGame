@@ -1,5 +1,5 @@
 import * as P5 from 'p5';
-import { PARENT_SELECTOR, BACKGROUND_COLOR, DISPLAY_MARGIN, DISPLAY_WIDTH } from './constants';
+import { PARENT_SELECTOR } from './constants';
 
 import Body from './body/Body';
 import Menu from './game/impl/menu/Menu';
