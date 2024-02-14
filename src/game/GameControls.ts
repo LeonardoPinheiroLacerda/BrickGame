@@ -1,8 +1,58 @@
 import Game from './Game';
 
 export default class GameControls {
+    keyUpPressedInterval: NodeJS.Timeout;
+    keyDownPressedInterval: NodeJS.Timeout;
+    keyLeftPressedInterval: NodeJS.Timeout;
+    keyRightPressedInterval: NodeJS.Timeout;
+    keyActionPressedInterval: NodeJS.Timeout;
+
+    keyUpPressedTimeout: NodeJS.Timeout;
+    keyDownPressedTimeout: NodeJS.Timeout;
+    keyLeftPressedTimeout: NodeJS.Timeout;
+    keyRightPressedTimeout: NodeJS.Timeout;
+    keyActionPressedTimeout: NodeJS.Timeout;
+
+    delay: number = 250;
+    timeout: number = this.delay / 5;
+
     bound(game: Game) {
-        game.getP().keyPressed = key => {
+        game.getP().keyReleased = key => {
+            let event: any = key;
+
+            switch (event.key) {
+                case 'ArrowRight':
+                case 'd':
+                case 'D':
+                    clearTimeout(this.keyRightPressedTimeout);
+                    clearInterval(this.keyRightPressedInterval);
+                    break;
+                case 'ArrowDown':
+                case 's':
+                case 'S':
+                    clearTimeout(this.keyDownPressedTimeout);
+                    clearInterval(this.keyDownPressedInterval);
+                    break;
+                case 'ArrowLeft':
+                case 'a':
+                case 'A':
+                    clearTimeout(this.keyLeftPressedTimeout);
+                    clearInterval(this.keyLeftPressedInterval);
+                    break;
+                case 'ArrowUp':
+                case 'w':
+                case 'W':
+                    clearTimeout(this.keyUpPressedTimeout);
+                    clearInterval(this.keyUpPressedInterval);
+                    break;
+                case ' ':
+                    clearTimeout(this.keyActionPressedTimeout);
+                    clearInterval(this.keyActionPressedInterval);
+                    break;
+            }
+        };
+
+        game.getP().keyTyped = key => {
             let event: any = key;
 
             switch (event.key) {
@@ -10,24 +60,49 @@ export default class GameControls {
                 case 'd':
                 case 'D':
                     this.pressRight(game);
+                    this.keyRightPressedTimeout = setTimeout(() => {
+                        this.keyRightPressedInterval = setInterval(() => {
+                            this.pressRight(game);
+                        }, this.timeout);
+                    }, this.delay);
                     break;
                 case 'ArrowDown':
                 case 's':
                 case 'S':
                     this.pressDown(game);
+                    this.keyDownPressedTimeout = setTimeout(() => {
+                        this.keyDownPressedInterval = setInterval(() => {
+                            this.pressDown(game);
+                        }, this.timeout);
+                    }, this.delay);
                     break;
                 case 'ArrowLeft':
                 case 'a':
                 case 'A':
                     this.pressLeft(game);
+                    this.keyLeftPressedTimeout = setTimeout(() => {
+                        this.keyLeftPressedInterval = setInterval(() => {
+                            this.pressLeft(game);
+                        }, this.timeout);
+                    }, this.delay);
                     break;
                 case 'ArrowUp':
                 case 'w':
                 case 'W':
                     this.pressUp(game);
+                    this.keyUpPressedTimeout = setTimeout(() => {
+                        this.keyUpPressedInterval = setInterval(() => {
+                            this.pressUp(game);
+                        }, this.timeout);
+                    }, this.delay);
                     break;
                 case ' ':
                     this.pressAction(game);
+                    this.keyActionPressedTimeout = setTimeout(() => {
+                        this.keyActionPressedInterval = setInterval(() => {
+                            this.pressAction(game);
+                        }, this.timeout);
+                    }, this.delay);
                     break;
                 case '1':
                     this.pressOnOff(game);
@@ -53,6 +128,8 @@ export default class GameControls {
 
     unbound(game: Game) {
         game.getP().keyPressed = key => {};
+        game.getP().keyTyped = key => {};
+        game.getP().keyReleased = key => {};
     }
 
     pressOnOff(game: Game) {
