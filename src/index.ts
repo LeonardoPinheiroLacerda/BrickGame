@@ -2,7 +2,7 @@ import * as P5 from 'p5';
 import { PARENT_SELECTOR } from './constants';
 
 import Body from './body/Body';
-import Menu from './game/impl/menu/Menu';
+import GameMenu from './game/GameMenu';
 import Game from './game/Game';
 
 export default new P5((p: P5) => {
@@ -18,7 +18,7 @@ export default new P5((p: P5) => {
 
     p.setup = () => {
         const { canvasWidth, canvasHeight } = body.build();
-        game = new Menu({ p, canvasWidth, canvasHeight, body });
+        game = new GameMenu({ p, canvasWidth, canvasHeight, body });
         body.bound(game);
     };
 
