@@ -56,8 +56,8 @@ body {
 
 #container > div > .btn:active {
     box-shadow:
-        calc(var(--width) * -0.005) calc(var(--width) * 0.005) var(--dispersion) var(--color-shadow),
-        calc(var(--width) * -0.004) calc(var(--width) * 0.004) var(--dispersion) var(--button-color-reflexion) inset;
+        calc(var(--width) * -0.004) calc(var(--width) * 0.004) var(--dispersion) var(--color-shadow),
+        calc(var(--width) * -0.003) calc(var(--width) * 0.003) var(--dispersion) var(--button-color-reflexion) inset;
     transform: translateX(calc(var(--width) * -0.005)) translateY(calc(var(--width) * 0.005));
 }
 

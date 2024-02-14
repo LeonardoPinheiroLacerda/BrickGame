@@ -173,14 +173,16 @@ export default class Game {
 
         p.textAlign(p.CENTER, p.TOP);
 
+        if (!this.state.running) return;
+
+        //Paused text
         if (!this.state.start && this.state.on) p.fill(FONT_COLOR);
         else p.fill(FONT_TURNED_OFF_COLOR);
-
         p.text('Paused', this.getHudPosX(0.5), this.getHudPosY(0.85));
 
+        //Muted text
         if (this.gameSound.getMute() && this.state.on) p.fill(FONT_COLOR);
         else p.fill(FONT_TURNED_OFF_COLOR);
-
         p.text('Muted', this.getHudPosX(0.5), this.getHudPosY(0.92));
 
         p.pop();
