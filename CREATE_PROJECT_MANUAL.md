@@ -231,3 +231,26 @@ Create a file called `.prettierrc.json` with the following content:
     "printWidth": 80
 }
 ```
+
+# How configurer ESLint
+
+## configurer `eslint` as dev dependencies
+
+```bash
+npm init @eslint/config
+```
+
+And choose the following options:
+
+1. To check syntax and find problems
+2. JavaScript modules (import/export)
+3. None of these
+4. Yes
+5. Browser
+6. JSON
+7. Yes
+8. npm
+
+## Install eslint extension on Visual Studio Code
+
+-   extensionId: **dbaeumer.vscode-eslint**
