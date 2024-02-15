@@ -1,7 +1,7 @@
 export default interface GameState {
-    on: Boolean;
-    start: Boolean;
-    colorEnabled: Boolean;
-    gameOver: Boolean;
-    running: Boolean;
+    on: boolean;
+    start: boolean;
+    colorEnabled: boolean;
+    gameOver: boolean;
+    running: boolean;
 }

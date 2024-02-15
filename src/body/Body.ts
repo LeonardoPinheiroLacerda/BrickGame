@@ -24,19 +24,19 @@ export default class Body {
 
     private actionBtn: P5.Element;
 
-    private pressOnOff: Function;
-    private pressStartPause: Function;
-    private pressSound: Function;
-    private pressReset: Function;
-    private pressExit: Function;
-    private pressEnableColor: Function;
+    private pressOnOff: (game: Game) => void;
+    private pressStartPause: (game: Game) => void;
+    private pressSound: (game: Game) => void;
+    private pressReset: (game: Game) => void;
+    private pressExit: (game: Game) => void;
+    private pressEnableColor: (game: Game) => void;
 
-    private pressUp: Function;
-    private pressDown: Function;
-    private pressRight: Function;
-    private pressLeft: Function;
+    private pressUp: (game: Game) => void;
+    private pressDown: (game: Game) => void;
+    private pressRight: (game: Game) => void;
+    private pressLeft: (game: Game) => void;
 
-    private pressAction: Function;
+    private pressAction: (game: Game) => void;
 
     constructor(props: BodyProps) {
         this.elements = new BodyElements({

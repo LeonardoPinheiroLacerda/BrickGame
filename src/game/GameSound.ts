@@ -2,7 +2,7 @@ import Sound from '../enum/Sound';
 
 export default class GameSound {
     private volume: number = 0.025;
-    private mute: Boolean = false;
+    private mute: boolean = false;
 
     play(sound: Sound) {
         if (!this.mute) {
@@ -12,7 +12,7 @@ export default class GameSound {
         }
     }
 
-    setMute(mute: Boolean) {
+    setMute(mute: boolean) {
         this.mute = mute;
     }
 

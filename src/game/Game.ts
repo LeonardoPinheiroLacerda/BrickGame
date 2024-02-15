@@ -33,7 +33,7 @@ interface GameProps {
 export default class Game {
     private p: P5;
 
-    private defaultFontFamily: String = 'retro-gamming';
+    private defaultFontFamily: string = 'retro-gamming';
 
     private smFontSize: number;
     private mdFontSize: number;
@@ -193,10 +193,10 @@ export default class Game {
 
         const displayMargin = canvasWidth * DISPLAY_MARGIN;
 
-        let posX = displayMargin + cellSize * x;
-        let posY = displayMargin + cellSize * y;
-        let w = cellSize;
-        let h = cellSize;
+        const posX = displayMargin + cellSize * x;
+        const posY = displayMargin + cellSize * y;
+        const w = cellSize;
+        const h = cellSize;
 
         let color: Color;
         if (grid[y][x].value !== 0) {
@@ -209,8 +209,8 @@ export default class Game {
             color = Color.INACTIVE;
         }
 
-        let margin = w * CELL_OUTER_MARGIN;
-        let innerMargin = w * CELL_INNER_MARGIN;
+        const margin = w * CELL_OUTER_MARGIN;
+        const innerMargin = w * CELL_INNER_MARGIN;
 
         //Draw cell
         p.push();

@@ -18,7 +18,7 @@ export default class GameControls {
 
     bound(game: Game) {
         game.getP().keyReleased = key => {
-            let event: any = key;
+            const event: any = key;
 
             switch (event.key) {
                 case 'ArrowRight':
@@ -53,7 +53,7 @@ export default class GameControls {
         };
 
         game.getP().keyTyped = key => {
-            let event: any = key;
+            const event: any = key;
 
             switch (event.key) {
                 case 'ArrowRight':
@@ -127,9 +127,9 @@ export default class GameControls {
     }
 
     unbound(game: Game) {
-        game.getP().keyPressed = key => {};
-        game.getP().keyTyped = key => {};
-        game.getP().keyReleased = key => {};
+        game.getP().keyPressed = () => {};
+        game.getP().keyTyped = () => {};
+        game.getP().keyReleased = () => {};
     }
 
     pressOnOff(game: Game) {
@@ -171,19 +171,19 @@ export default class GameControls {
     }
 
     pressUp(game: Game) {
-        console.log('up');
+        console.log('up', game);
     }
     pressDown(game: Game) {
-        console.log('down');
+        console.log('down', game);
     }
     pressRight(game: Game) {
-        console.log('right');
+        console.log('right', game);
     }
     pressLeft(game: Game) {
-        console.log('left');
+        console.log('left', game);
     }
 
     pressAction(game: Game) {
-        console.log('action');
+        console.log('action', game);
     }
 }
