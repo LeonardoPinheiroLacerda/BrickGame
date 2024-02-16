@@ -76,7 +76,7 @@ export default class Game {
         this.canvasHeight = props.canvasHeight;
         this.body = props.body;
 
-        this.cellSize = (this.canvasWidth * DISPLAY_WIDTH) / GRID_X;
+        this.cellSize = this.getRelativeValue(DISPLAY_WIDTH) / GRID_X;
 
         this.resetGrid();
 
@@ -124,19 +124,19 @@ export default class Game {
     }
 
     getDisplayPosX(x: number): number {
-        return this.displayWidth * x + this.canvasWidth * DISPLAY_MARGIN;
+        return this.displayWidth * x + this.getRelativeValue(DISPLAY_MARGIN);
     }
     getDisplayPosY(y: number): number {
-        return this.displayHeight * y + this.canvasWidth * DISPLAY_MARGIN;
+        return this.displayHeight * y + this.getRelativeValue(DISPLAY_MARGIN);
     }
 
     getHudPosX(x: number): number {
-        const zero = this.displayWidth + DISPLAY_MARGIN * this.canvasWidth * 2;
-        const width = this.canvasWidth - zero - DISPLAY_MARGIN * this.canvasWidth;
+        const zero = this.displayWidth + this.getRelativeValue(DISPLAY_MARGIN) * 2;
+        const width = this.canvasWidth - zero - this.getRelativeValue(DISPLAY_MARGIN);
         return width * x + zero;
     }
     getHudPosY(y: number): number {
-        return DISPLAY_MARGIN * this.canvasWidth + this.displayHeight * y;
+        return this.getRelativeValue(DISPLAY_MARGIN) + this.displayHeight * y;
     }
 
     getCanvasPosX(x: number): number {
