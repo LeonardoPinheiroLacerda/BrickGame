@@ -158,7 +158,7 @@ export default class GameControls {
     }
     pressExit(game: Game) {
         if (game.getState().on) {
-            game.changeGame('menu', 'GameMenu');
+            game.changeGame('engine/menu', 'GameMenu');
         }
     }
     pressEnableColor(game: Game) {
