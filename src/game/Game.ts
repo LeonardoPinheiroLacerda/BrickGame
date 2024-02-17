@@ -37,8 +37,8 @@ export default class Game {
     protected lgFontSize: number;
     protected xlgFontSize: number;
 
-    public canvasWidth: number;
-    public canvasHeight: number;
+    protected canvasWidth: number;
+    protected canvasHeight: number;
 
     protected displayWidth: number;
     protected displayHeight: number;
@@ -317,27 +317,22 @@ export default class Game {
         this.body.unbound();
         this.gameSound.stopAll();
 
-        // const gameClass = require(`./${className}/${className}`);
-        // const gameClass = require('./menu/GameMenu').default;
         const gameClass = require(`./${nameSpace}/${className}`).default;
 
-        console.log(gameClass);
-
         const args: GameProps = {
-            p: this.getP(),
+            p: this.p,
             canvasWidth: this.canvasWidth,
             canvasHeight: this.canvasHeight,
-            body: this.getBody(),
+            body: this.body,
         };
 
-        const g = new gameClass(args);
+        const obj = new gameClass(args);
 
-        g.getControls().pressOnOff(g);
+        obj.getControls().pressOnOff(obj);
+        this.body.bound(obj);
 
-        this.getBody().bound(g);
-
-        this.getP().draw = () => {
-            g.drawFrame();
+        this.p.draw = () => {
+            obj.drawFrame();
         };
     }
 

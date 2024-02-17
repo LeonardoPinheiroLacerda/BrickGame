@@ -154,6 +154,7 @@ export default class GameControls {
         game.getGameSound().setMute(false);
         game.resetGrid();
 
+        //TODO: criar método dentro de game para esse proposito
         game.score = 0;
         game.level = 1;
         const hiScore = localStorage.getItem(game.hiScoreKey);
@@ -163,8 +164,9 @@ export default class GameControls {
         game.hiScoreValue = Number.parseInt(localStorage.getItem(game.hiScoreKey));
     }
     pressExit(game: Game) {
-        game.getBody().unbound();
-        this.unbound(game);
+        if (game.getState().on) {
+            game.changeGame('menu', 'GameMenu');
+        }
     }
     pressEnableColor(game: Game) {
         game.getState().colorEnabled = !game.getState().colorEnabled;
