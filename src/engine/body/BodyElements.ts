@@ -8,8 +8,8 @@ import {
     BODY_BUTTON_COLOR,
     BODY_BUTTON_REFLECTION,
     SHADOW_DISPERSION,
-} from '../constants';
-import Coordinates from '../interface/Coordinates';
+} from '../../constants';
+import Coordinates from '../../interface/Coordinates';
 
 interface BodyElementsProps {
     parent: Element;

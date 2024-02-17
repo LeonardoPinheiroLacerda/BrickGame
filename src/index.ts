@@ -1,9 +1,9 @@
 import * as P5 from 'p5';
 import { PARENT_SELECTOR } from './constants';
 
-import Body from './body/Body';
-import GameMenu from './game/menu/GameMenu';
-import Game from './game/Game';
+import GameBody from './engine/body/GameBody';
+import GameMenu from './engine/menu/GameMenu';
+import Game from './engine/Game';
 
 import './importResources';
 
@@ -11,7 +11,7 @@ export default new P5((p: P5) => {
     //Inicializando algumas variaveis
     const parentElement = document.querySelector(PARENT_SELECTOR);
 
-    const body: Body = new Body({
+    const body: GameBody = new GameBody({
         parent: parentElement,
         p,
     });

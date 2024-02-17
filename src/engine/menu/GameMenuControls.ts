@@ -1,5 +1,4 @@
 import Sound from '../../enum/Sound';
-import Game from '../Game';
 import GameControls from '../GameControls';
 import GameMenu from './GameMenu';
 

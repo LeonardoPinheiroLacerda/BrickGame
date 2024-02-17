@@ -15,13 +15,13 @@ import {
     MEDIUM_FONT_SIZE,
     LARGE_FONT_SIZE,
     EXTRA_LARGE_FONT_SIZE,
-} from './../constants';
+} from '../constants';
 import Cell from '../interface/Cell';
 import Color from '../enum/Color';
 import Coordinates from '../interface/Coordinates';
 import GameState from '../interface/GameState';
 
-import Body from '../body/Body';
+import GameBody from './body/GameBody';
 import GameControls from './GameControls';
 import GameSound from './GameSound';
 import GameProps from '../interface/GameProps';
@@ -63,7 +63,7 @@ export default class Game {
 
     protected gameSound: GameSound = new GameSound();
     protected controls: GameControls = new GameControls();
-    protected body: Body;
+    protected body: GameBody;
 
     protected tickInterval: number = 30;
     protected actualFrame: number = 0;
@@ -310,7 +310,7 @@ export default class Game {
         return this.controls;
     }
 
-    getBody(): Body {
+    getBody(): GameBody {
         return this.body;
     }
 

@@ -1,13 +1,13 @@
 import * as P5 from 'p5';
 import BodyElements from './BodyElements';
-import Game from '../game/Game';
+import Game from '../Game';
 
 interface BodyProps {
     parent: Element;
     p: P5;
 }
 
-export default class Body {
+export default class GameBody {
     private elements: BodyElements;
 
     private onOffBtn: P5.Element;
