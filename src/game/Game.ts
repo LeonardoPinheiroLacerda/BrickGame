@@ -53,10 +53,10 @@ export default class Game {
         running: false,
     };
 
-    public score: number = 0;
-    public hiScoreValue: number = 0;
-    public hiScoreKey: string = 'hiScore';
-    public level: number = 1;
+    protected score: number = 0;
+    protected hiScoreValue: number = 0;
+    protected hiScoreKey: string = 'hiScore';
+    protected level: number = 1;
     protected maxLevel: number = 10;
 
     protected cellSize: number;
@@ -81,9 +81,19 @@ export default class Game {
         this.controls.bound(this);
 
         this.setup();
+
+        //Primeira renderização
+        this.drawFrame();
+
+        //Define o tamanho das fontes
+        this.xsmFontSize = this.getRelativeValue(EXTRA_SMALL_FONT_SIZE);
+        this.smFontSize = this.getRelativeValue(SMALL_FONT_SIZE);
+        this.mdFontSize = this.getRelativeValue(MEDIUM_FONT_SIZE);
+        this.lgFontSize = this.getRelativeValue(LARGE_FONT_SIZE);
+        this.xlgFontSize = this.getRelativeValue(EXTRA_LARGE_FONT_SIZE);
     }
 
-    resetGrid() {
+    resetGrid(): void {
         this.grid = [];
         for (let y = 0; y < GRID_Y; y++) {
             this.grid[y] = [];
@@ -93,7 +103,7 @@ export default class Game {
         }
     }
 
-    drawDisplay() {
+    drawDisplay(): void {
         const { p, canvasWidth, canvasHeight, grid } = this;
 
         p.background(BACKGROUND_COLOR);
@@ -148,7 +158,7 @@ export default class Game {
         return this.canvasWidth * size;
     }
 
-    drawHud() {
+    drawHud(): void {
         const { p } = this;
 
         p.push();
@@ -186,7 +196,17 @@ export default class Game {
         p.pop();
     }
 
-    drawCell({ y, x }: Coordinates) {
+    registerHiScore(): void {
+        this.score = 0;
+        this.level = 1;
+        const hiScore = localStorage.getItem(this.hiScoreKey);
+        if (hiScore === null) {
+            localStorage.setItem(this.hiScoreKey, '0');
+        }
+        this.hiScoreValue = Number.parseInt(localStorage.getItem(this.hiScoreKey));
+    }
+
+    drawCell({ y, x }: Coordinates): void {
         const { p, canvasWidth, cellSize, grid, state } = this;
 
         const displayMargin = canvasWidth * DISPLAY_MARGIN;
@@ -227,16 +247,10 @@ export default class Game {
         p.pop();
     }
 
-    drawFrame() {
+    drawFrame(): void {
         this.drawDisplay();
         this.drawHud();
         this.draw();
-
-        this.xsmFontSize = this.getRelativeValue(EXTRA_SMALL_FONT_SIZE);
-        this.smFontSize = this.getRelativeValue(SMALL_FONT_SIZE);
-        this.mdFontSize = this.getRelativeValue(MEDIUM_FONT_SIZE);
-        this.lgFontSize = this.getRelativeValue(LARGE_FONT_SIZE);
-        this.xlgFontSize = this.getRelativeValue(EXTRA_LARGE_FONT_SIZE);
 
         if (!this.state.on) return;
 
@@ -254,7 +268,7 @@ export default class Game {
         }
     }
 
-    drawWelcome() {
+    drawWelcome(): void {
         const { p } = this;
 
         p.push();
@@ -271,7 +285,7 @@ export default class Game {
         p.pop();
     }
 
-    drawGameOver() {
+    drawGameOver(): void {
         const { p } = this;
 
         p.push();
@@ -288,45 +302,52 @@ export default class Game {
         p.pop();
     }
 
-    getGameSound() {
+    getGameSound(): GameSound {
         return this.gameSound;
     }
 
-    getControls() {
+    getControls(): GameControls {
         return this.controls;
     }
 
-    getBody() {
+    getBody(): Body {
         return this.body;
     }
 
-    getP() {
+    getP(): P5 {
         return this.p;
     }
 
-    getState() {
+    getState(): GameState {
         return this.state;
     }
 
-    emptyCell() {
+    emptyCell(): Cell {
         return { color: Color.DEFAULT, value: 0 };
     }
 
-    changeGame(nameSpace: string, className: string) {
+    changeGame(nameSpace: string, className: string): void {
+        this.unbound();
+        this.bound(nameSpace, className);
+    }
+
+    private unbound(): void {
         this.controls.unbound(this);
         this.body.unbound();
         this.gameSound.stopAll();
+    }
 
+    private bound(nameSpace: string, className: string): void {
         const gameClass = require(`./${nameSpace}/${className}`).default;
 
-        const args: GameProps = {
+        const props: GameProps = {
             p: this.p,
             canvasWidth: this.canvasWidth,
             canvasHeight: this.canvasHeight,
             body: this.body,
         };
 
-        const obj = new gameClass(args);
+        const obj = new gameClass(props);
 
         obj.getControls().pressOnOff(obj);
         this.body.bound(obj);
@@ -336,8 +357,8 @@ export default class Game {
         };
     }
 
-    processTick() {}
-    processFrame() {}
-    draw() {}
-    setup() {}
+    protected processTick(): void {}
+    protected processFrame(): void {}
+    protected draw(): void {}
+    protected setup(): void {}
 }

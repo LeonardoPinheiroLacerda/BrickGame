@@ -154,14 +154,7 @@ export default class GameControls {
         game.getGameSound().setMute(false);
         game.resetGrid();
 
-        //TODO: criar método dentro de game para esse proposito
-        game.score = 0;
-        game.level = 1;
-        const hiScore = localStorage.getItem(game.hiScoreKey);
-        if (hiScore === null) {
-            localStorage.setItem(game.hiScoreKey, '0');
-        }
-        game.hiScoreValue = Number.parseInt(localStorage.getItem(game.hiScoreKey));
+        game.registerHiScore();
     }
     pressExit(game: Game) {
         if (game.getState().on) {
