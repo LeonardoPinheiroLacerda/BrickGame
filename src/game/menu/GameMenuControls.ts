@@ -21,17 +21,23 @@ export default class GameMenuControls extends GameControls {
         }
     }
     pressAction(game: GameMenu): void {
-        if (game.getState().running) game.getGameSound().play(Sound.ACTION_1);
-        
-        const { nameSpace, className } = game.games[game.selectedGame];
-        game.changeGame(nameSpace, className);
+        if (game.getState().start && game.getState().running && game.getState().on) {
+            game.getGameSound().play(Sound.ACTION_1);
+
+            const { nameSpace, className } = game.games[game.selectedGame];
+            game.changeGame(nameSpace, className);
+        }
     }
 
     pressStartPause(game: GameMenu): void {
-        if (game.getState().start == false) game.getGameSound().play(Sound.KEY_PRESS);
+        if (!game.getState().start && game.getState().on) {
+            game.getGameSound().play(Sound.KEY_PRESS);
+        }
+
         super.pressStartPause(game);
+
         //Dentro do menu não deve existir estado de pausa
-        game.getState().start = true;
+        if (game.getState().on) game.getState().start = true;
     }
     pressOnOff(game: GameMenu): void {
         super.pressOnOff(game);
