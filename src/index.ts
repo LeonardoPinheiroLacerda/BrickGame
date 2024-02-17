@@ -2,7 +2,7 @@ import * as P5 from 'p5';
 import { PARENT_SELECTOR } from './constants';
 
 import Body from './body/Body';
-import GameMenu from './game/GameMenu';
+import GameMenu from './game/menu/GameMenu';
 import Game from './game/Game';
 
 import './importResources';

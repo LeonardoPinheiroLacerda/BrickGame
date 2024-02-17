@@ -10,9 +10,11 @@ import {
     BACKGROUND_COLOR,
     FONT_COLOR,
     FONT_TURNED_OFF_COLOR,
+    EXTRA_SMALL_FONT_SIZE,
     SMALL_FONT_SIZE,
     MEDIUM_FONT_SIZE,
     LARGE_FONT_SIZE,
+    EXTRA_LARGE_FONT_SIZE,
 } from './../constants';
 import Cell from '../interface/Cell';
 import Color from '../enum/Color';
@@ -22,32 +24,28 @@ import GameState from '../interface/GameState';
 import Body from '../body/Body';
 import GameControls from './GameControls';
 import GameSound from './GameSound';
-
-interface GameProps {
-    p: P5;
-    canvasWidth: number;
-    canvasHeight: number;
-    body: Body;
-}
+import GameProps from '../interface/GameProps';
 
 export default class Game {
-    private p: P5;
+    protected p: P5;
 
-    private defaultFontFamily: string = 'retro-gamming';
+    protected defaultFontFamily: string = 'retro-gamming';
 
-    private smFontSize: number;
-    private mdFontSize: number;
-    private lgFontSize: number;
+    protected xsmFontSize: number;
+    protected smFontSize: number;
+    protected mdFontSize: number;
+    protected lgFontSize: number;
+    protected xlgFontSize: number;
 
-    private canvasWidth: number;
-    private canvasHeight: number;
+    public canvasWidth: number;
+    public canvasHeight: number;
 
-    private displayWidth: number;
-    private displayHeight: number;
+    protected displayWidth: number;
+    protected displayHeight: number;
 
-    private grid: Cell[][];
+    protected grid: Cell[][];
 
-    private state: GameState = {
+    protected state: GameState = {
         on: false,
         start: false,
         gameOver: false,
@@ -59,16 +57,16 @@ export default class Game {
     public hiScoreValue: number = 0;
     public hiScoreKey: string = 'hiScore';
     public level: number = 1;
-    private maxLevel: number = 10;
+    protected maxLevel: number = 10;
 
-    private cellSize: number;
+    protected cellSize: number;
 
-    private gameSound: GameSound;
-    private controls: GameControls;
-    private body: Body;
+    protected gameSound: GameSound = new GameSound();
+    protected controls: GameControls = new GameControls();
+    protected body: Body;
 
-    private tickInterval: number = 30;
-    private actualFrame: number = 0;
+    protected tickInterval: number = 30;
+    protected actualFrame: number = 0;
 
     constructor(props: GameProps) {
         this.p = props.p;
@@ -80,9 +78,9 @@ export default class Game {
 
         this.resetGrid();
 
-        this.gameSound = new GameSound();
-        this.controls = new GameControls();
         this.controls.bound(this);
+
+        this.setup();
     }
 
     resetGrid() {
@@ -232,10 +230,13 @@ export default class Game {
     drawFrame() {
         this.drawDisplay();
         this.drawHud();
+        this.draw();
 
+        this.xsmFontSize = this.getRelativeValue(EXTRA_SMALL_FONT_SIZE);
         this.smFontSize = this.getRelativeValue(SMALL_FONT_SIZE);
         this.mdFontSize = this.getRelativeValue(MEDIUM_FONT_SIZE);
         this.lgFontSize = this.getRelativeValue(LARGE_FONT_SIZE);
+        this.xlgFontSize = this.getRelativeValue(EXTRA_LARGE_FONT_SIZE);
 
         if (!this.state.on) return;
 
@@ -256,10 +257,10 @@ export default class Game {
     drawWelcome() {
         const { p } = this;
 
-        p.textFont(this.defaultFontFamily);
-        p.textSize(this.lgFontSize);
-
         p.push();
+
+        p.textFont(this.defaultFontFamily);
+        p.textSize(this.mdFontSize);
 
         p.fill(FONT_COLOR);
 
@@ -273,10 +274,10 @@ export default class Game {
     drawGameOver() {
         const { p } = this;
 
-        p.textFont(this.defaultFontFamily);
-        p.textSize(this.lgFontSize);
-
         p.push();
+
+        p.textFont(this.defaultFontFamily);
+        p.textSize(this.mdFontSize);
 
         p.fill(FONT_COLOR);
 
@@ -311,6 +312,37 @@ export default class Game {
         return { color: Color.DEFAULT, value: 0 };
     }
 
+    changeGame(nameSpace: string, className: string) {
+        this.controls.unbound(this);
+        this.body.unbound();
+        this.gameSound.stopAll();
+
+        // const gameClass = require(`./${className}/${className}`);
+        // const gameClass = require('./menu/GameMenu').default;
+        const gameClass = require(`./${nameSpace}/${className}`).default;
+
+        console.log(gameClass);
+
+        const args: GameProps = {
+            p: this.getP(),
+            canvasWidth: this.canvasWidth,
+            canvasHeight: this.canvasHeight,
+            body: this.getBody(),
+        };
+
+        const g = new gameClass(args);
+
+        g.getControls().pressOnOff(g);
+
+        this.getBody().bound(g);
+
+        this.getP().draw = () => {
+            g.drawFrame();
+        };
+    }
+
     processTick() {}
     processFrame() {}
+    draw() {}
+    setup() {}
 }

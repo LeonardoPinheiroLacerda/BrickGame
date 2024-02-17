@@ -1,0 +1,22 @@
+[
+    {
+        "name": "Menu",
+        "nameSpace": "menu",
+        "className": "GameMenu"
+    },
+    {
+        "name": "Tetris",
+        "nameSpace": "tetris",
+        "className": "Tetris"
+    },
+    {
+        "name": "Snake",
+        "nameSpace": "snake",
+        "className": "Snake"
+    },
+    {
+        "name": "Test",
+        "nameSpace": "test",
+        "className": "SomeClass"
+    }
+]
