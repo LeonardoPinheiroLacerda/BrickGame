@@ -6,17 +6,7 @@
     },
     {
         "name": "Tetris",
-        "nameSpace": "tetris",
+        "nameSpace": "games/tetris",
         "className": "Tetris"
-    },
-    {
-        "name": "Snake",
-        "nameSpace": "snake",
-        "className": "Snake"
-    },
-    {
-        "name": "Test",
-        "nameSpace": "test",
-        "className": "SomeClass"
     }
 ]

@@ -1,9 +1,10 @@
 import Sound from '../../enum/Sound';
+import Game from '../Game';
 import GameControls from '../GameControls';
 import GameMenu from './GameMenu';
 
 export default class GameMenuControls extends GameControls {
-    pressLeft(game: GameMenu): void {
+    protected left(game: GameMenu): void {
         if (game.getState().running) game.getGameSound().play(Sound.KEY_PRESS);
         if (game.games[game.selectedGame - 1]) {
             game.selectedGame -= 1;
@@ -11,7 +12,7 @@ export default class GameMenuControls extends GameControls {
             game.selectedGame = game.games.length - 1;
         }
     }
-    pressRight(game: GameMenu): void {
+    protected right(game: GameMenu): void {
         if (game.getState().running) game.getGameSound().play(Sound.KEY_PRESS);
         if (game.games[game.selectedGame + 1]) {
             game.selectedGame += 1;
@@ -19,7 +20,7 @@ export default class GameMenuControls extends GameControls {
             game.selectedGame = 0;
         }
     }
-    pressAction(game: GameMenu): void {
+    protected action(game: GameMenu): void {
         if (game.getState().start && game.getState().running && game.getState().on) {
             game.getGameSound().play(Sound.ACTION_1);
 
@@ -28,29 +29,31 @@ export default class GameMenuControls extends GameControls {
         }
     }
 
-    pressStartPause(game: GameMenu): void {
+    protected beforeStartPause(game: GameMenu): void {
         if (!game.getState().start && game.getState().on) {
             game.getGameSound().play(Sound.KEY_PRESS);
         }
+    }
 
-        super.pressStartPause(game);
-
+    protected afterStartPause(game: Game): void {
         //Dentro do menu não deve existir estado de pausa
         if (game.getState().on) game.getState().start = true;
     }
-    pressOnOff(game: GameMenu): void {
-        super.pressOnOff(game);
+
+    protected afterOnOff(game: GameMenu): void {
         game.playedStartTheme = false;
         game.selectedGame = 0;
         game.getGameSound().stopAll();
     }
-    pressReset(game: GameMenu): void {
-        super.pressReset(game);
+
+    protected afterReset(game: GameMenu): void {
         game.playedStartTheme = false;
         game.selectedGame = 0;
         game.getGameSound().stopAll();
     }
-    pressExit(game: GameMenu): void {
+
+    exit(game: GameMenu): void {
+        console.log(game);
         return;
     }
 }

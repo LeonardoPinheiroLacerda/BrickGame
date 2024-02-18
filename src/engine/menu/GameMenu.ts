@@ -12,10 +12,16 @@ export default class GameMenu extends Game {
     public selectedGame: number = 0;
     public games: GameItem[] = gamesJson;
     public playedStartTheme: boolean = false;
-    protected controls: GameControls = new GameMenuControls();
+    protected controls: GameControls;
 
     constructor(props: GameProps) {
         super(props);
+    }
+
+    protected setup(): void {
+        this.controls = new GameMenuControls();
+        this.controls.unbound(this);
+        this.controls.bound(this);
     }
 
     drawWelcome(): void {
