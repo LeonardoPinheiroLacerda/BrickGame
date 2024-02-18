@@ -133,69 +133,69 @@ export default class GameControls {
     }
 
     pressOnOff(game: Game) {
-        this.beforeOnOff(game);
-        this.onOff(game);
-        this.afterOnOff(game);
+        game.getControls().beforeOnOff(game);
+        game.getControls().onOff(game);
+        game.getControls().afterOnOff(game);
     }
     pressStartPause(game: Game) {
         if (!game.getState().on) return;
-        this.beforeStartPause(game);
-        this.startPause(game);
-        this.afterStartPause(game);
+        game.getControls().beforeStartPause(game);
+        game.getControls().startPause(game);
+        game.getControls().afterStartPause(game);
     }
     pressSound(game: Game) {
         if (!game.getState().on) return;
-        this.beforeSound(game);
-        this.sound(game);
-        this.afterSound(game);
+        game.getControls().beforeSound(game);
+        game.getControls().sound(game);
+        game.getControls().afterSound(game);
     }
     pressReset(game: Game) {
         if (!game.getState().on) return;
-        this.beforeReset(game);
-        this.reset(game);
-        this.afterReset(game);
+        game.getControls().beforeReset(game);
+        game.getControls().reset(game);
+        game.getControls().afterReset(game);
     }
     pressExit(game: Game) {
         if (!game.getState().on) return;
-        this.beforeExit(game);
-        this.exit(game);
-        this.afterExit(game);
+        game.getControls().beforeExit(game);
+        game.getControls().exit(game);
+        game.getControls().afterExit(game);
     }
     pressEnableColor(game: Game) {
         if (!game.getState().on) return;
-        this.beforeEnableColor(game);
-        this.enableColor(game);
-        this.afterEnableColor(game);
+        game.getControls().beforeEnableColor(game);
+        game.getControls().enableColor(game);
+        game.getControls().afterEnableColor(game);
     }
     pressUp(game: Game) {
         if (!game.getState().on) return;
-        this.beforeUp(game);
-        this.up(game);
-        this.afterUp(game);
+        game.getControls().beforeUp(game);
+        game.getControls().up(game);
+        game.getControls().afterUp(game);
     }
     pressDown(game: Game) {
         if (!game.getState().on) return;
-        this.beforeDown(game);
-        this.down(game);
-        this.afterDown(game);
+        game.getControls().beforeDown(game);
+        game.getControls().down(game);
+        game.getControls().afterDown(game);
     }
     pressRight(game: Game) {
         if (!game.getState().on) return;
-        this.beforeRight(game);
-        this.right(game);
-        this.afterRight(game);
+        game.getControls().beforeRight(game);
+        game.getControls().right(game);
+        game.getControls().afterRight(game);
     }
     pressLeft(game: Game) {
         if (!game.getState().on) return;
-        this.beforeLeft(game);
-        this.left(game);
-        this.afterLeft(game);
+        game.getControls().beforeLeft(game);
+        game.getControls().left(game);
+        game.getControls().afterLeft(game);
     }
     pressAction(game: Game) {
         if (!game.getState().on) return;
-        this.beforeAction(game);
-        this.action(game);
-        this.afterAction(game);
+        game.getControls().beforeAction(game);
+        game.getControls().action(game);
+        game.getControls().afterAction(game);
     }
 
     bound(game: Game) {
