@@ -25,6 +25,7 @@ import GameBody from './body/GameBody';
 import GameControls from './GameControls';
 import GameSound from './GameSound';
 import GameProps from '../interface/GameProps';
+import CellElement from '../interface/CellElement';
 
 export default class Game {
     protected p: P5;
@@ -206,8 +207,8 @@ export default class Game {
         this.hiScoreValue = Number.parseInt(localStorage.getItem(this.hiScoreKey));
     }
 
-    drawCell({ y, x }: Coordinates): void {
-        const { p, canvasWidth, cellSize, grid, state } = this;
+    drawCell({ y, x }: Coordinates, grid: Cell[][] = this.grid): void {
+        const { canvasWidth, cellSize, state } = this;
 
         const displayMargin = canvasWidth * DISPLAY_MARGIN;
 
@@ -227,10 +228,18 @@ export default class Game {
             color = Color.INACTIVE;
         }
 
+        //Draw cell
+        this.drawCellElement({ w, h, posX, posY, color });
+    }
+
+    drawCellElement(cellElement: CellElement) {
+        const { p } = this;
+
+        const { w, h, posX, posY, color } = cellElement;
+
         const margin = w * CELL_OUTER_MARGIN;
         const innerMargin = w * CELL_INNER_MARGIN;
 
-        //Draw cell
         p.push();
 
         p.noFill();
@@ -320,6 +329,10 @@ export default class Game {
 
     getState(): GameState {
         return this.state;
+    }
+
+    getGrid(): Cell[][] {
+        return this.grid;
     }
 
     emptyCell(): Cell {
