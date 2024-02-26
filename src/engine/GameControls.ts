@@ -95,6 +95,7 @@ export default class GameControls {
         }
         if (game.getState().gameOver) {
             game.getState().gameOver = false;
+            this.reset(game);
         }
     }
     protected sound(game: Game) {
@@ -106,8 +107,6 @@ export default class GameControls {
         game.getState().running = false;
         game.getGameSound().setMute(false);
         game.resetGrid();
-
-        game.registerHiScore();
 
         game.reset();
     }

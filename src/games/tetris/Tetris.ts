@@ -1,6 +1,7 @@
 import Game from '../../engine/Game';
 import Color from '../../enum/Color';
 import Sound from '../../enum/Sound';
+import Cell from '../../interface/Cell';
 import TetrisControls from './TetrisControls';
 import Piece from './piece/Piece';
 import Piece1 from './piece/Piece1';
@@ -11,14 +12,26 @@ import Piece5 from './piece/Piece5';
 import Piece6 from './piece/Piece6';
 import Piece7 from './piece/Piece7';
 
+import { GRID_Y } from './../../constants';
+import GameProps from '../../interface/GameProps';
+
 export default class Tetris extends Game {
     private next: Piece;
     private current: Piece;
     private actualId: number = 1;
 
+    linesCompleted: number = 0;
+    linesToLevelUp: number = 3;
+
     protected tickInterval: number = 10;
 
-    protected setup(): void {
+    protected hiScoreKey: string = 'hiTetrisScore';
+
+    constructor(props: GameProps) {
+        super(props);
+
+        this.hiScoreValue = parseInt(localStorage.getItem(this.hiScoreKey));
+
         this.controls = new TetrisControls();
         this.controls.bound(this);
 
@@ -26,8 +39,10 @@ export default class Tetris extends Game {
     }
 
     reset() {
-        this.resetGrid();
+        super.reset();
         this.current = null;
+        this.linesCompleted = 0;
+        this.generateNext();
     }
 
     drawWelcome(): void {
@@ -83,11 +98,12 @@ export default class Tetris extends Game {
         const hasCurrent = this.current;
 
         if (!canMove || !hasCurrent) {
+            this.checkScore();
             this.spawn();
             this.checkGameOver();
 
             if (this.state.gameOver === false) {
-                this.gameSound.play(Sound.ACTION_2);
+                this.gameSound.play(Sound.SPAWN);
             }
         }
 
@@ -156,9 +172,55 @@ export default class Tetris extends Game {
     private checkGameOver(): void {
         this.current?.parts.forEach(({ y, x }) => {
             if (this.grid[y][x].value !== 0) {
-                this.state.gameOver = true;
-                this.state.running = false;
+                this.gameOver();
             }
         });
+    }
+
+    private checkScore(): void {
+        const { grid } = this;
+
+        //Salva linhas completas em uma lista
+        const linesCompletedList: Cell[][] = [];
+
+        grid.forEach(row => {
+            if (row.filter(col => col.value === 0).length === 0) {
+                linesCompletedList.push(row);
+                console.log(row);
+            }
+        });
+
+        if (linesCompletedList.length > 0) {
+            //Incrementa o score de acordo com o numero de linhas completas
+            if (linesCompletedList.length === 1) {
+                this.score += 10 * this.level;
+            } else if (linesCompletedList.length === 2) {
+                this.score += 25 * this.level;
+            } else if (linesCompletedList.length === 3) {
+                this.score += 40 * this.level;
+            } else if (linesCompletedList.length === 4) {
+                this.score += 60 * this.level;
+            }
+
+            this.gameSound.play(Sound.SCORE_1);
+
+            //Remove linhas completas
+            this.grid = grid.filter(row => !linesCompletedList.includes(row));
+
+            //Adiciona linhas vazias
+            while (this.grid.length !== GRID_Y) {
+                this.grid = [this.emptyRow(), ...this.grid];
+            }
+
+            //Faz level up de acordo com o numero de linhas completas no geral
+            this.linesCompleted += linesCompletedList.length;
+            if (this.level < this.maxLevel) {
+                this.level = Math.trunc(this.linesCompleted / this.linesToLevelUp) + 1;
+
+                if (this.level > this.maxLevel) {
+                    this.level = this.maxLevel;
+                }
+            }
+        }
     }
 }

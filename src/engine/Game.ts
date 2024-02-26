@@ -81,8 +81,6 @@ export default class Game {
 
         this.controls.bound(this);
 
-        this.setup();
-
         //Primeira renderização
         this.drawFrame();
 
@@ -198,12 +196,12 @@ export default class Game {
     }
 
     registerHiScore(): void {
-        this.score = 0;
-        this.level = 1;
-        const hiScore = localStorage.getItem(this.hiScoreKey);
-        if (hiScore === null) {
-            localStorage.setItem(this.hiScoreKey, '0');
+        const oldHiScore = Number.parseInt(localStorage.getItem(this.hiScoreKey));
+
+        if (this.score > oldHiScore) {
+            localStorage.setItem(this.hiScoreKey, this.score.toString());
         }
+
         this.hiScoreValue = Number.parseInt(localStorage.getItem(this.hiScoreKey));
     }
 
@@ -311,6 +309,12 @@ export default class Game {
         p.pop();
     }
 
+    gameOver() {
+        this.registerHiScore();
+        this.state.gameOver = true;
+        this.state.running = false;
+    }
+
     getGameSound(): GameSound {
         return this.gameSound;
     }
@@ -337,6 +341,14 @@ export default class Game {
 
     emptyCell(): Cell {
         return { color: Color.DEFAULT, value: 0 };
+    }
+
+    emptyRow() {
+        const emptyRow: Cell[] = [];
+        for (let x = 0; x < GRID_X; x++) {
+            emptyRow.push(this.emptyCell());
+        }
+        return emptyRow;
     }
 
     changeGame(nameSpace: string, className: string): void {
@@ -373,6 +385,9 @@ export default class Game {
     protected processTick(): void {}
     protected processFrame(): void {}
     protected draw(): void {}
-    protected setup(): void {}
-    reset(): void {}
+    reset(): void {
+        this.level = 1;
+        this.score = 0;
+        this.resetGrid();
+    }
 }

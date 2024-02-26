@@ -16,9 +16,7 @@ export default class GameMenu extends Game {
 
     constructor(props: GameProps) {
         super(props);
-    }
 
-    protected setup(): void {
         this.controls = new GameMenuControls();
         this.controls.unbound(this);
         this.controls.bound(this);
