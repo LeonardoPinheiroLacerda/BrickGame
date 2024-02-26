@@ -7,7 +7,7 @@ enum Color {
     PURPLE = 'rgb(128, 0, 128)',
     RED = 'rgb(128, 0, 0)',
     YELLOW = 'rgb(128, 128, 0)',
-    INACTIVE = 'rgb(168, 185, 167)',
+    INACTIVE = 'rgb(166, 183, 165)',
 }
 
 export default Color;

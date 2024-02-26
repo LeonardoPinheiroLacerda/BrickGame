@@ -5,6 +5,11 @@ import TetrisControls from './TetrisControls';
 import Piece from './piece/Piece';
 import Piece1 from './piece/Piece1';
 import Piece2 from './piece/Piece2';
+import Piece3 from './piece/Piece3';
+import Piece4 from './piece/Piece4';
+import Piece5 from './piece/Piece5';
+import Piece6 from './piece/Piece6';
+import Piece7 from './piece/Piece7';
 
 export default class Tetris extends Game {
     private next: Piece;
@@ -115,12 +120,27 @@ export default class Tetris extends Game {
         const last = this.next;
 
         do {
-            switch (getRandomInt(0, 1)) {
+            switch (getRandomInt(0, 6)) {
                 case 0:
                     this.next = new Piece1(this.actualId);
                     break;
                 case 1:
                     this.next = new Piece2(this.actualId);
+                    break;
+                case 2:
+                    this.next = new Piece3(this.actualId);
+                    break;
+                case 3:
+                    this.next = new Piece4(this.actualId);
+                    break;
+                case 4:
+                    this.next = new Piece5(this.actualId);
+                    break;
+                case 5:
+                    this.next = new Piece6(this.actualId);
+                    break;
+                case 6:
+                    this.next = new Piece7(this.actualId);
                     break;
             }
         } while (last?.pieceId === this.next.pieceId && last);

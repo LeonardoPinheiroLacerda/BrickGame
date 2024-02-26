@@ -30,9 +30,9 @@ export default class Piece {
 
         const preview: Cell[][] = [];
 
-        for (let y = 0; y < 5; y++) {
+        for (let y = 0; y < 4; y++) {
             const row: Cell[] = [];
-            for (let x = 0; x < 5; x++) {
+            for (let x = 0; x < 4; x++) {
                 row.push({ value: 0, color: this.color });
             }
             preview.push(row);
