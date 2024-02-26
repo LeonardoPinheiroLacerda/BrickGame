@@ -66,7 +66,9 @@ export default class Game {
     protected controls: GameControls = new GameControls();
     protected body: GameBody;
 
-    protected tickInterval: number = 30;
+    protected initialTickInterval: number = 30;
+    protected tickInterval: number = this.initialTickInterval;
+
     protected actualFrame: number = 0;
 
     constructor(props: GameProps) {

@@ -23,7 +23,7 @@ export default class Tetris extends Game {
     linesCompleted: number = 0;
     linesToLevelUp: number = 3;
 
-    protected tickInterval: number = 10;
+    protected initialTickInterval: number = 20;
 
     protected hiScoreKey: string = 'hiTetrisScore';
 
@@ -112,6 +112,10 @@ export default class Tetris extends Game {
             this.resetGrid();
             this.gameSound.play(Sound.GAME_OVER);
         }
+    }
+
+    protected processFrame(): void {
+        this.tickInterval = this.initialTickInterval - this.level;
     }
 
     protected draw(): void {
