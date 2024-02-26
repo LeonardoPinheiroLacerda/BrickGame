@@ -3,13 +3,14 @@ import Color from '../../enum/Color';
 import TetrisControls from './TetrisControls';
 import Piece from './piece/Piece';
 import Piece1 from './piece/Piece1';
+import Piece2 from './piece/Piece2';
 
 export default class Tetris extends Game {
     private next: Piece;
     private current: Piece;
     private actualId: number = 1;
 
-    protected tickInterval: number = 3;
+    protected tickInterval: number = 20;
 
     protected setup(): void {
         this.controls = new TetrisControls();
@@ -91,7 +92,21 @@ export default class Tetris extends Game {
     }
 
     private generateNext(): void {
-        this.next = new Piece1(this.actualId);
+        const getRandomInt = (min: number, max: number) => {
+            min = Math.ceil(min);
+            max = Math.floor(max);
+            return Math.floor(Math.random() * (max - min + 1)) + min;
+        };
+
+        switch (getRandomInt(0, 1)) {
+            case 0:
+                this.next = new Piece1(this.actualId);
+                break;
+            case 1:
+                this.next = new Piece2(this.actualId);
+                break;
+        }
+
         this.actualId += 1;
     }
 

@@ -9,6 +9,7 @@ export default class Piece {
     public preview: Cell[][] = [];
     public color: Color;
     public id: number;
+    public pieceId: number;
 
     public state: number;
     public maxState: number;
@@ -88,22 +89,42 @@ export default class Piece {
     rotate(game: Tetris) {
         this.state = this.state === this.maxState ? 0 : this.state + 1;
 
-        game.getGrid().forEach(row => {
-            row.forEach(col => {
-                if (col.value === this.id) {
-                    const { color, value } = game.emptyCell();
-                    col.color = color;
-                    col.value = value;
-                }
-            });
-        });
+        const tmpParts = this.generateParts();
 
-        this.parts = this.generateParts();
+        let canRotate = true;
+
+        try {
+            for (let i = 0; i < tmpParts.length; i++) {
+                const cell = game.getGrid()[tmpParts[i].y][tmpParts[i].x];
+                if (cell.value != 0 && cell.value != this.id) {
+                    canRotate = false;
+                    break;
+                }
+            }
+        } catch (err) {
+            canRotate = false;
+        }
+
+        if (!canRotate) {
+            this.state = this.state === 0 ? this.maxState : this.state - 1;
+        } else {
+            game.getGrid().forEach(row => {
+                row.forEach(col => {
+                    if (col.value === this.id) {
+                        const { color, value } = game.emptyCell();
+                        col.color = color;
+                        col.value = value;
+                    }
+                });
+            });
+
+            this.parts = this.generateParts();
+        }
     }
 
-    getRandomInt(min: number, max: number) {
-        min = Math.ceil(min);
-        max = Math.floor(max);
+    getRandomState() {
+        const min = Math.ceil(0);
+        const max = Math.floor(this.maxState);
         return Math.floor(Math.random() * (max - min + 1)) + min;
     }
 }

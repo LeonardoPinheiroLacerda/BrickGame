@@ -12,4 +12,16 @@ export default class TetrisControls extends GameControls {
     protected action(game: Tetris): void {
         game.getCurrent().rotate(game);
     }
+
+    protected up(game: Tetris): void {
+        game.getCurrent().rotate(game);
+    }
+
+    protected right(game: Tetris): void {
+        game.getCurrent().move(game, { y: 0, x: 1 });
+    }
+
+    protected left(game: Tetris): void {
+        game.getCurrent().move(game, { y: 0, x: -1 });
+    }
 }
