@@ -84,7 +84,7 @@ export default class GameControls {
 
     protected onOff(game: Game) {
         game.getState().on = !game.getState().on;
-        this.pressReset(game);
+        this.reset(game);
     }
     protected startPause(game: Game) {
         if (game.getState().on) {
@@ -92,6 +92,9 @@ export default class GameControls {
         }
         if (game.getState().start) {
             game.getState().running = true;
+        }
+        if (game.getState().gameOver) {
+            game.getState().gameOver = false;
         }
     }
     protected sound(game: Game) {
@@ -105,6 +108,8 @@ export default class GameControls {
         game.resetGrid();
 
         game.registerHiScore();
+
+        game.reset();
     }
     protected exit(game: Game) {
         if (game.getState().on) {

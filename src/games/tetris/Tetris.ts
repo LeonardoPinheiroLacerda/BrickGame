@@ -1,5 +1,6 @@
 import Game from '../../engine/Game';
 import Color from '../../enum/Color';
+import Sound from '../../enum/Sound';
 import TetrisControls from './TetrisControls';
 import Piece from './piece/Piece';
 import Piece1 from './piece/Piece1';
@@ -10,13 +11,18 @@ export default class Tetris extends Game {
     private current: Piece;
     private actualId: number = 1;
 
-    protected tickInterval: number = 20;
+    protected tickInterval: number = 10;
 
     protected setup(): void {
         this.controls = new TetrisControls();
         this.controls.bound(this);
 
         this.generateNext();
+    }
+
+    reset() {
+        this.resetGrid();
+        this.current = null;
     }
 
     drawWelcome(): void {
@@ -52,7 +58,13 @@ export default class Tetris extends Game {
                         h: this.cellSize,
                         posX: coordX + this.cellSize * x,
                         posY: coordY + this.cellSize * y,
-                        color: column.value !== 0 ? column.color : Color.INACTIVE,
+                        color: this.state.colorEnabled
+                            ? column.value !== 0
+                                ? column.color
+                                : Color.INACTIVE
+                            : column.value !== 0
+                              ? Color.DEFAULT
+                              : Color.INACTIVE,
                     });
                 });
             });
@@ -67,15 +79,17 @@ export default class Tetris extends Game {
 
         if (!canMove || !hasCurrent) {
             this.spawn();
-
             this.checkGameOver();
 
-            this.generateNext();
+            if (this.state.gameOver === false) {
+                this.gameSound.play(Sound.ACTION_2);
+            }
         }
 
         if (this.state.gameOver) {
             this.current = null;
             this.resetGrid();
+            this.gameSound.play(Sound.GAME_OVER);
         }
     }
 
@@ -98,24 +112,29 @@ export default class Tetris extends Game {
             return Math.floor(Math.random() * (max - min + 1)) + min;
         };
 
-        switch (getRandomInt(0, 1)) {
-            case 0:
-                this.next = new Piece1(this.actualId);
-                break;
-            case 1:
-                this.next = new Piece2(this.actualId);
-                break;
-        }
+        const last = this.next;
+
+        do {
+            switch (getRandomInt(0, 1)) {
+                case 0:
+                    this.next = new Piece1(this.actualId);
+                    break;
+                case 1:
+                    this.next = new Piece2(this.actualId);
+                    break;
+            }
+        } while (last?.pieceId === this.next.pieceId && last);
 
         this.actualId += 1;
     }
 
     private spawn(): void {
         this.current = this.next;
+        this.generateNext();
     }
 
     private checkGameOver(): void {
-        this.current.parts.forEach(({ y, x }) => {
+        this.current?.parts.forEach(({ y, x }) => {
             if (this.grid[y][x].value !== 0) {
                 this.state.gameOver = true;
                 this.state.running = false;

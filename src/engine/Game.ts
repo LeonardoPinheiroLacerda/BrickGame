@@ -300,7 +300,7 @@ export default class Game {
         p.push();
 
         p.textFont(this.defaultFontFamily);
-        p.textSize(this.mdFontSize);
+        p.textSize(this.lgFontSize);
 
         p.fill(FONT_COLOR);
 
@@ -374,4 +374,5 @@ export default class Game {
     protected processFrame(): void {}
     protected draw(): void {}
     protected setup(): void {}
+    reset(): void {}
 }
