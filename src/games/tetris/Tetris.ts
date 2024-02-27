@@ -23,7 +23,7 @@ export default class Tetris extends Game {
     linesCompleted: number = 0;
     linesToLevelUp: number = 3;
 
-    protected initialTickInterval: number = 20;
+    protected initialTickInterval: number = 30;
 
     protected hiScoreKey: string = 'hiTetrisScore';
 
@@ -45,7 +45,7 @@ export default class Tetris extends Game {
         this.generateNext();
     }
 
-    drawWelcome(): void {
+    async drawWelcome(): Promise<void> {
         const { p } = this;
 
         p.textSize(this.xlgFontSize);
@@ -64,7 +64,7 @@ export default class Tetris extends Game {
         p.text('Action: Rotate', this.getDisplayPosX(0.075), this.getDisplayPosY(0.9));
     }
 
-    drawHud(): void {
+    async drawHud(): Promise<void> {
         super.drawHud();
 
         if (this.state.running) {
@@ -112,13 +112,11 @@ export default class Tetris extends Game {
             this.resetGrid();
             this.gameSound.play(Sound.EXPLOSION);
         }
-    }
 
-    protected processFrame(): void {
         this.tickInterval = this.initialTickInterval - this.level;
     }
 
-    protected draw(): void {
+    protected async draw(): Promise<void> {
         if (this.current && !this.state.gameOver) {
             this.current.parts.forEach(part => {
                 this.grid[part.y][part.x] = { value: this.current.id, color: this.current.color };

@@ -22,7 +22,7 @@ export default class GameMenu extends Game {
         this.controls.bound(this);
     }
 
-    drawWelcome(): void {
+    async drawWelcome(): Promise<void> {
         if (!this.playedStartTheme) {
             this.playedStartTheme = true;
             this.gameSound.play(Sound.START_THEME);
@@ -47,7 +47,7 @@ export default class GameMenu extends Game {
         p.pop();
     }
 
-    draw(): void {
+    async draw(): Promise<void> {
         if (this.state.running) {
             const { p } = this;
             p.push();

@@ -6,7 +6,7 @@ export default class GameSound {
 
     private activeSounds: HTMLAudioElement[] = [];
 
-    play(sound: Sound) {
+    async play(sound: Sound): Promise<void> {
         if (!this.mute) {
             const audio: HTMLAudioElement = new Audio(sound);
             audio.volume = this.volume;
@@ -20,7 +20,7 @@ export default class GameSound {
         }
     }
 
-    stop(sound: Sound) {
+    async stop(sound: Sound): Promise<void> {
         const getFileName = (url: string) => {
             const arr = url.split('/');
             return arr[arr.length - 1];
@@ -32,18 +32,18 @@ export default class GameSound {
         });
     }
 
-    stopAll() {
+    async stopAll(): Promise<void> {
         this.activeSounds.forEach(s => {
             s.volume = 0;
         });
     }
 
-    setMute(mute: boolean) {
+    setMute(mute: boolean): void {
         if (mute) this.stopAll();
         this.mute = mute;
     }
 
-    getMute() {
+    getMute(): boolean {
         return this.mute;
     }
 }

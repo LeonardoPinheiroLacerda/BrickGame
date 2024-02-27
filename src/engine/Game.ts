@@ -92,7 +92,7 @@ export default class Game {
         this.xlgFontSize = this.getRelativeValue(EXTRA_LARGE_FONT_SIZE);
     }
 
-    resetGrid(): void {
+    async resetGrid(): Promise<void> {
         this.grid = [];
         for (let y = 0; y < GRID_Y; y++) {
             this.grid[y] = [];
@@ -102,7 +102,7 @@ export default class Game {
         }
     }
 
-    drawDisplay(): void {
+    async drawDisplay(): Promise<void> {
         const { p, canvasWidth, canvasHeight, grid } = this;
 
         p.background(BACKGROUND_COLOR);
@@ -157,7 +157,7 @@ export default class Game {
         return this.canvasWidth * size;
     }
 
-    drawHud(): void {
+    async drawHud(): Promise<void> {
         const { p } = this;
 
         p.push();
@@ -195,7 +195,7 @@ export default class Game {
         p.pop();
     }
 
-    registerHiScore(): void {
+    async registerHiScore(): Promise<void> {
         const oldHiScore = this.getHiScore();
 
         if (this.score >= oldHiScore) {
@@ -209,7 +209,7 @@ export default class Game {
         return isNaN(parseInt(localStorage.getItem(this.hiScoreKey))) ? 0 : parseInt(localStorage.getItem(this.hiScoreKey));
     }
 
-    drawCell({ y, x }: Coordinates, grid: Cell[][] = this.grid): void {
+    async drawCell({ y, x }: Coordinates, grid: Cell[][] = this.grid): Promise<void> {
         const { canvasWidth, cellSize, state } = this;
 
         const displayMargin = canvasWidth * DISPLAY_MARGIN;
@@ -234,7 +234,7 @@ export default class Game {
         this.drawCellElement({ w, h, posX, posY, color });
     }
 
-    drawCellElement(cellElement: CellElement) {
+    async drawCellElement(cellElement: CellElement): Promise<void> {
         const { p } = this;
 
         const { w, h, posX, posY, color } = cellElement;
@@ -258,7 +258,7 @@ export default class Game {
         p.pop();
     }
 
-    drawFrame(): void {
+    async drawFrame(): Promise<void> {
         this.drawDisplay();
         this.drawHud();
         this.draw();
@@ -277,7 +277,7 @@ export default class Game {
         }
     }
 
-    drawWelcome(): void {
+    async drawWelcome(): Promise<void> {
         const { p } = this;
 
         p.push();
@@ -294,7 +294,7 @@ export default class Game {
         p.pop();
     }
 
-    drawGameOver(): void {
+    async drawGameOver(): Promise<void> {
         const { p } = this;
 
         p.push();
@@ -386,7 +386,7 @@ export default class Game {
 
     protected processTick(): void {}
     protected processFrame(): void {}
-    protected draw(): void {}
+    protected async draw(): Promise<void> {}
     reset(): void {
         this.level = 1;
         this.score = 0;
