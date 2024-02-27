@@ -23,10 +23,24 @@ module.exports = {
                     name: 'sounds/[name].[ext]',
                 },
             },
+            {
+                test: /\.png$/,
+                loader: 'file-loader',
+                options: {
+                    name: 'images/[name].[ext]',
+                },
+            },
+            {
+                test: /favicon\.ico$/,
+                loader: 'file-loader',
+                options: {
+                    name: '[name].[ext]',
+                },
+            },
         ],
     },
     resolve: {
-        extensions: ['.tsx', '.ts', '.js', '.css', '.wav'],
+        extensions: ['.tsx', '.ts', '.js', '.css', '.wav', '.png', '.ico'],
     },
     output: {
         filename: 'bundle.js',

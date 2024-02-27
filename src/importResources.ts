@@ -15,3 +15,7 @@ import '../public/sounds/sound_12.wav';
 import '../public/sounds/sound_13.wav';
 import '../public/sounds/sound_14.wav';
 import '../public/sounds/sound_15.wav';
+
+import '../public/images/meta-image.png';
+
+import '../public/favicon.ico';
