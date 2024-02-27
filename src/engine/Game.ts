@@ -69,8 +69,6 @@ export default class Game {
     protected initialTickInterval: number = 30;
     protected tickInterval: number = this.initialTickInterval;
 
-    protected actualFrame: number = 0;
-
     constructor(props: GameProps) {
         this.p = props.p;
         this.canvasWidth = props.canvasWidth;
@@ -166,33 +164,33 @@ export default class Game {
 
         p.textFont(this.defaultFontFamily);
         p.textSize(this.smFontSize);
-        p.textAlign(p.LEFT, p.TOP);
+        p.textAlign(p.LEFT, p.BASELINE);
 
         if (this.state.on) p.fill(FONT_COLOR);
         else p.fill(FONT_TURNED_OFF_COLOR);
 
-        p.text('Score', this.getHudPosX(0.05), this.getHudPosY(0.01));
-        p.text(this.score, this.getHudPosX(0.05), this.getHudPosY(0.08));
+        p.text('Score', this.getHudPosX(0.05), this.getHudPosY(0.06));
+        p.text(this.score, this.getHudPosX(0.05), this.getHudPosY(0.13));
 
-        p.text('Hi-Score', this.getHudPosX(0.05), this.getHudPosY(0.18));
-        p.text(this.hiScoreValue, this.getHudPosX(0.05), this.getHudPosY(0.25));
+        p.text('Hi-Score', this.getHudPosX(0.05), this.getHudPosY(0.23));
+        p.text(this.hiScoreValue, this.getHudPosX(0.05), this.getHudPosY(0.3));
 
-        p.text('Level', this.getHudPosX(0.05), this.getHudPosY(0.68));
-        p.text(`${this.level} - ${this.maxLevel}`, this.getHudPosX(0.05), this.getHudPosY(0.75));
+        p.text('Level', this.getHudPosX(0.05), this.getHudPosY(0.72));
+        p.text(`${this.level} - ${this.maxLevel}`, this.getHudPosX(0.05), this.getHudPosY(0.8));
 
-        p.textAlign(p.CENTER, p.TOP);
+        p.textAlign(p.CENTER, p.BASELINE);
 
         if (!this.state.running) return;
 
         //Paused text
         if (!this.state.start && this.state.on) p.fill(FONT_COLOR);
         else p.fill(FONT_TURNED_OFF_COLOR);
-        p.text('Paused', this.getHudPosX(0.5), this.getHudPosY(0.85));
+        p.text('Paused', this.getHudPosX(0.5), this.getHudPosY(0.9));
 
         //Muted text
         if (this.gameSound.getMute() && this.state.on) p.fill(FONT_COLOR);
         else p.fill(FONT_TURNED_OFF_COLOR);
-        p.text('Muted', this.getHudPosX(0.5), this.getHudPosY(0.92));
+        p.text('Muted', this.getHudPosX(0.5), this.getHudPosY(0.97));
 
         p.pop();
     }
@@ -264,9 +262,7 @@ export default class Game {
         if (!this.state.on) return;
 
         if (!this.state.gameOver && this.state.start && this.state.running) {
-            this.actualFrame++;
-
-            if (this.actualFrame % this.tickInterval === 0) {
+            if (this.p.frameCount % this.tickInterval === 0) {
                 this.processTick();
             }
             this.processFrame();

@@ -49,13 +49,13 @@ export default class Tetris extends Game {
         const { p } = this;
 
         p.textSize(this.xlgFontSize);
-        p.textAlign(p.CENTER, p.CENTER);
+        p.textAlign(p.CENTER, p.BASELINE);
         p.text('Tetris', this.getDisplayPosX(0.5), this.getDisplayPosY(0.3));
 
         p.textSize(this.smFontSize);
         p.text('Press start to play', this.getDisplayPosX(0.5), this.getDisplayPosY(0.42));
 
-        p.textAlign(p.LEFT, p.CENTER);
+        p.textAlign(p.LEFT, p.BOTTOM);
         p.textSize(this.xsmFontSize);
         p.text('Up:     Rotate', this.getDisplayPosX(0.075), this.getDisplayPosY(0.7));
         p.text('Down:   Move down faster', this.getDisplayPosX(0.075), this.getDisplayPosY(0.75));
