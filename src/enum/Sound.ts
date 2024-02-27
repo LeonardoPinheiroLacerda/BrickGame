@@ -12,7 +12,7 @@ enum Sound {
     DROP = './sounds/sound_11.wav',
     EXPLOSION = './sounds/sound_09.wav',
     GAME_START = './sounds/sound_04.wav',
-    GAME_OVER = './sounds/sound_12.wav',
+    SHOT = './sounds/sound_12.wav',
     START_THEME = './sounds/sound_10.wav',
 }
 

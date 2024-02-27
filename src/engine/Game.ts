@@ -196,13 +196,17 @@ export default class Game {
     }
 
     registerHiScore(): void {
-        const oldHiScore = Number.parseInt(localStorage.getItem(this.hiScoreKey));
+        const oldHiScore = this.getHiScore();
 
-        if (this.score > oldHiScore) {
+        if (this.score >= oldHiScore) {
             localStorage.setItem(this.hiScoreKey, this.score.toString());
         }
 
-        this.hiScoreValue = Number.parseInt(localStorage.getItem(this.hiScoreKey));
+        this.hiScoreValue = this.getHiScore();
+    }
+
+    getHiScore(): number {
+        return isNaN(parseInt(localStorage.getItem(this.hiScoreKey))) ? 0 : parseInt(localStorage.getItem(this.hiScoreKey));
     }
 
     drawCell({ y, x }: Coordinates, grid: Cell[][] = this.grid): void {

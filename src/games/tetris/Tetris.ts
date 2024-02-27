@@ -30,7 +30,7 @@ export default class Tetris extends Game {
     constructor(props: GameProps) {
         super(props);
 
-        this.hiScoreValue = parseInt(localStorage.getItem(this.hiScoreKey));
+        this.hiScoreValue = this.getHiScore();
 
         this.controls = new TetrisControls();
         this.controls.bound(this);
@@ -102,7 +102,7 @@ export default class Tetris extends Game {
             this.spawn();
             this.checkGameOver();
 
-            if (this.state.gameOver === false) {
+            if (!canMove && hasCurrent && !this.state.gameOver) {
                 this.gameSound.play(Sound.SPAWN);
             }
         }
@@ -110,7 +110,7 @@ export default class Tetris extends Game {
         if (this.state.gameOver) {
             this.current = null;
             this.resetGrid();
-            this.gameSound.play(Sound.GAME_OVER);
+            this.gameSound.play(Sound.EXPLOSION);
         }
     }
 
