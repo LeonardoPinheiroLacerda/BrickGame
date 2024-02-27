@@ -26,7 +26,7 @@
   "bugs": {
     "url": "https://github.com/LeonardoPinheiroLacerda/BrickGame/issues"
   },
-  "homepage": "http://LeonardoPinheiroLacerda.github.io/BrickGame",
+  "homepage": "https://gamebrick.com.br",
   "devDependencies": {
     "@types/p5": "^1.7.6",
     "@typescript-eslint/eslint-plugin": "^7.0.1",
