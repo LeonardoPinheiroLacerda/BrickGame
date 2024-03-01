@@ -28,4 +28,9 @@ export default class TetrisControls extends GameControls {
         game.getGameSound().play(Sound.KEY_PRESS);
         game.getCurrent()?.move(game, { y: 0, x: -1 });
     }
+
+    protected down(game: Tetris): void {
+        game.getGameSound().play(Sound.KEY_PRESS);
+        game.getCurrent()?.move(game, { y: 1, x: 0 });
+    }
 }

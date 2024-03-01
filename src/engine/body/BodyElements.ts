@@ -132,9 +132,9 @@ export default class BodyElements {
 
         p.style('position', 'absolute');
         p.style('top', `-${this.width * 0.035}px`);
-        p.style('left', '30%');
+        p.style('left', '27.5%');
 
-        p.style('width', '40%');
+        p.style('width', '45%');
         p.style('text-align', 'center');
 
         p.style('font-family', 'retro-gamming');
