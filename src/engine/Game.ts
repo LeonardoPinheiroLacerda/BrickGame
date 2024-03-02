@@ -28,17 +28,14 @@ import GameControls from './GameControls';
 import GameSound from './GameSound';
 import GameProps from '../interface/GameProps';
 import CellElement from '../interface/CellElement';
+import FontSize from '../enum/FontSize';
 
 export default class Game {
     protected p: P5;
 
     protected defaultFontFamily: string = 'retro-gamming';
 
-    protected xsmFontSize: number;
-    protected smFontSize: number;
-    protected mdFontSize: number;
-    protected lgFontSize: number;
-    protected xlgFontSize: number;
+    private fontSizes: number[] = [0];
 
     protected canvasWidth: number;
     protected canvasHeight: number;
@@ -88,11 +85,12 @@ export default class Game {
         this.drawFrame();
 
         //Define o tamanho das fontes
-        this.xsmFontSize = this.getRelativeValue(EXTRA_SMALL_FONT_SIZE);
-        this.smFontSize = this.getRelativeValue(SMALL_FONT_SIZE);
-        this.mdFontSize = this.getRelativeValue(MEDIUM_FONT_SIZE);
-        this.lgFontSize = this.getRelativeValue(LARGE_FONT_SIZE);
-        this.xlgFontSize = this.getRelativeValue(EXTRA_LARGE_FONT_SIZE);
+        this.fontSizes = [];
+        this.fontSizes.push(this.getRelativeValue(EXTRA_SMALL_FONT_SIZE));
+        this.fontSizes.push(this.getRelativeValue(SMALL_FONT_SIZE));
+        this.fontSizes.push(this.getRelativeValue(MEDIUM_FONT_SIZE));
+        this.fontSizes.push(this.getRelativeValue(LARGE_FONT_SIZE));
+        this.fontSizes.push(this.getRelativeValue(EXTRA_LARGE_FONT_SIZE));
 
         //Define fonte padrão
         this.p.textFont(this.defaultFontFamily);
@@ -168,8 +166,8 @@ export default class Game {
         this.p.fill(state ? FONT_COLOR : FONT_TURNED_OFF_COLOR);
     }
 
-    protected setTextSize(size: number): void {
-        this.p.textSize(size);
+    protected setTextSize(fontSize: FontSize): void {
+        this.p.textSize(this.fontSizes[fontSize]);
     }
 
     protected setTextAlign(horizontalAlign: P5.HORIZ_ALIGN): void {
@@ -189,7 +187,7 @@ export default class Game {
 
         p.push();
 
-        this.setTextSize(this.smFontSize);
+        this.setTextSize(FontSize.SMALL);
         this.setTextState(false);
         this.setTextAlign(p.LEFT);
 
@@ -357,7 +355,7 @@ export default class Game {
 
         p.push();
 
-        this.setTextSize(this.mdFontSize);
+        this.setTextSize(FontSize.MEDIUM);
         this.setTextState(true);
         this.setTextAlign(p.CENTER);
 
@@ -371,7 +369,7 @@ export default class Game {
 
         p.push();
 
-        this.setTextSize(this.lgFontSize);
+        this.setTextSize(FontSize.LARGE);
         this.setTextState(true);
         this.setTextAlign(p.CENTER);
 

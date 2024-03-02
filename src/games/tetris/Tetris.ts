@@ -13,6 +13,7 @@ import Piece7 from './piece/Piece7';
 
 import { GRID_Y } from './../../constants';
 import GameProps from '../../interface/GameProps';
+import FontSize from '../../enum/FontSize';
 
 export default class Tetris extends Game {
     private next: Piece;
@@ -47,14 +48,14 @@ export default class Tetris extends Game {
     async drawWelcome(): Promise<void> {
         const { p } = this;
 
-        this.setTextSize(this.xlgFontSize);
+        this.setTextSize(FontSize.EXTRA_LARGE);
         this.setTextAlign(p.CENTER);
         this.textOnDisplay('Tetris', { x: 0.5, y: 0.3 });
 
-        this.setTextSize(this.smFontSize);
+        this.setTextSize(FontSize.SMALL);
         this.textOnDisplay('Press start to play', { x: 0.5, y: 0.42 });
 
-        this.setTextSize(this.xsmFontSize);
+        this.setTextSize(FontSize.EXTRA_SMALL);
         this.setTextAlign(p.LEFT);
 
         this.textOnDisplay('Up:     Rotate', { x: 0.075, y: 0.7 });

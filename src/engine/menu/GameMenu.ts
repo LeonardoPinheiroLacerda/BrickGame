@@ -6,6 +6,7 @@ import GameMenuControls from './GameMenuControls';
 import GameItem from '../../interface/GameItem';
 import Sound from '../../enum/Sound';
 import GameProps from '../../interface/GameProps';
+import FontSize from '../../enum/FontSize';
 
 export default class GameMenu extends Game {
     public selectedGame: number = 0;
@@ -29,13 +30,13 @@ export default class GameMenu extends Game {
         const { p } = this;
         p.push();
 
-        this.setTextSize(this.lgFontSize);
+        this.setTextSize(FontSize.LARGE);
         this.setTextState(true);
         this.setTextAlign(p.CENTER);
 
         this.textOnDisplay('Menu', { x: 0.5, y: 0.15 });
 
-        this.setTextSize(this.smFontSize);
+        this.setTextSize(FontSize.SMALL);
 
         this.textOnDisplay('Wellcome to your', { x: 0.5, y: 0.25 });
         this.textOnDisplay('favorite brick game', { x: 0.5, y: 0.32 });
@@ -51,13 +52,13 @@ export default class GameMenu extends Game {
             const { p } = this;
             p.push();
 
-            this.setTextSize(this.lgFontSize);
+            this.setTextSize(FontSize.LARGE);
             this.setTextState(true);
             this.setTextAlign(p.CENTER);
 
             this.textOnDisplay('Menu', { x: 0.5, y: 0.15 });
 
-            this.setTextSize(this.smFontSize);
+            this.setTextSize(FontSize.SMALL);
 
             this.textOnDisplay('Choose a game and', { x: 0.5, y: 0.25 });
             this.textOnDisplay('Press action to play', { x: 0.5, y: 0.32 });
@@ -68,11 +69,11 @@ export default class GameMenu extends Game {
             this.setTextAlign(p.LEFT);
             this.textOnDisplay('>', { x: 0.9, y: 0.54 });
 
-            this.setTextSize(this.mdFontSize);
+            this.setTextSize(FontSize.MEDIUM);
             this.setTextAlign(p.CENTER);
             this.textOnDisplay(this.games[this.selectedGame].name, { x: 0.5, y: 0.55 });
 
-            this.setTextSize(this.xsmFontSize);
+            this.setTextSize(FontSize.EXTRA_SMALL);
             this.setTextAlign(p.LEFT);
 
             this.textOnDisplay('Left:    Previous option', { x: 0.05, y: 0.78 });
