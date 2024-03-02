@@ -10,27 +10,32 @@ export default class TetrisControls extends GameControls {
     }
 
     protected action(game: Tetris): void {
-        game.getGameSound().play(Sound.ACTION_1);
-        game.getCurrent()?.rotate(game);
+        if (game.getCurrent()?.rotate(game)) {
+            game.getGameSound().play(Sound.ACTION_1);
+        }
     }
 
     protected up(game: Tetris): void {
-        game.getGameSound().play(Sound.ACTION_1);
-        game.getCurrent()?.rotate(game);
+        if (game.getCurrent()?.rotate(game)) {
+            game.getGameSound().play(Sound.ACTION_1);
+        }
     }
 
     protected right(game: Tetris): void {
-        game.getGameSound().play(Sound.KEY_PRESS);
-        game.getCurrent()?.move(game, { y: 0, x: 1 });
+        if (game.getCurrent()?.move(game, { y: 0, x: 1 })) {
+            game.getGameSound().play(Sound.KEY_PRESS);
+        }
     }
 
     protected left(game: Tetris): void {
-        game.getGameSound().play(Sound.KEY_PRESS);
-        game.getCurrent()?.move(game, { y: 0, x: -1 });
+        if (game.getCurrent()?.move(game, { y: 0, x: -1 })) {
+            game.getGameSound().play(Sound.KEY_PRESS);
+        }
     }
 
     protected down(game: Tetris): void {
-        game.getGameSound().play(Sound.KEY_PRESS);
-        game.getCurrent()?.move(game, { y: 1, x: 0 });
+        if (game.getCurrent()?.move(game, { y: 1, x: 0 })) {
+            game.getGameSound().play(Sound.KEY_PRESS);
+        }
     }
 }

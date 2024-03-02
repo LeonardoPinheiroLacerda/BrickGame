@@ -86,7 +86,7 @@ export default class Piece {
         }
     }
 
-    rotate(game: Tetris) {
+    rotate(game: Tetris): boolean {
         this.state = this.state === this.maxState ? 0 : this.state + 1;
 
         const tmpParts = this.generateParts();
@@ -120,6 +120,8 @@ export default class Piece {
 
             this.parts = this.generateParts();
         }
+
+        return canRotate;
     }
 
     getRandomState() {
