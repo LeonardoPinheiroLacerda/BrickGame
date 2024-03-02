@@ -37,6 +37,13 @@ module.exports = {
                     name: '[name].[ext]',
                 },
             },
+            {
+                test: /CNAME$/,
+                loader: 'file-loader',
+                options: {
+                    name: '[name]',
+                },
+            },
         ],
     },
     resolve: {

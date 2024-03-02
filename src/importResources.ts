@@ -20,3 +20,5 @@ import '../public/images/meta-image.png';
 import '../public/images/splash.gif';
 
 import '../public/favicon.ico';
+
+import '../public/CNAME';
