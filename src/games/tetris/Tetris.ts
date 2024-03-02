@@ -47,21 +47,21 @@ export default class Tetris extends Game {
     async drawWelcome(): Promise<void> {
         const { p } = this;
 
-        p.textSize(this.xlgFontSize);
-        p.textAlign(p.CENTER, p.BASELINE);
-        p.textFont(this.defaultFontFamily);
-        p.text('Tetris', this.getDisplayPosX(0.5), this.getDisplayPosY(0.3));
+        this.setTextSize(this.xlgFontSize);
+        this.setTextAlign(p.CENTER);
+        this.textOnDisplay('Tetris', { x: 0.5, y: 0.3 });
 
-        p.textSize(this.smFontSize);
-        p.text('Press start to play', this.getDisplayPosX(0.5), this.getDisplayPosY(0.42));
+        this.setTextSize(this.smFontSize);
+        this.textOnDisplay('Press start to play', { x: 0.5, y: 0.42 });
 
-        p.textAlign(p.LEFT, p.BOTTOM);
-        p.textSize(this.xsmFontSize);
-        p.text('Up:     Rotate', this.getDisplayPosX(0.075), this.getDisplayPosY(0.7));
-        p.text('Down:   Move down faster', this.getDisplayPosX(0.075), this.getDisplayPosY(0.75));
-        p.text('Left:   Move left', this.getDisplayPosX(0.075), this.getDisplayPosY(0.8));
-        p.text('Right:  Move right', this.getDisplayPosX(0.075), this.getDisplayPosY(0.85));
-        p.text('Action: Rotate', this.getDisplayPosX(0.075), this.getDisplayPosY(0.9));
+        this.setTextSize(this.xsmFontSize);
+        this.setTextAlign(p.LEFT);
+
+        this.textOnDisplay('Up:     Rotate', { x: 0.075, y: 0.7 });
+        this.textOnDisplay('Down:   Move down faster', { x: 0.075, y: 0.75 });
+        this.textOnDisplay('Left:   Move left', { x: 0.075, y: 0.8 });
+        this.textOnDisplay('Right:  Move right', { x: 0.075, y: 0.85 });
+        this.textOnDisplay('Action: Rotate', { x: 0.075, y: 0.9 });
     }
 
     protected processTick(): void {

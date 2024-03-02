@@ -1,5 +1,4 @@
 import Game from '../Game';
-import { FONT_COLOR } from '../../constants';
 
 import * as gamesJson from '../../../resources/games.json';
 import GameControls from '../GameControls';
@@ -30,19 +29,19 @@ export default class GameMenu extends Game {
         const { p } = this;
         p.push();
 
-        p.textFont(this.defaultFontFamily);
-        p.textSize(this.lgFontSize);
+        this.setTextSize(this.lgFontSize);
+        this.setTextState(true);
+        this.setTextAlign(p.CENTER);
 
-        p.fill(FONT_COLOR);
-        p.textAlign(p.CENTER, p.CENTER);
-        p.text('Menu', this.getDisplayPosX(0.5), this.getDisplayPosY(0.15));
+        this.textOnDisplay('Menu', { x: 0.5, y: 0.15 });
 
-        p.textSize(this.smFontSize);
-        p.text('Wellcome to your', this.getDisplayPosX(0.5), this.getDisplayPosY(0.25));
-        p.text('favorite brick game', this.getDisplayPosX(0.5), this.getDisplayPosY(0.32));
-        p.text('simulator!', this.getDisplayPosX(0.5), this.getDisplayPosY(0.39));
-        p.text('Press start', this.getDisplayPosX(0.5), this.getDisplayPosY(0.66));
-        p.text('to continue.', this.getDisplayPosX(0.5), this.getDisplayPosY(0.72));
+        this.setTextSize(this.smFontSize);
+
+        this.textOnDisplay('Wellcome to your', { x: 0.5, y: 0.25 });
+        this.textOnDisplay('favorite brick game', { x: 0.5, y: 0.32 });
+        this.textOnDisplay('simulator!', { x: 0.5, y: 0.39 });
+        this.textOnDisplay('Press start', { x: 0.5, y: 0.66 });
+        this.textOnDisplay('to continue.', { x: 0.5, y: 0.72 });
 
         p.pop();
     }
@@ -52,31 +51,33 @@ export default class GameMenu extends Game {
             const { p } = this;
             p.push();
 
-            p.textFont(this.defaultFontFamily);
-            p.textSize(this.lgFontSize);
-            p.fill(FONT_COLOR);
-            p.textAlign(p.CENTER, p.CENTER);
-            p.text('Menu', this.getDisplayPosX(0.5), this.getDisplayPosY(0.15));
+            this.setTextSize(this.lgFontSize);
+            this.setTextState(true);
+            this.setTextAlign(p.CENTER);
 
-            p.textSize(this.smFontSize);
-            p.text('Choose a game and', this.getDisplayPosX(0.5), this.getDisplayPosY(0.25));
-            p.text('Press action to play', this.getDisplayPosX(0.5), this.getDisplayPosY(0.32));
+            this.textOnDisplay('Menu', { x: 0.5, y: 0.15 });
 
-            p.textAlign(p.RIGHT, p.CENTER);
-            p.text('<', this.getDisplayPosX(0.1), this.getDisplayPosY(0.55));
+            this.setTextSize(this.smFontSize);
 
-            p.textAlign(p.LEFT, p.CENTER);
-            p.text('>', this.getDisplayPosX(0.9), this.getDisplayPosY(0.55));
+            this.textOnDisplay('Choose a game and', { x: 0.5, y: 0.25 });
+            this.textOnDisplay('Press action to play', { x: 0.5, y: 0.32 });
 
-            p.textSize(this.mdFontSize);
-            p.textAlign(p.CENTER, p.CENTER);
-            p.text(this.games[this.selectedGame].name, this.getDisplayPosX(0.5), this.getDisplayPosY(0.55));
+            this.setTextAlign(p.RIGHT);
+            this.textOnDisplay('<', { x: 0.1, y: 0.54 });
 
-            p.textSize(this.xsmFontSize);
-            p.textAlign(p.LEFT, p.CENTER);
-            p.text('Left: Previous option', this.getDisplayPosX(0.05), this.getDisplayPosY(0.78));
-            p.text('Right: Next option', this.getDisplayPosX(0.05), this.getDisplayPosY(0.84));
-            p.text('Action: Select', this.getDisplayPosX(0.05), this.getDisplayPosY(0.9));
+            this.setTextAlign(p.LEFT);
+            this.textOnDisplay('>', { x: 0.9, y: 0.54 });
+
+            this.setTextSize(this.mdFontSize);
+            this.setTextAlign(p.CENTER);
+            this.textOnDisplay(this.games[this.selectedGame].name, { x: 0.5, y: 0.55 });
+
+            this.setTextSize(this.xsmFontSize);
+            this.setTextAlign(p.LEFT);
+
+            this.textOnDisplay('Left:    Previous option', { x: 0.05, y: 0.78 });
+            this.textOnDisplay('Right:   Next option', { x: 0.05, y: 0.84 });
+            this.textOnDisplay('Action:  Select', { x: 0.05, y: 0.9 });
 
             p.pop();
         }

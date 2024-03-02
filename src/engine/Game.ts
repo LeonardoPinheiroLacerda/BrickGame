@@ -93,6 +93,9 @@ export default class Game {
         this.mdFontSize = this.getRelativeValue(MEDIUM_FONT_SIZE);
         this.lgFontSize = this.getRelativeValue(LARGE_FONT_SIZE);
         this.xlgFontSize = this.getRelativeValue(EXTRA_LARGE_FONT_SIZE);
+
+        //Define fonte padrão
+        this.p.textFont(this.defaultFontFamily);
     }
 
     async resetGrid(): Promise<void> {
@@ -157,15 +160,28 @@ export default class Game {
         return this.getRelativeValue(DISPLAY_MARGIN) + this.displayHeight * y;
     }
 
-    getCanvasPosX(x: number): number {
-        return this.canvasWidth * x;
-    }
-    getCanvasPosY(y: number): number {
-        return this.canvasHeight * y;
-    }
-
     getRelativeValue(size: number): number {
         return this.canvasWidth * size;
+    }
+
+    protected setTextState(state: boolean): void {
+        this.p.fill(state ? FONT_COLOR : FONT_TURNED_OFF_COLOR);
+    }
+
+    protected setTextSize(size: number): void {
+        this.p.textSize(size);
+    }
+
+    protected setTextAlign(horizontalAlign: P5.HORIZ_ALIGN): void {
+        this.p.textAlign(horizontalAlign, this.p.BASELINE);
+    }
+
+    protected textOnHud(text: any, coord: Coordinates) {
+        this.p.text(text, this.getHudPosX(coord.x), this.getHudPosY(coord.y));
+    }
+
+    protected textOnDisplay(text: any, coord: Coordinates) {
+        this.p.text(text, this.getDisplayPosX(coord.x), this.getDisplayPosY(coord.y));
     }
 
     async drawHud(): Promise<void> {
@@ -173,46 +189,40 @@ export default class Game {
 
         p.push();
 
-        p.textFont(this.defaultFontFamily);
-        p.textSize(this.smFontSize);
+        this.setTextSize(this.smFontSize);
+        this.setTextState(false);
+        this.setTextAlign(p.LEFT);
 
-        p.fill(FONT_TURNED_OFF_COLOR);
-        p.textAlign(p.LEFT, p.BASELINE);
+        this.textOnHud('88888888', { x: 0.05, y: 0.13 });
+        this.textOnHud('88888888', { x: 0.05, y: 0.3 });
+        this.textOnHud('00 - 00', { x: 0.05, y: 0.8 });
 
-        p.text('88888888', this.getHudPosX(0.05), this.getHudPosY(0.13));
-        p.text('88888888', this.getHudPosX(0.05), this.getHudPosY(0.3));
-        p.text(`00 - 00`, this.getHudPosX(0.05), this.getHudPosY(0.8));
+        this.setTextState(this.state.on);
 
-        p.textAlign(p.LEFT, p.BASELINE);
+        this.textOnHud('Score', { x: 0.05, y: 0.06 });
+        this.textOnHud(this.score, { x: 0.05, y: 0.13 });
 
-        if (this.state.on) p.fill(FONT_COLOR);
-        else p.fill(FONT_TURNED_OFF_COLOR);
+        this.textOnHud('Hi-Score', { x: 0.05, y: 0.23 });
+        this.textOnHud(this.hiScoreValue, { x: 0.05, y: 0.3 });
 
-        p.text('Score', this.getHudPosX(0.05), this.getHudPosY(0.06));
-        p.text(this.score, this.getHudPosX(0.05), this.getHudPosY(0.13));
+        this.textOnHud('Level', { x: 0.05, y: 0.72 });
+        const levelValue = `${this.level < 10 ? '0' + this.level : this.level} - ${this.maxLevel}`;
+        this.textOnHud(levelValue, { x: 0.05, y: 0.8 });
 
-        p.text('Hi-Score', this.getHudPosX(0.05), this.getHudPosY(0.23));
-        p.text(this.hiScoreValue, this.getHudPosX(0.05), this.getHudPosY(0.3));
-
-        p.text('Level', this.getHudPosX(0.05), this.getHudPosY(0.72));
-        p.text(`${this.level < 10 ? '0' + this.level : this.level} - ${this.maxLevel}`, this.getHudPosX(0.05), this.getHudPosY(0.8));
-
-        p.textAlign(p.CENTER, p.BASELINE);
+        this.setTextAlign(p.CENTER);
 
         if (this.state.running) {
             //Paused text
-            if (!this.state.start && this.state.on) p.fill(FONT_COLOR);
-            else p.fill(FONT_TURNED_OFF_COLOR);
-            p.text('Paused', this.getHudPosX(0.5), this.getHudPosY(0.9));
+            this.setTextState(!this.state.start && this.state.on);
+            this.textOnHud('Paused', { x: 0.5, y: 0.9 });
 
             //Muted text
-            if (this.gameSound.getMute() && this.state.on) p.fill(FONT_COLOR);
-            else p.fill(FONT_TURNED_OFF_COLOR);
-            p.text('Muted', this.getHudPosX(0.5), this.getHudPosY(0.97));
+            this.setTextState(this.gameSound.getMute() && this.state.on);
+            this.textOnHud('Muted', { x: 0.5, y: 0.97 });
         } else {
-            p.fill(FONT_TURNED_OFF_COLOR);
-            p.text('Paused', this.getHudPosX(0.5), this.getHudPosY(0.9));
-            p.text('Muted', this.getHudPosX(0.5), this.getHudPosY(0.97));
+            this.setTextState(false);
+            this.textOnHud('Paused', { x: 0.5, y: 0.9 });
+            this.textOnHud('Muted', { x: 0.5, y: 0.97 });
         }
 
         p.pop();
@@ -347,14 +357,11 @@ export default class Game {
 
         p.push();
 
-        p.textFont(this.defaultFontFamily);
-        p.textSize(this.mdFontSize);
+        this.setTextSize(this.mdFontSize);
+        this.setTextState(true);
+        this.setTextAlign(p.CENTER);
 
-        p.fill(FONT_COLOR);
-
-        p.textAlign(p.CENTER, p.CENTER);
-
-        p.text('Game Brick', this.getDisplayPosX(0.5), this.getDisplayPosY(0.5));
+        this.textOnDisplay('Game Brick', { x: 0.5, y: 0.5 });
 
         p.pop();
     }
@@ -364,14 +371,11 @@ export default class Game {
 
         p.push();
 
-        p.textFont(this.defaultFontFamily);
-        p.textSize(this.lgFontSize);
+        this.setTextSize(this.lgFontSize);
+        this.setTextState(true);
+        this.setTextAlign(p.CENTER);
 
-        p.fill(FONT_COLOR);
-
-        p.textAlign(p.CENTER, p.CENTER);
-
-        p.text('Game Over', this.getDisplayPosX(0.5), this.getDisplayPosY(0.5));
+        this.textOnDisplay('Game Over', { x: 0.5, y: 0.5 });
 
         p.pop();
     }
