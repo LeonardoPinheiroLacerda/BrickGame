@@ -164,6 +164,14 @@ export default class Game {
 
         p.textFont(this.defaultFontFamily);
         p.textSize(this.smFontSize);
+
+        p.fill(FONT_TURNED_OFF_COLOR);
+        p.textAlign(p.LEFT, p.BASELINE);
+
+        p.text('88888888', this.getHudPosX(0.05), this.getHudPosY(0.13));
+        p.text('88888888', this.getHudPosX(0.05), this.getHudPosY(0.3));
+        p.text(`00 - 00`, this.getHudPosX(0.05), this.getHudPosY(0.8));
+
         p.textAlign(p.LEFT, p.BASELINE);
 
         if (this.state.on) p.fill(FONT_COLOR);
@@ -176,21 +184,25 @@ export default class Game {
         p.text(this.hiScoreValue, this.getHudPosX(0.05), this.getHudPosY(0.3));
 
         p.text('Level', this.getHudPosX(0.05), this.getHudPosY(0.72));
-        p.text(`${this.level} - ${this.maxLevel}`, this.getHudPosX(0.05), this.getHudPosY(0.8));
+        p.text(`${this.level < 10 ? '0' + this.level : this.level} - ${this.maxLevel}`, this.getHudPosX(0.05), this.getHudPosY(0.8));
 
         p.textAlign(p.CENTER, p.BASELINE);
 
-        if (!this.state.running) return;
+        if (this.state.running) {
+            //Paused text
+            if (!this.state.start && this.state.on) p.fill(FONT_COLOR);
+            else p.fill(FONT_TURNED_OFF_COLOR);
+            p.text('Paused', this.getHudPosX(0.5), this.getHudPosY(0.9));
 
-        //Paused text
-        if (!this.state.start && this.state.on) p.fill(FONT_COLOR);
-        else p.fill(FONT_TURNED_OFF_COLOR);
-        p.text('Paused', this.getHudPosX(0.5), this.getHudPosY(0.9));
-
-        //Muted text
-        if (this.gameSound.getMute() && this.state.on) p.fill(FONT_COLOR);
-        else p.fill(FONT_TURNED_OFF_COLOR);
-        p.text('Muted', this.getHudPosX(0.5), this.getHudPosY(0.97));
+            //Muted text
+            if (this.gameSound.getMute() && this.state.on) p.fill(FONT_COLOR);
+            else p.fill(FONT_TURNED_OFF_COLOR);
+            p.text('Muted', this.getHudPosX(0.5), this.getHudPosY(0.97));
+        } else {
+            p.fill(FONT_TURNED_OFF_COLOR);
+            p.text('Paused', this.getHudPosX(0.5), this.getHudPosY(0.9));
+            p.text('Muted', this.getHudPosX(0.5), this.getHudPosY(0.97));
+        }
 
         p.pop();
     }

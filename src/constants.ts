@@ -1,7 +1,7 @@
 //Colors
 export const BACKGROUND_COLOR = 'rgb(172, 189, 173)';
 export const FONT_COLOR = 'rgb(19, 26, 18)';
-export const FONT_TURNED_OFF_COLOR = 'rgb(166, 183, 165)';
+export const FONT_TURNED_OFF_COLOR = 'rgb(161, 178, 160)';
 
 export const BODY_MAIN_COLOR = 'rgb(0, 68, 187)';
 export const BODY_SHADOW = 'rgb(1, 28, 74)';
