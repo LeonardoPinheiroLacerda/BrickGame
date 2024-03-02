@@ -22,6 +22,11 @@ export default new P5((p: P5) => {
         const { canvasWidth, canvasHeight } = body.build();
         game = new Tetris({ p, canvasWidth, canvasHeight, body });
         body.bound(game);
+
+        const splash: HTMLDivElement = document.querySelector('#splash');
+        setTimeout(() => {
+            splash.style.display = 'none';
+        }, 1000);
     };
 
     p.draw = () => {

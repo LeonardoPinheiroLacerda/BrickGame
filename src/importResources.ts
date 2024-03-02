@@ -17,5 +17,6 @@ import '../public/sounds/sound_14.wav';
 import '../public/sounds/sound_15.wav';
 
 import '../public/images/meta-image.png';
+import '../public/images/splash.gif';
 
 import '../public/favicon.ico';

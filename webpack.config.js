@@ -24,7 +24,7 @@ module.exports = {
                 },
             },
             {
-                test: /\.png$/,
+                test: /\.png|\.gif$/,
                 loader: 'file-loader',
                 options: {
                     name: 'images/[name].[ext]',
@@ -40,7 +40,7 @@ module.exports = {
         ],
     },
     resolve: {
-        extensions: ['.tsx', '.ts', '.js', '.css', '.wav', '.png', '.ico'],
+        extensions: ['.tsx', '.ts', '.js', '.css', '.wav', '.png', '.ico', '.gif'],
     },
     output: {
         filename: 'bundle.js',
