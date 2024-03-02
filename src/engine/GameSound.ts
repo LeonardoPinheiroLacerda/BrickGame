@@ -6,55 +6,16 @@ export default class GameSound {
 
     private activeSounds: HTMLAudioElement[] = [];
 
-    private soundsLoaded: boolean = false;
-
-    private audioContext: AudioContext;
-
-    loadAll() {
-        this.audioContext = new window.AudioContext();
-        const load = (sound: Sound) => {
-            const audioElement = document.createElement('audio');
-            audioElement.id = this.soundId(sound);
-            audioElement.src = sound;
-            audioElement.volume = this.volume;
-            document.body.append(audioElement);
-
-            const audioSource = this.audioContext.createMediaElementSource(audioElement);
-            audioSource.connect(this.audioContext.destination);
-        };
-
-        load(Sound.SPAWN);
-        load(Sound.SCORE_1);
-        load(Sound.SCORE_2);
-        load(Sound.SCORE_3);
-        load(Sound.KEY_PRESS);
-        load(Sound.ACTION_1);
-        load(Sound.ACTION_2);
-        load(Sound.HIT_1);
-        load(Sound.HIT_2);
-        load(Sound.DODGE);
-        load(Sound.DROP);
-        load(Sound.EXPLOSION);
-        load(Sound.GAME_START);
-        load(Sound.SHOT);
-        load(Sound.START_THEME);
-
-        this.soundsLoaded = true;
-    }
-
-    soundId(sound: Sound) {
-        return sound.replace('./sounds/', '').replace('.wav', '');
-    }
+    private soundLibraryLoaded: boolean = false;
 
     async play(sound: Sound): Promise<void> {
-        if (this.soundsLoaded === false) {
+        if (this.soundLibraryLoaded === false) {
             this.loadAll();
         }
 
         if (!this.mute) {
             try {
                 const audio: HTMLAudioElement = document.querySelector(`#${this.soundId(sound)}`);
-                audio.volume = this.volume;
 
                 this.activeSounds.push(audio);
                 audio.addEventListener('ended', () => {
@@ -94,5 +55,41 @@ export default class GameSound {
 
     getMute(): boolean {
         return this.mute;
+    }
+
+    private loadAll() {
+        const audioContext = new window.AudioContext();
+        const load = (sound: Sound) => {
+            const audioElement = document.createElement('audio');
+            audioElement.id = this.soundId(sound);
+            audioElement.src = sound;
+            audioElement.volume = this.volume;
+            document.body.append(audioElement);
+
+            const audioSource = audioContext.createMediaElementSource(audioElement);
+            audioSource.connect(audioContext.destination);
+        };
+
+        load(Sound.SPAWN);
+        load(Sound.SCORE_1);
+        load(Sound.SCORE_2);
+        load(Sound.SCORE_3);
+        load(Sound.KEY_PRESS);
+        load(Sound.ACTION_1);
+        load(Sound.ACTION_2);
+        load(Sound.HIT_1);
+        load(Sound.HIT_2);
+        load(Sound.DODGE);
+        load(Sound.DROP);
+        load(Sound.EXPLOSION);
+        load(Sound.GAME_START);
+        load(Sound.SHOT);
+        load(Sound.START_THEME);
+
+        this.soundLibraryLoaded = true;
+    }
+
+    private soundId(sound: Sound) {
+        return sound.replace('./sounds/', '').replace('.wav', '');
     }
 }

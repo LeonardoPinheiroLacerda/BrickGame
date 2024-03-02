@@ -16,6 +16,9 @@ export const SHADOW_DISPERSION = '3px';
 export const GRID_X = 11;
 export const GRID_Y = 18;
 
+export const HUD_GRID_X = 4;
+export const HUD_GRID_Y = 4;
+
 export const DISPLAY_WIDTH = 0.65;
 export const DISPLAY_MARGIN = 0.025;
 

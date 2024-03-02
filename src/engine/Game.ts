@@ -15,6 +15,8 @@ import {
     MEDIUM_FONT_SIZE,
     LARGE_FONT_SIZE,
     EXTRA_LARGE_FONT_SIZE,
+    HUD_GRID_Y,
+    HUD_GRID_X,
 } from '../constants';
 import Cell from '../interface/Cell';
 import Color from '../enum/Color';
@@ -45,6 +47,7 @@ export default class Game {
     protected displayHeight: number;
 
     protected grid: Cell[][];
+    protected hudGrid: Cell[][];
 
     protected state: GameState = {
         on: false,
@@ -98,6 +101,14 @@ export default class Game {
             this.grid[y] = [];
             for (let x = 0; x < GRID_X; x++) {
                 this.grid[y][x] = this.emptyCell();
+            }
+        }
+
+        this.hudGrid = [];
+        for (let y = 0; y < HUD_GRID_Y; y++) {
+            this.hudGrid[y] = [];
+            for (let x = 0; x < HUD_GRID_X; x++) {
+                this.hudGrid[y][x] = this.emptyCell();
             }
         }
     }
@@ -205,6 +216,47 @@ export default class Game {
         }
 
         p.pop();
+
+        this.drawHudGrid();
+    }
+
+    async drawHudGrid() {
+        const coordY = this.getHudPosY(0.375);
+        const coordX = this.getHudPosX(0.078);
+
+        this.p.push();
+
+        this.hudGrid.forEach((row, y) => {
+            row.forEach((column, x) => {
+                if ((this.state.on === false || this.state.start === false) && this.state.running === false) {
+                    column = this.emptyCell();
+                }
+
+                let color = column.value !== 0 ? Color.DEFAULT : Color.INACTIVE;
+
+                if (this.state.colorEnabled && column.value !== 0) {
+                    color = column.color;
+                }
+
+                this.drawCellElement({
+                    w: this.cellSize,
+                    h: this.cellSize,
+                    posX: coordX + this.cellSize * x,
+                    posY: coordY + this.cellSize * y,
+                    color,
+                });
+            });
+        });
+
+        this.p.noFill();
+        this.p.stroke(this.state.on ? FONT_COLOR : FONT_TURNED_OFF_COLOR);
+        this.p.rect(
+            coordX - this.getRelativeValue(0.005),
+            coordY - this.getRelativeValue(0.005),
+            this.cellSize * 4 + this.getRelativeValue(0.01),
+            this.cellSize * 4 + this.getRelativeValue(0.01),
+        );
+        this.p.pop();
     }
 
     async registerHiScore(): Promise<void> {
@@ -279,6 +331,7 @@ export default class Game {
 
         if (!this.state.gameOver && this.state.start && this.state.running) {
             if (this.p.frameCount % this.tickInterval === 0) {
+                this.verifyGrids();
                 this.processTick();
             }
             this.processFrame();
@@ -394,6 +447,15 @@ export default class Game {
         this.p.draw = () => {
             obj.drawFrame();
         };
+    }
+
+    private verifyGrids() {
+        if (this.hudGrid.length !== HUD_GRID_Y || this.hudGrid.some(g => g.length !== HUD_GRID_X)) {
+            throw `The property hudGrid must be a ${HUD_GRID_Y}x${HUD_GRID_X} matrix.`;
+        }
+        if (this.grid.length !== GRID_Y || this.grid.some(g => g.length !== GRID_X)) {
+            throw `The property grid must be a ${GRID_Y}x${GRID_X} matrix.`;
+        }
     }
 
     protected processTick(): void {}

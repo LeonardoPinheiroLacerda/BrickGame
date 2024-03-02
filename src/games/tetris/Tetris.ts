@@ -1,5 +1,4 @@
 import Game from '../../engine/Game';
-import Color from '../../enum/Color';
 import Sound from '../../enum/Sound';
 import Cell from '../../interface/Cell';
 import TetrisControls from './TetrisControls';
@@ -12,7 +11,7 @@ import Piece5 from './piece/Piece5';
 import Piece6 from './piece/Piece6';
 import Piece7 from './piece/Piece7';
 
-import { FONT_COLOR, FONT_TURNED_OFF_COLOR, GRID_Y } from './../../constants';
+import { GRID_Y } from './../../constants';
 import GameProps from '../../interface/GameProps';
 
 export default class Tetris extends Game {
@@ -63,56 +62,6 @@ export default class Tetris extends Game {
         p.text('Left:   Move left', this.getDisplayPosX(0.075), this.getDisplayPosY(0.8));
         p.text('Right:  Move right', this.getDisplayPosX(0.075), this.getDisplayPosY(0.85));
         p.text('Action: Rotate', this.getDisplayPosX(0.075), this.getDisplayPosY(0.9));
-    }
-
-    async drawHud(): Promise<void> {
-        super.drawHud();
-
-        const coordY = this.getHudPosY(0.375);
-        const coordX = this.getHudPosX(0.078);
-
-        if (this.state.running) {
-            this.next?.preview.forEach((row, y) => {
-                row.forEach((column, x) => {
-                    this.drawCellElement({
-                        w: this.cellSize,
-                        h: this.cellSize,
-                        posX: coordX + this.cellSize * x,
-                        posY: coordY + this.cellSize * y,
-                        color: this.state.colorEnabled
-                            ? column.value !== 0
-                                ? column.color
-                                : Color.INACTIVE
-                            : column.value !== 0
-                              ? Color.DEFAULT
-                              : Color.INACTIVE,
-                    });
-                });
-            });
-        } else {
-            this.next?.preview.forEach((row, y) => {
-                row.forEach((column, x) => {
-                    this.drawCellElement({
-                        w: this.cellSize,
-                        h: this.cellSize,
-                        posX: coordX + this.cellSize * x,
-                        posY: coordY + this.cellSize * y,
-                        color: Color.INACTIVE,
-                    });
-                });
-            });
-        }
-
-        this.p.push();
-        this.p.noFill();
-        this.p.stroke(this.state.on ? FONT_COLOR : FONT_TURNED_OFF_COLOR);
-        this.p.rect(
-            coordX - this.getRelativeValue(0.005),
-            coordY - this.getRelativeValue(0.005),
-            this.cellSize * 4 + this.getRelativeValue(0.01),
-            this.cellSize * 4 + this.getRelativeValue(0.01),
-        );
-        this.p.pop();
     }
 
     protected processTick(): void {
@@ -187,6 +136,7 @@ export default class Tetris extends Game {
             }
         } while (last?.pieceId === this.next.pieceId && last);
 
+        this.hudGrid = this.next.preview;
         this.actualId += 1;
     }
 
