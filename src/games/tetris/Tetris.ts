@@ -12,7 +12,7 @@ import Piece5 from './piece/Piece5';
 import Piece6 from './piece/Piece6';
 import Piece7 from './piece/Piece7';
 
-import { FONT_COLOR, GRID_Y } from './../../constants';
+import { FONT_COLOR, FONT_TURNED_OFF_COLOR, GRID_Y } from './../../constants';
 import GameProps from '../../interface/GameProps';
 
 export default class Tetris extends Game {
@@ -68,10 +68,10 @@ export default class Tetris extends Game {
     async drawHud(): Promise<void> {
         super.drawHud();
 
-        if (this.state.running) {
-            const coordY = this.getHudPosY(0.375);
-            const coordX = this.getHudPosX(0.05);
+        const coordY = this.getHudPosY(0.375);
+        const coordX = this.getHudPosX(0.078);
 
+        if (this.state.running) {
             this.next?.preview.forEach((row, y) => {
                 row.forEach((column, x) => {
                     this.drawCellElement({
@@ -89,18 +89,30 @@ export default class Tetris extends Game {
                     });
                 });
             });
-
-            this.p.push();
-            this.p.noFill();
-            this.p.stroke(FONT_COLOR);
-            this.p.rect(
-                coordX - this.getRelativeValue(0.005),
-                coordY - this.getRelativeValue(0.005),
-                this.cellSize * 4 + this.getRelativeValue(0.01),
-                this.cellSize * 4 + this.getRelativeValue(0.01),
-            );
-            this.p.pop();
+        } else {
+            this.next?.preview.forEach((row, y) => {
+                row.forEach((column, x) => {
+                    this.drawCellElement({
+                        w: this.cellSize,
+                        h: this.cellSize,
+                        posX: coordX + this.cellSize * x,
+                        posY: coordY + this.cellSize * y,
+                        color: Color.INACTIVE,
+                    });
+                });
+            });
         }
+
+        this.p.push();
+        this.p.noFill();
+        this.p.stroke(this.state.on ? FONT_COLOR : FONT_TURNED_OFF_COLOR);
+        this.p.rect(
+            coordX - this.getRelativeValue(0.005),
+            coordY - this.getRelativeValue(0.005),
+            this.cellSize * 4 + this.getRelativeValue(0.01),
+            this.cellSize * 4 + this.getRelativeValue(0.01),
+        );
+        this.p.pop();
     }
 
     protected processTick(): void {
