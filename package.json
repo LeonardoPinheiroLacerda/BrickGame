@@ -4,10 +4,9 @@
   "description": "Brick game simulator.",
   "scripts": {
     "start": "webpack serve --open",
-    "build": "webpack",
     "check-prettier": "npx prettier -c .",
     "write-prettier": "npx prettier -w .",
-    "predeploy": "npm run build",
+    "predeploy": "rm -rf dist && webpack",
     "deploy": "gh-pages -d dist"
   },
   "repository": {

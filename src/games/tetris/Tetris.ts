@@ -23,7 +23,7 @@ export default class Tetris extends Game {
     linesCompleted: number = 0;
     linesToLevelUp: number = 3;
 
-    protected initialTickInterval: number = 30;
+    protected initialTickInterval: number = 25;
 
     protected hiScoreKey: string = 'hiTetrisScore';
 
