@@ -7,6 +7,7 @@ import GameItem from '../../interface/GameItem';
 import Sound from '../../enum/Sound';
 import GameProps from '../../interface/GameProps';
 import FontSize from '../../enum/FontSize';
+import FontAlign from '../../enum/FontAlign';
 
 export default class GameMenu extends Game {
     public selectedGame: number = 0;
@@ -32,7 +33,7 @@ export default class GameMenu extends Game {
 
         this.setTextSize(FontSize.LARGE);
         this.setTextState(true);
-        this.setTextAlign(p.CENTER);
+        this.setTextAlign(FontAlign.CENTER);
 
         this.textOnDisplay('Menu', { x: 0.5, y: 0.15 });
 
@@ -54,7 +55,7 @@ export default class GameMenu extends Game {
 
             this.setTextSize(FontSize.LARGE);
             this.setTextState(true);
-            this.setTextAlign(p.CENTER);
+            this.setTextAlign(FontAlign.CENTER);
 
             this.textOnDisplay('Menu', { x: 0.5, y: 0.15 });
 
@@ -63,18 +64,18 @@ export default class GameMenu extends Game {
             this.textOnDisplay('Choose a game and', { x: 0.5, y: 0.25 });
             this.textOnDisplay('Press action to play', { x: 0.5, y: 0.32 });
 
-            this.setTextAlign(p.RIGHT);
+            this.setTextAlign(FontAlign.RIGHT);
             this.textOnDisplay('<', { x: 0.1, y: 0.54 });
 
-            this.setTextAlign(p.LEFT);
+            this.setTextAlign(FontAlign.LEFT);
             this.textOnDisplay('>', { x: 0.9, y: 0.54 });
 
             this.setTextSize(FontSize.MEDIUM);
-            this.setTextAlign(p.CENTER);
+            this.setTextAlign(FontAlign.CENTER);
             this.textOnDisplay(this.games[this.selectedGame].name, { x: 0.5, y: 0.55 });
 
             this.setTextSize(FontSize.EXTRA_SMALL);
-            this.setTextAlign(p.LEFT);
+            this.setTextAlign(FontAlign.LEFT);
 
             this.textOnDisplay('Left:    Previous option', { x: 0.05, y: 0.78 });
             this.textOnDisplay('Right:   Next option', { x: 0.05, y: 0.84 });

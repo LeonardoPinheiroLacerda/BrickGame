@@ -29,6 +29,7 @@ import GameSound from './GameSound';
 import GameProps from '../interface/GameProps';
 import CellElement from '../interface/CellElement';
 import FontSize from '../enum/FontSize';
+import FontAlign from '../enum/FontAlign';
 
 export default class Game {
     protected p: P5;
@@ -170,8 +171,12 @@ export default class Game {
         this.p.textSize(this.fontSizes[fontSize]);
     }
 
-    protected setTextAlign(horizontalAlign: P5.HORIZ_ALIGN): void {
-        this.p.textAlign(horizontalAlign, this.p.BASELINE);
+    // protected setTextAlign(horizontalAlign: P5.HORIZ_ALIGN): void {
+    //     this.p.textAlign(horizontalAlign, this.p.BASELINE);
+    // }
+
+    protected setTextAlign(fontAlign: FontAlign): void {
+        this.p.textAlign(fontAlign, this.p.BASELINE);
     }
 
     protected textOnHud(text: any, coord: Coordinates) {
@@ -189,11 +194,11 @@ export default class Game {
 
         this.setTextSize(FontSize.SMALL);
         this.setTextState(false);
-        this.setTextAlign(p.LEFT);
+        this.setTextAlign(FontAlign.LEFT);
 
         this.textOnHud('88888888', { x: 0.05, y: 0.13 });
         this.textOnHud('88888888', { x: 0.05, y: 0.3 });
-        this.textOnHud('00 - 00', { x: 0.05, y: 0.8 });
+        this.textOnHud('88 - 88', { x: 0.05, y: 0.8 });
 
         this.setTextState(this.state.on);
 
@@ -207,7 +212,7 @@ export default class Game {
         const levelValue = `${this.level < 10 ? '0' + this.level : this.level} - ${this.maxLevel}`;
         this.textOnHud(levelValue, { x: 0.05, y: 0.8 });
 
-        this.setTextAlign(p.CENTER);
+        this.setTextAlign(FontAlign.CENTER);
 
         if (this.state.running) {
             //Paused text
@@ -357,7 +362,7 @@ export default class Game {
 
         this.setTextSize(FontSize.MEDIUM);
         this.setTextState(true);
-        this.setTextAlign(p.CENTER);
+        this.setTextAlign(FontAlign.CENTER);
 
         this.textOnDisplay('Game Brick', { x: 0.5, y: 0.5 });
 
@@ -371,7 +376,7 @@ export default class Game {
 
         this.setTextSize(FontSize.LARGE);
         this.setTextState(true);
-        this.setTextAlign(p.CENTER);
+        this.setTextAlign(FontAlign.CENTER);
 
         this.textOnDisplay('Game Over', { x: 0.5, y: 0.5 });
 
