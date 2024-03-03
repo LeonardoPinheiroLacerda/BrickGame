@@ -26,7 +26,7 @@ export default new P5((p: P5) => {
         const splash: HTMLDivElement = document.querySelector('#splash');
         setTimeout(() => {
             splash.style.display = 'none';
-        }, 1000);
+        }, 250);
     };
 
     p.draw = () => {

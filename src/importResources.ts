@@ -22,3 +22,20 @@ import '../public/images/splash.gif';
 import '../public/favicon.ico';
 
 import '../public/CNAME';
+
+import '../public/images/number-1.png';
+import '../public/images/number-2.png';
+import '../public/images/number-3.png';
+import '../public/images/number-4.png';
+import '../public/images/number-5.png';
+import '../public/images/number-6.png';
+import '../public/images/number-1.png';
+
+import '../public/images/letter-a.png';
+import '../public/images/letter-s.png';
+import '../public/images/letter-d.png';
+import '../public/images/letter-w.png';
+
+import '../public/images/games.png';
+import '../public/images/github.png';
+import '../public/images/close.png';

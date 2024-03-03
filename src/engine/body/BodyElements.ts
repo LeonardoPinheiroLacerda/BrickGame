@@ -43,6 +43,9 @@ export default class BodyElements {
         root.style.setProperty('--color-shadow-reflexion', BODY_REFLECTION);
         root.style.setProperty('--dispersion', SHADOW_DISPERSION);
 
+        root.style.setProperty('--main-color', BODY_MAIN_COLOR);
+
+        root.style.setProperty('--button-color', BODY_BUTTON_COLOR);
         root.style.setProperty('--button-color-reflexion', BODY_BUTTON_REFLECTION);
 
         root.style.setProperty('--width', `${this.width}px`);
