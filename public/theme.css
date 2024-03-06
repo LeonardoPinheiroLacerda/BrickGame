@@ -10,6 +10,36 @@
     user-select: none;
 }
 
+/*Scroll bar*/
+
+/* width */
+::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: var(--body-background);
+    border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: var(--scroll-color);
+    border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: var(--scroll-color-hover);
+}
+
+/* Corner */
+::-webkit-scrollbar-corner {
+    display: none;
+}
+
 body {
     width: 100vw;
     height: 100vh;
@@ -177,4 +207,85 @@ body {
     #controls {
         display: none;
     }
+}
+
+#controls-modal {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+    display: none;
+}
+
+#controls-modal.visible {
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
+}
+
+#controls-modal > #modal {
+    width: 80%;
+    height: 50%;
+    border-radius: 1rem;
+    background-color: var(--main-color);
+    position: relative;
+    border: 3px solid black;
+    overflow: auto;
+}
+
+#controls-modal > #modal > #close-btn > img {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    width: 2.5rem;
+    cursor: pointer;
+}
+
+#controls-modal > #modal > #close-btn > img:hover {
+    filter: contrast(0.8);
+}
+
+#controls-modal > #modal > #close-btn > img:active {
+    filter: contrast(0.7);
+}
+
+#wasd {
+    display: flex;
+    flex-direction: row;
+    width: 13.5rem;
+    flex-wrap: wrap;
+}
+.w-key {
+    margin-right: 4.75rem !important;
+    margin-left: 4.75rem !important;
+}
+
+.key {
+    width: 4rem;
+    margin: 0.25rem;
+}
+
+.key-description {
+    font-family: 'retro-gamming';
+    font-size: 2rem;
+}
+
+.command {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1rem;
+    margin: 2rem;
+}
+
+#device-buttons {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#device-buttons > .command {
+    width: 30%;
 }

@@ -31,7 +31,7 @@ module.exports = {
                 },
             },
             {
-                test: /favicon\.ico$/,
+                test: /favicon\.ico|modal\.js$/,
                 loader: 'file-loader',
                 options: {
                     name: '[name].[ext]',
