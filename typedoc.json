@@ -2,13 +2,13 @@
     "$schema": "https://typedoc.org/schema.json",
     "entryPoints": [
         "global.d.ts", 
-        "src/engine/**", 
-        "src/enum/**", 
-        "src/interface/**"
+        "src/docs/**",
     ],
 
     "titleLink": "https://github.com/LeonardoPinheiroLacerda/BrickGame",
     "name": "Brick Game",
+    
+    "out": "./dist/docs",
 
     "exclude": ["global.d.ts"],
     "excludePrivate": true,

@@ -37,7 +37,7 @@ export default class BodyElements {
         this.p = props.p;
     }
 
-    defineValues() {
+    private defineValues() {
         const root: HTMLElement = document.querySelector(':root');
         root.style.setProperty('--color-shadow', BODY_SHADOW);
         root.style.setProperty('--color-shadow-reflexion', BODY_REFLECTION);

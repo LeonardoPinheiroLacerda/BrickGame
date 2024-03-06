@@ -3,10 +3,10 @@
   "version": "0.4.0",
   "description": "Brick game simulator.",
   "scripts": {
-    "start": "webpack serve --open",
+    "start": "npm run docs && webpack serve --open",
     "check-prettier": "npx prettier -c .",
     "write-prettier": "npx prettier -w .",
-    "predeploy": "rm -rf dist && webpack",
+    "predeploy": "rm -rf dist && webpack && npm run docs",
     "deploy": "gh-pages -d dist",
     "docs": "typedoc"
   },
