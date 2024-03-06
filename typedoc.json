@@ -1,0 +1,17 @@
+{
+    "$schema": "https://typedoc.org/schema.json",
+    "entryPoints": [
+        "global.d.ts", 
+        "src/engine/**", 
+        "src/enum/**", 
+        "src/interface/**"
+    ],
+
+    "titleLink": "https://github.com/LeonardoPinheiroLacerda/BrickGame",
+    "name": "Brick Game",
+
+    "exclude": ["global.d.ts"],
+    "excludePrivate": true,
+    "plugin": ["typedoc-plugin-rename-defaults","@mxssfd/typedoc-theme"],   
+    "theme": "my-theme"    
+}
