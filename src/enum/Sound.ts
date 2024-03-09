@@ -1,3 +1,8 @@
+/**
+ * Enumerates all available sound effects
+ *
+ * @enum
+ */
 enum Sound {
     SPAWN = './sounds/sound_01.wav',
     SCORE_1 = './sounds/sound_15.wav',

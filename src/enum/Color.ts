@@ -1,3 +1,8 @@
+/**
+ * Enumerates all available cell's colors
+ *
+ * @enum
+ */
 enum Color {
     DEFAULT = 'rgb(19, 26, 18)',
     BLUE = 'rgb(0, 0, 128)',

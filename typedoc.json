@@ -1,15 +1,15 @@
 {
-    "$schema": "https://typedoc.org/schema.json",
     "entryPoints": [
-        // "global.d.ts", 
-        "src/docs/**",
+        // "global.d.ts",
+        "src/docs/**"
     ],
 
     "titleLink": "https://github.com/LeonardoPinheiroLacerda/BrickGame",
     "name": "Brick Game",
-    
+    "includeVersion": true,
+
     "out": "./dist/docs",
     "excludePrivate": true,
-    "plugin": ["typedoc-plugin-rename-defaults","@mxssfd/typedoc-theme"],   
-    "theme": "my-theme"    
+    "plugin": ["typedoc-plugin-rename-defaults", "@mxssfd/typedoc-theme"],
+    "theme": "my-theme"
 }
