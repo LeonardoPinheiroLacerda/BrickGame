@@ -1,7 +1,7 @@
 {
     "$schema": "https://typedoc.org/schema.json",
     "entryPoints": [
-        "global.d.ts", 
+        // "global.d.ts", 
         "src/docs/**",
     ],
 
@@ -9,8 +9,6 @@
     "name": "Brick Game",
     
     "out": "./dist/docs",
-
-    "exclude": ["global.d.ts"],
     "excludePrivate": true,
     "plugin": ["typedoc-plugin-rename-defaults","@mxssfd/typedoc-theme"],   
     "theme": "my-theme"    

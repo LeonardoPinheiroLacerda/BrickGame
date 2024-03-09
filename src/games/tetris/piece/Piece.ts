@@ -1,7 +1,7 @@
 import Color from '../../../enum/Color';
 import Coordinates from '../../../interface/Coordinates';
 import Tetris from '../Tetris';
-import Vector from '../../../interface/Vector';
+import Vector from '../interfaces/Vector';
 import Cell from '../../../interface/Cell';
 
 export default class Piece {

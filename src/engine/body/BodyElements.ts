@@ -10,11 +10,14 @@ import {
     SHADOW_DISPERSION,
 } from '../../constants';
 import Coordinates from '../../interface/Coordinates';
+import BodyProps from '../../interface/BodyProps';
 
-interface BodyElementsProps {
-    parent: Element;
-    p: P5;
-}
+/**
+ *
+ * Responsable for rendering the body elements, like: buttons, display and etc
+ *
+ * @class
+ */
 
 export default class BodyElements {
     private width: number;
@@ -32,7 +35,7 @@ export default class BodyElements {
     private buttonBorder: string;
     private buttonAnimationDuration: string;
 
-    constructor(props: BodyElementsProps) {
+    constructor(props: BodyProps) {
         this.parent = props.parent;
         this.p = props.p;
     }

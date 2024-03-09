@@ -1,11 +1,14 @@
 import * as P5 from 'p5';
 import BodyElements from './BodyElements';
 import Game from '../Game';
+import BodyProps from '../../interface/BodyProps';
 
-interface BodyProps {
-    parent: Element;
-    p: P5;
-}
+/**
+ *
+ * Responsable for rendering the gamebrick body, bound and unbound controls events
+ *
+ * @class
+ */
 
 export default class GameBody {
     private elements: BodyElements;

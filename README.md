@@ -1,6 +1,6 @@
 # Brick Game
 
-Free **open-source** brick game simulator. Built using typescript, webpack and the P5.js library.
+Free **open-source** brick game simulator. Built using typescript, webpack and the P5.js framework.
 
 Feel **free** to fork this repository and create your own games!
 
