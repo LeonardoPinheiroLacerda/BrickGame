@@ -42,4 +42,6 @@ import '../public/images/games.png';
 import '../public/images/github.png';
 import '../public/images/close.png';
 
+import '../public/images/cell.svg';
+
 import '../public/modal';

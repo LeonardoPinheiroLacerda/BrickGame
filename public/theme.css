@@ -192,6 +192,50 @@ body {
     }
 }
 
+@media only screen and (max-width: 990px) {
+    #wasd {
+        width: 10.5rem !important;
+    }
+
+    .key {
+        width: 3rem !important;
+    }
+
+    .key-description {
+        font-size: 1.5rem !important;
+    }
+
+    .command {
+        gap: 0.5rem !important;
+    }
+}
+
+@media only screen and (max-width: 815px) {
+    #controls-tutorial {
+        gap: 0rem;
+        flex-direction: column !important;
+    }
+}
+
+@media only screen and (max-width: 750px) {
+    .key-description {
+        font-size: 1.2rem !important;
+    }
+}
+
+@media only screen and (max-width: 650px) {
+    #wasd {
+        width: 9rem !important;
+    }
+
+    .key {
+        width: 2.5rem !important;
+    }
+    .key-description {
+        font-size: 1rem !important;
+    }
+}
+
 #controls-modal {
     position: absolute;
     top: 0;
@@ -211,8 +255,9 @@ body {
 
 #controls-modal > #modal {
     width: 80%;
-    max-width: 1200px;
+    max-width: 1000px;
     height: 50%;
+    max-height: 600px;
     border-radius: 1rem;
     background-color: var(--main-color);
     position: relative;
@@ -244,7 +289,8 @@ body {
     border-radius: 1rem;
     background-color: rgb(172, 189, 173);
     overflow: auto;
-    padding: 1.5rem;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
 }
 
 #controls-modal > #modal > #close-btn > img {
@@ -311,8 +357,8 @@ body {
     flex-wrap: wrap;
 }
 .w-key {
-    margin-right: 4.75rem !important;
-    margin-left: 4.75rem !important;
+    margin-right: 35% !important;
+    margin-left: 35% !important;
 }
 
 .key {

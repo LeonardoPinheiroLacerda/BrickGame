@@ -12,3 +12,8 @@ document.querySelector('#controls').addEventListener('click', show);
 document.querySelector('#controls-modal').addEventListener('click', hide);
 document.querySelector('#modal').addEventListener('click', evt => evt.stopPropagation());
 document.querySelector('#close-btn').addEventListener('click', hide);
+
+const display = document.querySelector('#modal-display');
+
+display.style.backgroundImage = 'url(/images/cell.svg)';
+display.style.backgroundSize = '3%';
