@@ -8,7 +8,11 @@ To implement new games you only need to extends the class **Game** and **GameCon
 
 As the project grows I will update this documentation with a step by step to **how implement new and cool games!**
 
-![screenshot1](./doc/capture.png)
+You can test and play some already developed games [here](http://gamebrick.com.br).
+
+## Reference
+
+You can access the reference documentation [here](https://gamebrick.com.br/docs).
 
 ## How to run
 
