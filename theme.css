@@ -382,3 +382,12 @@ body {
     gap: 1rem;
 }
 
+#version {
+    font-family: 'retro-gamming';
+    font-size: 1rem;
+    color: white;
+    position: absolute;
+    bottom: 1rem;
+    right: 1rem;
+}
+
