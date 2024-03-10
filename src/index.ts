@@ -11,6 +11,10 @@ export default new P5((p: P5) => {
     //Inicializando algumas variaveis
     const parentElement = document.querySelector(PARENT_SELECTOR);
 
+    //Info versão
+    const versionElement = document.querySelector('#version');
+    versionElement.innerHTML = `version: ${require('./../package.json').version}`;
+
     const body: GameBody = new GameBody({
         parent: parentElement,
         p,
@@ -23,6 +27,7 @@ export default new P5((p: P5) => {
         game = new Tetris({ p, canvasWidth, canvasHeight, body });
         body.bound(game);
 
+        //Limpando splash screen
         const splash: HTMLDivElement = document.querySelector('#splash');
         setTimeout(() => {
             splash.style.display = 'none';
