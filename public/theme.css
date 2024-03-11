@@ -48,39 +48,39 @@ body {
         0.2rem -0.2rem var(--dispersion) var(--color-shadow-reflexion);
 }
 
-#container > div > .sm-btn {
+.sm-btn {
     box-shadow:
         calc(var(--width) * -0.0075) calc(var(--width) * 0.0075) var(--dispersion) var(--color-shadow),
         calc(var(--width) * -0.01) calc(var(--width) * 0.01) var(--dispersion) var(--button-color-reflexion) inset;
 }
 
-#container > div > .sm-btn:active {
+.sm-btn:active {
     box-shadow:
         calc(var(--width) * -0.004) calc(var(--width) * 0.004) var(--dispersion) var(--color-shadow),
         calc(var(--width) * -0.003) calc(var(--width) * 0.003) var(--dispersion) var(--button-color-reflexion) inset;
     transform: translateX(calc(var(--width) * -0.0025)) translateY(calc(var(--width) * 0.0025));
 }
 
-#container > div > .btn {
+.btn {
     box-shadow:
         calc(var(--width) * -0.015) calc(var(--width) * 0.015) var(--dispersion) var(--color-shadow),
         calc(var(--width) * -0.0175) calc(var(--width) * 0.0175) var(--dispersion) var(--button-color-reflexion) inset;
 }
 
-#container > div > .btn:active {
+.btn:active {
     box-shadow:
         calc(var(--width) * -0.004) calc(var(--width) * 0.004) var(--dispersion) var(--color-shadow),
         calc(var(--width) * -0.003) calc(var(--width) * 0.003) var(--dispersion) var(--button-color-reflexion) inset;
     transform: translateX(calc(var(--width) * -0.005)) translateY(calc(var(--width) * 0.005));
 }
 
-#container > div > .lg-btn {
+.lg-btn {
     box-shadow:
         calc(var(--width) * -0.02) calc(var(--width) * 0.02) var(--dispersion) var(--color-shadow),
         calc(var(--width) * -0.0175) calc(var(--width) * 0.0175) var(--dispersion) var(--button-color-reflexion) inset;
 }
 
-#container > div > .lg-btn:active {
+.lg-btn:active {
     box-shadow:
         calc(var(--width) * -0.005) calc(var(--width) * 0.005) var(--dispersion) var(--color-shadow),
         calc(var(--width) * -0.004) calc(var(--width) * 0.004) var(--dispersion) var(--button-color-reflexion) inset;
@@ -183,58 +183,6 @@ body {
     position: absolute;
     top: 75px;
     left: 15px;
-}
-
-@media only screen and (max-width: 600px) {
-    #source-code,
-    #controls,
-    #version {
-        display: none;
-    }
-}
-
-@media only screen and (max-width: 990px) {
-    #wasd {
-        width: 10.5rem !important;
-    }
-
-    .key {
-        width: 3rem !important;
-    }
-
-    .key-description {
-        font-size: 1.5rem !important;
-    }
-
-    .command {
-        gap: 0.5rem !important;
-    }
-}
-
-@media only screen and (max-width: 815px) {
-    #controls-tutorial {
-        gap: 0rem;
-        flex-direction: column !important;
-    }
-}
-
-@media only screen and (max-width: 750px) {
-    .key-description {
-        font-size: 1.2rem !important;
-    }
-}
-
-@media only screen and (max-width: 650px) {
-    #wasd {
-        width: 9rem !important;
-    }
-
-    .key {
-        width: 2.5rem !important;
-    }
-    .key-description {
-        font-size: 1rem !important;
-    }
 }
 
 #controls-modal {
@@ -387,4 +335,74 @@ body {
     position: absolute;
     bottom: 1rem;
     right: 1rem;
+}
+
+@media only screen and (max-width: 600px) {
+    #source-code,
+    #controls,
+    #version {
+        display: none;
+    }
+
+    #container {
+        width: 100% !important;
+        height: 100vh !important;
+        /* margin: 1% !important; */
+        /* border-radius: 0px !important; */
+    }
+
+    .frame > canvas {
+        width: 85% !important;
+        height: auto !important;
+        aspect-ratio: 9/10 !important;
+    }
+
+    .frame {
+        width: 85% !important;
+        padding: 7.5%¨ !important;
+    }
+}
+
+@media only screen and (max-width: 990px) {
+    #wasd {
+        width: 10.5rem !important;
+    }
+
+    .key {
+        width: 3rem !important;
+    }
+
+    .key-description {
+        font-size: 1.5rem !important;
+    }
+
+    .command {
+        gap: 0.5rem !important;
+    }
+}
+
+@media only screen and (max-width: 815px) {
+    #controls-tutorial {
+        gap: 0rem;
+        flex-direction: column !important;
+    }
+}
+
+@media only screen and (max-width: 750px) {
+    .key-description {
+        font-size: 1.2rem !important;
+    }
+}
+
+@media only screen and (max-width: 650px) {
+    #wasd {
+        width: 9rem !important;
+    }
+
+    .key {
+        width: 2.5rem !important;
+    }
+    .key-description {
+        font-size: 1rem !important;
+    }
 }

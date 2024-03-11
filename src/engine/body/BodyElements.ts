@@ -9,7 +9,6 @@ import {
     BODY_BUTTON_REFLECTION,
     SHADOW_DISPERSION,
 } from '../../constants';
-import Coordinates from '../../interface/Coordinates';
 import BodyProps from '../../interface/BodyProps';
 
 /**
@@ -95,11 +94,103 @@ export default class BodyElements {
         container.style('border-radius', this.borderRadius);
         container.style('box-sizing', 'border-box');
         container.style('margin', 'auto');
-        container.style('position', 'relative');
+        // container.style('position', 'relative');
 
         container.style('border', this.border);
 
+        container.style('display', 'flex');
+        container.style('flex-direction', 'column');
+
         return container;
+    }
+
+    createButtonContainer(container: P5.Element) {
+        const buttonContainer = this.p.createDiv();
+        buttonContainer.parent(container);
+
+        buttonContainer.style('width', '100%');
+        buttonContainer.style('height', 'auto');
+
+        buttonContainer.style('display', 'flex');
+        buttonContainer.style('flex-grow', '1');
+        buttonContainer.style('flex-direction', 'column');
+
+        const smallButtonContainer = this.p.createDiv();
+        smallButtonContainer.parent(buttonContainer);
+
+        smallButtonContainer.style('width', '100%');
+        smallButtonContainer.style('height', 'auto');
+
+        smallButtonContainer.style('display', 'flex');
+        smallButtonContainer.style('flex-grow', '1');
+        smallButtonContainer.style('justify-content', 'space-evenly');
+
+        smallButtonContainer.style('max-height', '150px');
+
+        const innerButtonContainer = this.p.createDiv();
+        innerButtonContainer.parent(buttonContainer);
+
+        innerButtonContainer.style('width', '100%');
+        innerButtonContainer.style('height', 'auto');
+
+        innerButtonContainer.style('display', 'flex');
+        innerButtonContainer.style('flex-grow', '3');
+        innerButtonContainer.style('flex-direction', 'row');
+
+        const mediumButtonContainer = this.p.createDiv();
+        mediumButtonContainer.parent(innerButtonContainer);
+
+        mediumButtonContainer.style('width', '100%');
+        mediumButtonContainer.style('height', 'auto');
+
+        mediumButtonContainer.style('display', 'flex');
+
+        mediumButtonContainer.style('flex-shrink', '4');
+
+        mediumButtonContainer.style('position', 'relative');
+
+        const directionVerticalContainer = this.p.createDiv();
+        directionVerticalContainer.parent(mediumButtonContainer);
+        directionVerticalContainer.style('width', '100%');
+        directionVerticalContainer.style('height', '100%');
+        directionVerticalContainer.style('display', 'flex');
+        directionVerticalContainer.style('flex-direction', 'row');
+        directionVerticalContainer.style('position', 'absolute');
+        directionVerticalContainer.style('top', '0');
+        directionVerticalContainer.style('bottom', '0');
+        directionVerticalContainer.style('left', '0');
+        directionVerticalContainer.style('right', '0');
+        directionVerticalContainer.style('justify-content', 'center');
+        directionVerticalContainer.style('align-items', 'center');
+        directionVerticalContainer.style('gap', `${this.width * 0.09}px`);
+
+        const directionHorizontalContainer = this.p.createDiv();
+        directionHorizontalContainer.parent(mediumButtonContainer);
+        directionHorizontalContainer.style('width', '100%');
+        directionHorizontalContainer.style('height', '100%');
+        directionHorizontalContainer.style('display', 'flex');
+        directionHorizontalContainer.style('flex-direction', 'column');
+        directionHorizontalContainer.style('position', 'absolute');
+        directionHorizontalContainer.style('top', '0');
+        directionHorizontalContainer.style('bottom', '0');
+        directionHorizontalContainer.style('left', '0');
+        directionHorizontalContainer.style('right', '0');
+        directionHorizontalContainer.style('justify-content', 'center');
+        directionHorizontalContainer.style('align-items', 'center');
+        directionHorizontalContainer.style('gap', `${this.width * 0.09}px`);
+
+        const largeButtonContainer = this.p.createDiv();
+        largeButtonContainer.parent(innerButtonContainer);
+
+        largeButtonContainer.style('width', '100%');
+        largeButtonContainer.style('height', 'auto');
+
+        largeButtonContainer.style('display', 'flex');
+        largeButtonContainer.style('justify-content', 'center');
+        largeButtonContainer.style('align-items', 'center');
+        mediumButtonContainer.style('flex-shrink', '0.75');
+
+        return { smallButtonContainer, mediumButtonContainer, largeButtonContainer, directionVerticalContainer, directionHorizontalContainer };
     }
 
     createCanvas(container: P5.Element) {
@@ -111,9 +202,6 @@ export default class BodyElements {
 
         canvas.id('brick-game-canvas');
 
-        canvas.style('position', 'absolute');
-        canvas.style('top', '7.5%');
-        canvas.style('left', '15%');
         canvas.style('border', this.border);
 
         return { canvasWidth, canvasHeight };
@@ -126,12 +214,17 @@ export default class BodyElements {
         frame.addClass('frame');
 
         frame.style('border', this.border);
-        frame.style('position', 'absolute');
-        frame.style('top', '3.75%');
-        frame.style('left', '7.5%');
+        frame.style('position', 'relative');
         frame.style('border-radius', this.borderRadius);
         frame.style('width', `${this.width * 0.85}px`);
-        frame.style('height', `${this.width * 0.7 * 1.335}px`);
+        frame.style('height', 'auto');
+        frame.style('aspect-ratio', '9/10');
+        frame.style('margin', '7.5%');
+        frame.style('margin-bottom', '3.75%');
+
+        frame.style('display', 'flex');
+        frame.style('justify-content', 'center');
+        frame.style('align-items', 'center');
 
         const p = this.p.createP('Brick Game');
         p.parent(frame);
@@ -150,21 +243,24 @@ export default class BodyElements {
         p.style('background-color', BODY_MAIN_COLOR);
         p.style('padding-right', `${this.width * 0.01}px`);
         p.style('padding-left', `${this.width * 0.01}px`);
+
+        return frame;
     }
 
-    createSmallButton(container: P5.Element, label: string, coordinates: Coordinates) {
+    createSmallButton(container: P5.Element, label: string, top: boolean) {
         //Container
         const buttonContainer = this.p.createDiv();
         buttonContainer.parent(container);
-
-        buttonContainer.style('position', 'absolute');
-        buttonContainer.style('top', `${this.height * coordinates.y}px`);
-        buttonContainer.style('left', `${this.width * coordinates.x}px`);
 
         buttonContainer.style('display', 'flex');
         buttonContainer.style('flex-direction', 'column');
         buttonContainer.style('justify-content', 'center');
         buttonContainer.style('align-items', 'center');
+        if (top) {
+            buttonContainer.style('margin-top', 'auto');
+        } else {
+            buttonContainer.style('margin-bottom', 'auto');
+        }
 
         //Button
         const button = this.p.createButton('');
@@ -205,14 +301,10 @@ export default class BodyElements {
         return button;
     }
 
-    createButton(container: P5.Element, label: string, coordinates: Coordinates) {
+    createButton(container: P5.Element, label: string) {
         //Container
         const buttonContainer = this.p.createDiv();
         buttonContainer.parent(container);
-
-        buttonContainer.style('position', 'absolute');
-        buttonContainer.style('top', `${this.height * coordinates.y}px`);
-        buttonContainer.style('left', `${this.width * coordinates.x}px`);
 
         buttonContainer.style('display', 'flex');
         buttonContainer.style('flex-direction', 'column');
@@ -257,14 +349,10 @@ export default class BodyElements {
         return button;
     }
 
-    createBigButton(container: P5.Element, label: string, coordinates: Coordinates) {
+    createBigButton(container: P5.Element, label: string) {
         //Container
         const buttonContainer = this.p.createDiv();
         buttonContainer.parent(container);
-
-        buttonContainer.style('position', 'absolute');
-        buttonContainer.style('top', `${this.height * coordinates.y}px`);
-        buttonContainer.style('left', `${this.width * coordinates.x}px`);
 
         buttonContainer.style('display', 'flex');
         buttonContainer.style('flex-direction', 'column');

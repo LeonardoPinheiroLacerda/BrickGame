@@ -52,26 +52,29 @@ export default class GameBody {
         //Container
         const container = this.elements.createContainer();
 
-        //Canvas
-        const { canvasWidth, canvasHeight } = this.elements.createCanvas(container);
-
         //Frame
-        this.elements.createFrame(container);
+        const frame = this.elements.createFrame(container);
 
-        //SmallButtons
-        this.onOffBtn = this.elements.createSmallButton(container, 'On<br/>Off', { x: 0.1, y: 0.55 });
-        this.startPauseBtn = this.elements.createSmallButton(container, 'Start<br/>Pause', { x: 0.24, y: 0.6 });
-        this.soundBtn = this.elements.createSmallButton(container, 'Sound', { x: 0.38, y: 0.55 });
-        this.resetBtn = this.elements.createSmallButton(container, 'Reset', { x: 0.52, y: 0.6 });
-        this.exitBtn = this.elements.createSmallButton(container, 'Exit', { x: 0.65, y: 0.55 });
-        this.enableColorBtn = this.elements.createSmallButton(container, 'Enable<br/>Colors', { x: 0.8, y: 0.6 });
+        //Canvas
+        const { canvasWidth, canvasHeight } = this.elements.createCanvas(frame);
 
-        this.upBtn = this.elements.createButton(container, 'UP', { x: 0.25, y: 0.68 });
-        this.leftBtn = this.elements.createButton(container, 'LEFT', { x: 0.09, y: 0.765 });
-        this.downBtn = this.elements.createButton(container, 'DOWN', { x: 0.24, y: 0.85 });
-        this.rightBtn = this.elements.createButton(container, 'RIGHT', { x: 0.4, y: 0.765 });
+        //Buttons
+        const { largeButtonContainer, smallButtonContainer, directionHorizontalContainer, directionVerticalContainer } =
+            this.elements.createButtonContainer(container);
 
-        this.actionBtn = this.elements.createBigButton(container, 'Action', { x: 0.66, y: 0.74 });
+        this.onOffBtn = this.elements.createSmallButton(smallButtonContainer, 'On<br/>Off', true);
+        this.startPauseBtn = this.elements.createSmallButton(smallButtonContainer, 'Start<br/>Pause', false);
+        this.soundBtn = this.elements.createSmallButton(smallButtonContainer, 'Sound', true);
+        this.resetBtn = this.elements.createSmallButton(smallButtonContainer, 'Reset', false);
+        this.exitBtn = this.elements.createSmallButton(smallButtonContainer, 'Exit', true);
+        this.enableColorBtn = this.elements.createSmallButton(smallButtonContainer, 'Enable<br/>Colors', false);
+
+        this.upBtn = this.elements.createButton(directionVerticalContainer, 'UP');
+        this.leftBtn = this.elements.createButton(directionHorizontalContainer, 'LEFT');
+        this.downBtn = this.elements.createButton(directionVerticalContainer, 'DOWN');
+        this.rightBtn = this.elements.createButton(directionHorizontalContainer, 'RIGHT');
+
+        this.actionBtn = this.elements.createBigButton(largeButtonContainer, 'Action');
 
         return { canvasWidth, canvasHeight };
     }
@@ -83,30 +86,23 @@ export default class GameBody {
         this.pressReset = game.getControls().pressReset;
         this.pressExit = game.getControls().pressExit;
         this.pressEnableColor = game.getControls().pressEnableColor;
-
         this.pressUp = game.getControls().pressUp;
         this.pressDown = game.getControls().pressDown;
         this.pressRight = game.getControls().pressRight;
         this.pressLeft = game.getControls().pressLeft;
-
         this.pressAction = game.getControls().pressAction;
-
         this.onOffBtn.mouseClicked(() => this.pressOnOff(game));
         this.startPauseBtn.mouseClicked(() => this.pressStartPause(game));
         this.soundBtn.mouseClicked(() => this.pressSound(game));
         this.resetBtn.mouseClicked(() => this.pressReset(game));
         this.exitBtn.mouseClicked(() => this.pressExit(game));
         this.enableColorBtn.mouseClicked(() => this.pressEnableColor(game));
-
         this.upBtn.mouseClicked(() => this.pressUp(game));
         this.downBtn.mouseClicked(() => this.pressDown(game));
         this.rightBtn.mouseClicked(() => this.pressRight(game));
         this.leftBtn.mouseClicked(() => this.pressLeft(game));
-
         this.actionBtn.mouseClicked(() => this.pressAction(game));
-
         //On hold
-
         let delayTimerOnUp: NodeJS.Timeout;
         let holdTimerOnUp: NodeJS.Timeout;
         this.upBtn.touchStarted(() => {
@@ -116,12 +112,10 @@ export default class GameBody {
                 }, 50);
             }, 250);
         });
-
         this.upBtn.touchEnded(() => {
             clearTimeout(delayTimerOnUp);
             clearTimeout(holdTimerOnUp);
         });
-
         let delayTimerOnDown: NodeJS.Timeout;
         let holdTimerOnDown: NodeJS.Timeout;
         this.downBtn.touchStarted(() => {
@@ -131,12 +125,10 @@ export default class GameBody {
                 }, 50);
             }, 250);
         });
-
         this.downBtn.touchEnded(() => {
             clearTimeout(delayTimerOnDown);
             clearTimeout(holdTimerOnDown);
         });
-
         let delayTimerOnRight: NodeJS.Timeout;
         let holdTimerOnRight: NodeJS.Timeout;
         this.rightBtn.touchStarted(() => {
@@ -146,12 +138,10 @@ export default class GameBody {
                 }, 50);
             }, 250);
         });
-
         this.rightBtn.touchEnded(() => {
             clearTimeout(delayTimerOnRight);
             clearTimeout(holdTimerOnRight);
         });
-
         let delayTimerOnLeft: NodeJS.Timeout;
         let holdTimerOnLeft: NodeJS.Timeout;
         this.leftBtn.touchStarted(() => {
@@ -161,12 +151,10 @@ export default class GameBody {
                 }, 50);
             }, 250);
         });
-
         this.leftBtn.touchEnded(() => {
             clearTimeout(delayTimerOnLeft);
             clearTimeout(holdTimerOnLeft);
         });
-
         let delayTimerOnAction: NodeJS.Timeout;
         let holdTimerOnAction: NodeJS.Timeout;
         this.actionBtn.touchStarted(() => {
@@ -176,7 +164,6 @@ export default class GameBody {
                 }, 50);
             }, 250);
         });
-
         this.actionBtn.touchEnded(() => {
             clearTimeout(delayTimerOnAction);
             clearTimeout(holdTimerOnAction);
