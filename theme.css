@@ -190,7 +190,8 @@ body {
 
 @media only screen and (max-width: 600px) {
     #source-code,
-    #controls {
+    #controls,
+    #version {
         display: none;
     }
 }
