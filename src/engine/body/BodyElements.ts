@@ -60,8 +60,8 @@ export default class BodyElements {
         this.buttonAnimationDuration = '0.15s';
 
         this.smallButtonSize = `${this.width * 0.08}px`;
-        this.buttonSize = `${this.width * 0.16}px`;
-        this.largeButtonSize = `${this.width * 0.22}px`;
+        this.buttonSize = `${this.width * 0.18}px`;
+        this.largeButtonSize = `${this.width * 0.25}px`;
     }
 
     createContainer() {
