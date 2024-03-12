@@ -1,8 +1,3 @@
-@font-face {
-    font-family: retro-gamming;
-    src: url(./fonts/digital-7.monoitalic.ttf);
-}
-
 * {
     margin: 0;
     padding: 0;
@@ -10,89 +5,11 @@
     user-select: none;
 }
 
-body {
-    width: 100vw;
-    height: 100vh;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    background: rgb(0, 158, 247);
-    background: linear-gradient(300deg, rgb(48, 179, 255) 0%, rgba(0, 158, 247, 1) 100%);
-}
-
-#container {
-    box-shadow:
-        calc(var(--width) * -0.03) calc(var(--width) * 0.03) var(--dispersion) black,
-        calc(var(--width) * -0.02) calc(var(--width) * 0.02) var(--dispersion) var(--color-shadow-reflexion) inset,
-        calc(var(--width) * 0.01) calc(var(--width) * -0.01) var(--dispersion) var(--color-shadow) inset;
-}
-
 #modal {
     box-shadow:
         -0.75rem 0.75rem var(--dispersion) black,
         -0.5rem 0.5rem var(--dispersion) var(--color-shadow-reflexion) inset,
         0.4rem -0.4rem var(--dispersion) var(--color-shadow) inset;
-}
-
-#container > canvas {
-    box-shadow:
-        calc(var(--width) * -0.01) calc(var(--width) * 0.01) var(--dispersion) var(--color-shadow),
-        calc(var(--width) * 0.01) calc(var(--width) * -0.01) var(--dispersion) var(--color-shadow-reflexion);
-}
-
-#modal-display {
-    box-shadow:
-        -0.3rem 0.3rem var(--dispersion) var(--color-shadow),
-        0.2rem -0.2rem var(--dispersion) var(--color-shadow-reflexion);
-}
-
-.sm-btn {
-    box-shadow:
-        calc(var(--width) * -0.0075) calc(var(--width) * 0.0075) var(--dispersion) var(--color-shadow),
-        calc(var(--width) * -0.01) calc(var(--width) * 0.01) var(--dispersion) var(--button-color-reflexion) inset;
-}
-
-.sm-btn:active {
-    box-shadow:
-        calc(var(--width) * -0.004) calc(var(--width) * 0.004) var(--dispersion) var(--color-shadow),
-        calc(var(--width) * -0.003) calc(var(--width) * 0.003) var(--dispersion) var(--button-color-reflexion) inset;
-    transform: translateX(calc(var(--width) * -0.0025)) translateY(calc(var(--width) * 0.0025));
-}
-
-.btn {
-    box-shadow:
-        calc(var(--width) * -0.015) calc(var(--width) * 0.015) var(--dispersion) var(--color-shadow),
-        calc(var(--width) * -0.0175) calc(var(--width) * 0.0175) var(--dispersion) var(--button-color-reflexion) inset;
-}
-
-.btn:active {
-    box-shadow:
-        calc(var(--width) * -0.004) calc(var(--width) * 0.004) var(--dispersion) var(--color-shadow),
-        calc(var(--width) * -0.003) calc(var(--width) * 0.003) var(--dispersion) var(--button-color-reflexion) inset;
-    transform: translateX(calc(var(--width) * -0.005)) translateY(calc(var(--width) * 0.005));
-}
-
-.lg-btn {
-    box-shadow:
-        calc(var(--width) * -0.02) calc(var(--width) * 0.02) var(--dispersion) var(--color-shadow),
-        calc(var(--width) * -0.0175) calc(var(--width) * 0.0175) var(--dispersion) var(--button-color-reflexion) inset;
-}
-
-.lg-btn:active {
-    box-shadow:
-        calc(var(--width) * -0.005) calc(var(--width) * 0.005) var(--dispersion) var(--color-shadow),
-        calc(var(--width) * -0.004) calc(var(--width) * 0.004) var(--dispersion) var(--button-color-reflexion) inset;
-    transform: translateX(calc(var(--width) * -0.0075)) translateY(calc(var(--width) * 0.0075));
-}
-
-#brick-game {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    height: 100%;
 }
 
 #splash {
@@ -107,6 +24,12 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+#modal-display {
+    box-shadow:
+        -0.3rem 0.3rem var(--dispersion) var(--color-shadow),
+        0.2rem -0.2rem var(--dispersion) var(--color-shadow-reflexion);
 }
 
 #source-code {
@@ -335,32 +258,6 @@ body {
     position: absolute;
     bottom: 1rem;
     right: 1rem;
-}
-
-@media only screen and (max-width: 600px) {
-    #source-code,
-    #controls,
-    #version {
-        display: none;
-    }
-
-    #container {
-        width: 100% !important;
-        height: 100vh !important;
-        /* margin: 1% !important; */
-        /* border-radius: 0px !important; */
-    }
-
-    .frame > canvas {
-        width: 85% !important;
-        height: auto !important;
-        aspect-ratio: 9/10 !important;
-    }
-
-    .frame {
-        width: 85% !important;
-        padding: 7.5%¨ !important;
-    }
 }
 
 @media only screen and (max-width: 990px) {

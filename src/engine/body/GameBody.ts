@@ -76,6 +76,8 @@ export default class GameBody {
 
         this.actionBtn = this.elements.createBigButton(largeButtonContainer, 'Action');
 
+        this.elements.defineValues();
+
         return { canvasWidth, canvasHeight };
     }
 
