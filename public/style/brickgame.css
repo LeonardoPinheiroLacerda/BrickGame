@@ -353,4 +353,19 @@ body {
     #large-button-container {
         flex-shrink: 1.75;
     }
+
+    .sm-btn {
+        width: var(--sm-button-size-mobile) !important;
+        height: var(--sm-button-size-mobile) !important;
+    }
+
+    .btn {
+        width: var(--button-size-mobile) !important;
+        height: var(--button-size-mobile) !important;
+    }
+
+    .lg-btn {
+        width: var(--lg-button-size-mobile) !important;
+        height: var(--lg-button-size-mobile) !important;
+    }
 }

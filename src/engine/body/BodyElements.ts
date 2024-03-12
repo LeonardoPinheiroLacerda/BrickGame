@@ -55,9 +55,13 @@ export default class BodyElements {
         root.style.setProperty('--border-radius', `${this.width * 0.05}px`);
         root.style.setProperty('--border', `${this.width * 0.006}px solid black`);
 
-        root.style.setProperty('--sm-button-size', `${this.width * 0.09}px`);
-        root.style.setProperty('--button-size', `${this.width * 0.21}px`);
-        root.style.setProperty('--lg-button-size', `${this.width * 0.3}px`);
+        root.style.setProperty('--sm-button-size', `${this.width * 0.08}px`);
+        root.style.setProperty('--button-size', `${this.width * 0.18}px`);
+        root.style.setProperty('--lg-button-size', `${this.width * 0.25}px`);
+
+        root.style.setProperty('--sm-button-size-mobile', `${this.width * 0.09}px`);
+        root.style.setProperty('--button-size-mobile', `${this.width * 0.21}px`);
+        root.style.setProperty('--lg-button-size-mobile', `${this.width * 0.3}px`);
 
         root.style.setProperty('--button-border', `${this.width * 0.0045}px solid black`);
         root.style.setProperty('--button-animation-duration', `0.15s`);
