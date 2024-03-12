@@ -640,8 +640,7 @@ body {
     #container {
         width: 100% !important;
         height: 100vh !important;
-        /* margin: 1% !important; */
-        /* border-radius: 0px !important; */
+        border-radius: 0px !important;
     }
 
     #frame > canvas {
@@ -657,6 +656,14 @@ body {
 
     #small-button-container {
         margin-top: 3.5%;
+    }
+    #direction-vertical-container,
+    #direction-horizontal-container {
+        gap: calc(var(--width) * 0.13);
+    }
+
+    #large-button-container {
+        flex-shrink: 1.75;
     }
 }
 
