@@ -9,6 +9,7 @@ export const BODY_REFLECTION = 'rgb(3, 94, 255)';
 
 export const BODY_BUTTON_COLOR = 'rgb(247, 222, 57)';
 export const BODY_BUTTON_REFLECTION = 'rgb(250, 241, 185)';
+export const BODY_BUTTON_SHADOW = 'rgb(176, 170, 130git)';
 
 export const SHADOW_DISPERSION = '3px';
 

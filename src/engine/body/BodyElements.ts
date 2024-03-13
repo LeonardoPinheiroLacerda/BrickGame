@@ -8,6 +8,7 @@ import {
     BODY_BUTTON_COLOR,
     BODY_BUTTON_REFLECTION,
     SHADOW_DISPERSION,
+    BODY_BUTTON_SHADOW,
 } from '../../constants';
 import BodyProps from '../../interface/BodyProps';
 
@@ -45,6 +46,7 @@ export default class BodyElements {
 
         root.style.setProperty('--button-color', BODY_BUTTON_COLOR);
         root.style.setProperty('--button-color-reflexion', BODY_BUTTON_REFLECTION);
+        root.style.setProperty('--button-color-shadow', BODY_BUTTON_SHADOW);
 
         root.style.setProperty('--width', `${this.width}px`);
         root.style.setProperty('--height', `${this.height}px`);

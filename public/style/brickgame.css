@@ -88,6 +88,10 @@ body {
     background-color: var(--main-color);
     padding-right: calc(var(--width) * 0.01);
     padding-left: calc(var(--width) * 0.01);
+
+    text-shadow:
+        calc(var(--width) * -0.003) calc(var(--width) * 0.003) 0 var(--color-shadow),
+        calc(var(--width) * 0.002) calc(var(--width) * -0.002) 0 var(--color-shadow-reflexion);
 }
 
 /* BUTTONS */
@@ -192,6 +196,10 @@ body {
 
     line-height: calc(var(--width) * 0.03);
     height: calc(var(--width) * 0.06);
+
+    text-shadow:
+        calc(var(--width) * -0.003) calc(var(--width) * 0.003) 0 var(--color-shadow),
+        calc(var(--width) * 0.002) calc(var(--width) * -0.002) 0 var(--color-shadow-reflexion);
 }
 
 .btn-container {
@@ -232,7 +240,9 @@ body {
     font-size: calc(var(--width) * 0.045);
     font-weight: bold;
     color: white;
-    text-shadow: calc(var(--width) * 0.002) calc(var(--width) * 0.002) 0 rgba(0, 0, 0, 0.65) !important;
+    text-shadow:
+        calc(var(--width) * -0.002) calc(var(--width) * 0.002) 0 var(--button-color-shadow),
+        calc(var(--width) * 0.002) calc(var(--width) * -0.002) 0 var(--button-color-reflexion);
 }
 
 #button-container,
@@ -325,9 +335,11 @@ body {
         display: none;
     }
 
+    body,
     #container {
         width: 100% !important;
         height: 100vh !important;
+        /* height: 100dvh !important; */
         border-radius: 0px !important;
     }
 
