@@ -241,7 +241,7 @@ body {
     font-weight: bold;
     color: white;
     text-shadow:
-        calc(var(--width) * -0.002) calc(var(--width) * 0.002) 0 var(--button-color-shadow),
+        calc(var(--width) * -0.003) calc(var(--width) * 0.003) 0 var(--button-color-shadow),
         calc(var(--width) * 0.002) calc(var(--width) * -0.002) 0 var(--button-color-reflexion);
 }
 
