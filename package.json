@@ -1,6 +1,6 @@
 {
   "name": "brick-game",
-  "version": "0.5.4",
+  "version": "0.5.5",
   "description": "Brick game simulator.",
   "scripts": {
     "start": "npm run docs && webpack serve --open",
@@ -48,6 +48,7 @@
     "webpack-dev-server": "^4.15.1"
   },
   "dependencies": {
-    "p5": "^1.9.0"
+    "p5": "^1.9.0",
+    "typedoc-material-theme": "^1.0.2"
   }
 }

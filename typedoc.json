@@ -10,6 +10,11 @@
 
     "out": "./dist/docs",
     "excludePrivate": true,
-    "plugin": ["typedoc-plugin-rename-defaults", "@mxssfd/typedoc-theme"],
+    "plugin": [
+        "typedoc-plugin-rename-defaults",
+        "@mxssfd/typedoc-theme"
+        // , "typedoc-material-theme"
+    ],
+    // "themeColor": "#cb9820",
     "theme": "my-theme"
 }

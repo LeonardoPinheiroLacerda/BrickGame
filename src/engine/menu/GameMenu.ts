@@ -13,14 +13,14 @@ export default class GameMenu extends Game {
     public selectedGame: number = 0;
     public games: GameItem[] = gamesJson;
     public playedStartTheme: boolean = false;
-    protected controls: GameControls;
+    protected gameControls: GameControls;
 
     constructor(props: GameProps) {
         super(props);
 
-        this.controls = new GameMenuControls();
-        this.controls.unbound(this);
-        this.controls.bound(this);
+        this.gameControls = new GameMenuControls();
+        this.gameControls.unbound(this);
+        this.gameControls.bound(this);
     }
 
     async drawWelcome(): Promise<void> {
@@ -31,19 +31,19 @@ export default class GameMenu extends Game {
         const { p } = this;
         p.push();
 
-        this.setTextSize(FontSize.LARGE);
-        this.setTextState(true);
-        this.setTextAlign(FontAlign.CENTER);
+        this.gameTexts.setTextSize(FontSize.LARGE);
+        this.gameTexts.setTextState(true);
+        this.gameTexts.setTextAlign(FontAlign.CENTER);
 
-        this.textOnDisplay('Menu', { x: 0.5, y: 0.15 });
+        this.gameTexts.textOnDisplay('Menu', { x: 0.5, y: 0.15 });
 
-        this.setTextSize(FontSize.SMALL);
+        this.gameTexts.setTextSize(FontSize.SMALL);
 
-        this.textOnDisplay('Wellcome to your', { x: 0.5, y: 0.25 });
-        this.textOnDisplay('favorite brick game', { x: 0.5, y: 0.32 });
-        this.textOnDisplay('simulator!', { x: 0.5, y: 0.39 });
-        this.textOnDisplay('Press start', { x: 0.5, y: 0.66 });
-        this.textOnDisplay('to continue.', { x: 0.5, y: 0.72 });
+        this.gameTexts.textOnDisplay('Wellcome to your', { x: 0.5, y: 0.25 });
+        this.gameTexts.textOnDisplay('favorite brick game', { x: 0.5, y: 0.32 });
+        this.gameTexts.textOnDisplay('simulator!', { x: 0.5, y: 0.39 });
+        this.gameTexts.textOnDisplay('Press start', { x: 0.5, y: 0.66 });
+        this.gameTexts.textOnDisplay('to continue.', { x: 0.5, y: 0.72 });
 
         p.pop();
     }
@@ -53,33 +53,33 @@ export default class GameMenu extends Game {
             const { p } = this;
             p.push();
 
-            this.setTextSize(FontSize.LARGE);
-            this.setTextState(true);
-            this.setTextAlign(FontAlign.CENTER);
+            this.gameTexts.setTextSize(FontSize.LARGE);
+            this.gameTexts.setTextState(true);
+            this.gameTexts.setTextAlign(FontAlign.CENTER);
 
-            this.textOnDisplay('Menu', { x: 0.5, y: 0.15 });
+            this.gameTexts.textOnDisplay('Menu', { x: 0.5, y: 0.15 });
 
-            this.setTextSize(FontSize.SMALL);
+            this.gameTexts.setTextSize(FontSize.SMALL);
 
-            this.textOnDisplay('Choose a game and', { x: 0.5, y: 0.25 });
-            this.textOnDisplay('Press action to play', { x: 0.5, y: 0.32 });
+            this.gameTexts.textOnDisplay('Choose a game and', { x: 0.5, y: 0.25 });
+            this.gameTexts.textOnDisplay('Press action to play', { x: 0.5, y: 0.32 });
 
-            this.setTextAlign(FontAlign.RIGHT);
-            this.textOnDisplay('<', { x: 0.1, y: 0.54 });
+            this.gameTexts.setTextAlign(FontAlign.RIGHT);
+            this.gameTexts.textOnDisplay('<', { x: 0.1, y: 0.54 });
 
-            this.setTextAlign(FontAlign.LEFT);
-            this.textOnDisplay('>', { x: 0.9, y: 0.54 });
+            this.gameTexts.setTextAlign(FontAlign.LEFT);
+            this.gameTexts.textOnDisplay('>', { x: 0.9, y: 0.54 });
 
-            this.setTextSize(FontSize.MEDIUM);
-            this.setTextAlign(FontAlign.CENTER);
-            this.textOnDisplay(this.games[this.selectedGame].name, { x: 0.5, y: 0.55 });
+            this.gameTexts.setTextSize(FontSize.MEDIUM);
+            this.gameTexts.setTextAlign(FontAlign.CENTER);
+            this.gameTexts.textOnDisplay(this.games[this.selectedGame].name, { x: 0.5, y: 0.55 });
 
-            this.setTextSize(FontSize.EXTRA_SMALL);
-            this.setTextAlign(FontAlign.LEFT);
+            this.gameTexts.setTextSize(FontSize.EXTRA_SMALL);
+            this.gameTexts.setTextAlign(FontAlign.LEFT);
 
-            this.textOnDisplay('Left:    Previous option', { x: 0.05, y: 0.78 });
-            this.textOnDisplay('Right:   Next option', { x: 0.05, y: 0.84 });
-            this.textOnDisplay('Action:  Select', { x: 0.05, y: 0.9 });
+            this.gameTexts.textOnDisplay('Left:    Previous option', { x: 0.05, y: 0.78 });
+            this.gameTexts.textOnDisplay('Right:   Next option', { x: 0.05, y: 0.84 });
+            this.gameTexts.textOnDisplay('Action:  Select', { x: 0.05, y: 0.9 });
 
             p.pop();
         }

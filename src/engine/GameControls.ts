@@ -138,69 +138,69 @@ export default class GameControls {
     }
 
     pressOnOff(game: Game) {
-        game.getControls().beforeOnOff(game);
-        game.getControls().onOff(game);
-        game.getControls().afterOnOff(game);
+        game.getGameControls().beforeOnOff(game);
+        game.getGameControls().onOff(game);
+        game.getGameControls().afterOnOff(game);
     }
     pressStartPause(game: Game) {
         if (!game.getState().on) return;
-        game.getControls().beforeStartPause(game);
-        game.getControls().startPause(game);
-        game.getControls().afterStartPause(game);
+        game.getGameControls().beforeStartPause(game);
+        game.getGameControls().startPause(game);
+        game.getGameControls().afterStartPause(game);
     }
     pressSound(game: Game) {
         if (!game.getState().on) return;
-        game.getControls().beforeSound(game);
-        game.getControls().sound(game);
-        game.getControls().afterSound(game);
+        game.getGameControls().beforeSound(game);
+        game.getGameControls().sound(game);
+        game.getGameControls().afterSound(game);
     }
     pressReset(game: Game) {
         if (!game.getState().on) return;
-        game.getControls().beforeReset(game);
-        game.getControls().reset(game);
-        game.getControls().afterReset(game);
+        game.getGameControls().beforeReset(game);
+        game.getGameControls().reset(game);
+        game.getGameControls().afterReset(game);
     }
     pressExit(game: Game) {
         if (!game.getState().on) return;
-        game.getControls().beforeExit(game);
-        game.getControls().exit(game);
-        game.getControls().afterExit(game);
+        game.getGameControls().beforeExit(game);
+        game.getGameControls().exit(game);
+        game.getGameControls().afterExit(game);
     }
     pressEnableColor(game: Game) {
         if (!game.getState().on) return;
-        game.getControls().beforeEnableColor(game);
-        game.getControls().enableColor(game);
-        game.getControls().afterEnableColor(game);
+        game.getGameControls().beforeEnableColor(game);
+        game.getGameControls().enableColor(game);
+        game.getGameControls().afterEnableColor(game);
     }
     pressUp(game: Game) {
         if (!game.getState().on) return;
-        game.getControls().beforeUp(game);
-        game.getControls().up(game);
-        game.getControls().afterUp(game);
+        game.getGameControls().beforeUp(game);
+        game.getGameControls().up(game);
+        game.getGameControls().afterUp(game);
     }
     pressDown(game: Game) {
         if (!game.getState().on) return;
-        game.getControls().beforeDown(game);
-        game.getControls().down(game);
-        game.getControls().afterDown(game);
+        game.getGameControls().beforeDown(game);
+        game.getGameControls().down(game);
+        game.getGameControls().afterDown(game);
     }
     pressRight(game: Game) {
         if (!game.getState().on) return;
-        game.getControls().beforeRight(game);
-        game.getControls().right(game);
-        game.getControls().afterRight(game);
+        game.getGameControls().beforeRight(game);
+        game.getGameControls().right(game);
+        game.getGameControls().afterRight(game);
     }
     pressLeft(game: Game) {
         if (!game.getState().on) return;
-        game.getControls().beforeLeft(game);
-        game.getControls().left(game);
-        game.getControls().afterLeft(game);
+        game.getGameControls().beforeLeft(game);
+        game.getGameControls().left(game);
+        game.getGameControls().afterLeft(game);
     }
     pressAction(game: Game) {
         if (!game.getState().on) return;
-        game.getControls().beforeAction(game);
-        game.getControls().action(game);
-        game.getControls().afterAction(game);
+        game.getGameControls().beforeAction(game);
+        game.getGameControls().action(game);
+        game.getGameControls().afterAction(game);
     }
 
     bound(game: Game) {

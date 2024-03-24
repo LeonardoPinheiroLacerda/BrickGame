@@ -68,7 +68,7 @@ export default class Piece {
                 this.centerPoint.y -= vector.y;
             } else {
                 this.parts.forEach(({ y, x }) => {
-                    game.getGrid()[y][x] = game.emptyCell();
+                    game.getGrid()[y][x] = game.getGameUtils().emptyCell();
                 });
 
                 this.parts = tmpParts;
@@ -111,7 +111,7 @@ export default class Piece {
             game.getGrid().forEach(row => {
                 row.forEach(col => {
                     if (col.value === this.id) {
-                        const { color, value } = game.emptyCell();
+                        const { color, value } = game.getGameUtils().emptyCell();
                         col.color = color;
                         col.value = value;
                     }

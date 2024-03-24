@@ -10,11 +10,6 @@ import {
     BACKGROUND_COLOR,
     FONT_COLOR,
     FONT_TURNED_OFF_COLOR,
-    EXTRA_SMALL_FONT_SIZE,
-    SMALL_FONT_SIZE,
-    MEDIUM_FONT_SIZE,
-    LARGE_FONT_SIZE,
-    EXTRA_LARGE_FONT_SIZE,
     HUD_GRID_Y,
     HUD_GRID_X,
 } from '../constants';
@@ -30,13 +25,13 @@ import GameProps from '../interface/GameProps';
 import CellElement from '../interface/CellElement';
 import FontSize from '../enum/FontSize';
 import FontAlign from '../enum/FontAlign';
+import GameCoordinates from './GameCoordinates';
+import GameTexts from './GameTexts';
+import GameUtils from './GameUtils';
+import GameScore from './GameScore';
 
 export default class Game {
     protected p: P5;
-
-    protected defaultFontFamily: string = 'retro-gamming';
-
-    private fontSizes: number[] = [0];
 
     protected canvasWidth: number;
     protected canvasHeight: number;
@@ -55,16 +50,14 @@ export default class Game {
         running: false,
     };
 
-    protected score: number = 0;
-    protected hiScoreValue: number = 0;
-    protected hiScoreKey: string = 'hiScore';
-    protected level: number = 1;
-    protected maxLevel: number = 10;
-
     protected cellSize: number;
 
     protected gameSound: GameSound = new GameSound();
-    protected controls: GameControls = new GameControls();
+    protected gameCoordinates: GameCoordinates = new GameCoordinates(this);
+    protected gameTexts: GameTexts = new GameTexts(this);
+    protected gameUtils: GameUtils = new GameUtils(this);
+    protected gameScore: GameScore = new GameScore(this);
+    protected gameControls: GameControls = new GameControls();
     protected body: GameBody;
 
     protected initialTickInterval: number = 30;
@@ -80,39 +73,13 @@ export default class Game {
 
         this.resetGrid();
 
-        this.controls.bound(this);
+        this.gameControls.bound(this);
 
         //Primeira renderização
         this.drawFrame();
 
-        //Define o tamanho das fontes
-        this.fontSizes = [];
-        this.fontSizes.push(this.getRelativeValue(EXTRA_SMALL_FONT_SIZE));
-        this.fontSizes.push(this.getRelativeValue(SMALL_FONT_SIZE));
-        this.fontSizes.push(this.getRelativeValue(MEDIUM_FONT_SIZE));
-        this.fontSizes.push(this.getRelativeValue(LARGE_FONT_SIZE));
-        this.fontSizes.push(this.getRelativeValue(EXTRA_LARGE_FONT_SIZE));
-
         //Define fonte padrão
-        this.p.textFont(this.defaultFontFamily);
-    }
-
-    async resetGrid(): Promise<void> {
-        this.grid = [];
-        for (let y = 0; y < GRID_Y; y++) {
-            this.grid[y] = [];
-            for (let x = 0; x < GRID_X; x++) {
-                this.grid[y][x] = this.emptyCell();
-            }
-        }
-
-        this.hudGrid = [];
-        for (let y = 0; y < HUD_GRID_Y; y++) {
-            this.hudGrid[y] = [];
-            for (let x = 0; x < HUD_GRID_X; x++) {
-                this.hudGrid[y][x] = this.emptyCell();
-            }
-        }
+        this.gameTexts.defineFont();
     }
 
     async drawDisplay(): Promise<void> {
@@ -143,89 +110,45 @@ export default class Game {
         });
     }
 
-    getDisplayPosX(x: number): number {
-        return this.displayWidth * x + this.getRelativeValue(DISPLAY_MARGIN);
-    }
-    getDisplayPosY(y: number): number {
-        return this.displayHeight * y + this.getRelativeValue(DISPLAY_MARGIN);
-    }
-
-    getHudPosX(x: number): number {
-        const zero = this.displayWidth + this.getRelativeValue(DISPLAY_MARGIN) * 2;
-        const width = this.canvasWidth - zero - this.getRelativeValue(DISPLAY_MARGIN);
-        return width * x + zero;
-    }
-    getHudPosY(y: number): number {
-        return this.getRelativeValue(DISPLAY_MARGIN) + this.displayHeight * y;
-    }
-
-    getRelativeValue(size: number): number {
-        return this.canvasWidth * size;
-    }
-
-    protected setTextState(state: boolean): void {
-        this.p.fill(state ? FONT_COLOR : FONT_TURNED_OFF_COLOR);
-    }
-
-    protected setTextSize(fontSize: FontSize): void {
-        this.p.textSize(this.fontSizes[fontSize]);
-    }
-
-    // protected setTextAlign(horizontalAlign: P5.HORIZ_ALIGN): void {
-    //     this.p.textAlign(horizontalAlign, this.p.BASELINE);
-    // }
-
-    protected setTextAlign(fontAlign: FontAlign): void {
-        this.p.textAlign(fontAlign, this.p.BASELINE);
-    }
-
-    protected textOnHud(text: any, coord: Coordinates) {
-        this.p.text(text, this.getHudPosX(coord.x), this.getHudPosY(coord.y));
-    }
-
-    protected textOnDisplay(text: any, coord: Coordinates) {
-        this.p.text(text, this.getDisplayPosX(coord.x), this.getDisplayPosY(coord.y));
-    }
-
     async drawHud(): Promise<void> {
         const { p } = this;
 
         p.push();
 
-        this.setTextSize(FontSize.SMALL);
-        this.setTextState(false);
-        this.setTextAlign(FontAlign.LEFT);
+        this.gameTexts.setTextSize(FontSize.SMALL);
+        this.gameTexts.setTextState(false);
+        this.gameTexts.setTextAlign(FontAlign.LEFT);
 
-        this.textOnHud('88888888', { x: 0.05, y: 0.13 });
-        this.textOnHud('88888888', { x: 0.05, y: 0.3 });
-        this.textOnHud('88 - 88', { x: 0.05, y: 0.8 });
+        this.gameTexts.textOnHud('88888888', { x: 0.05, y: 0.13 });
+        this.gameTexts.textOnHud('88888888', { x: 0.05, y: 0.3 });
+        this.gameTexts.textOnHud('88 - 88', { x: 0.05, y: 0.8 });
 
-        this.setTextState(this.state.on);
+        this.gameTexts.setTextState(this.state.on);
 
-        this.textOnHud('Score', { x: 0.05, y: 0.06 });
-        this.textOnHud(this.score, { x: 0.05, y: 0.13 });
+        this.gameTexts.textOnHud('Score', { x: 0.05, y: 0.06 });
+        this.gameTexts.textOnHud(this.gameScore.score, { x: 0.05, y: 0.13 });
 
-        this.textOnHud('Hi-Score', { x: 0.05, y: 0.23 });
-        this.textOnHud(this.hiScoreValue, { x: 0.05, y: 0.3 });
+        this.gameTexts.textOnHud('Hi-Score', { x: 0.05, y: 0.23 });
+        this.gameTexts.textOnHud(this.gameScore.hiScoreValue, { x: 0.05, y: 0.3 });
 
-        this.textOnHud('Level', { x: 0.05, y: 0.72 });
-        const levelValue = `${this.level < 10 ? '0' + this.level : this.level} - ${this.maxLevel}`;
-        this.textOnHud(levelValue, { x: 0.05, y: 0.8 });
+        this.gameTexts.textOnHud('Level', { x: 0.05, y: 0.72 });
+        const levelValue = `${this.gameScore.level < 10 ? '0' + this.gameScore.level : this.gameScore.level} - ${this.gameScore.getMaxLevel()}`;
+        this.gameTexts.textOnHud(levelValue, { x: 0.05, y: 0.8 });
 
-        this.setTextAlign(FontAlign.CENTER);
+        this.gameTexts.setTextAlign(FontAlign.CENTER);
 
         if (this.state.running) {
             //Paused text
-            this.setTextState(!this.state.start && this.state.on);
-            this.textOnHud('Paused', { x: 0.5, y: 0.9 });
+            this.gameTexts.setTextState(!this.state.start && this.state.on);
+            this.gameTexts.textOnHud('Paused', { x: 0.5, y: 0.9 });
 
             //Muted text
-            this.setTextState(this.gameSound.getMute() && this.state.on);
-            this.textOnHud('Muted', { x: 0.5, y: 0.97 });
+            this.gameTexts.setTextState(this.gameSound.getMute() && this.state.on);
+            this.gameTexts.textOnHud('Muted', { x: 0.5, y: 0.97 });
         } else {
-            this.setTextState(false);
-            this.textOnHud('Paused', { x: 0.5, y: 0.9 });
-            this.textOnHud('Muted', { x: 0.5, y: 0.97 });
+            this.gameTexts.setTextState(false);
+            this.gameTexts.textOnHud('Paused', { x: 0.5, y: 0.9 });
+            this.gameTexts.textOnHud('Muted', { x: 0.5, y: 0.97 });
         }
 
         p.pop();
@@ -234,15 +157,15 @@ export default class Game {
     }
 
     async drawHudGrid() {
-        const coordY = this.getHudPosY(0.375);
-        const coordX = this.getHudPosX(0.078);
+        const coordY = this.gameCoordinates.getHudPosY(0.375);
+        const coordX = this.gameCoordinates.getHudPosX(0.078);
 
         this.p.push();
 
         this.hudGrid.forEach((row, y) => {
             row.forEach((column, x) => {
                 if ((this.state.on === false || this.state.start === false) && this.state.running === false) {
-                    column = this.emptyCell();
+                    column = this.gameUtils.emptyCell();
                 }
 
                 let color = column.value !== 0 ? Color.DEFAULT : Color.INACTIVE;
@@ -270,20 +193,6 @@ export default class Game {
             this.cellSize * 4 + this.getRelativeValue(0.01),
         );
         this.p.pop();
-    }
-
-    async registerHiScore(): Promise<void> {
-        const oldHiScore = this.getHiScore();
-
-        if (this.score >= oldHiScore) {
-            localStorage.setItem(this.hiScoreKey, this.score.toString());
-        }
-
-        this.hiScoreValue = this.getHiScore();
-    }
-
-    getHiScore(): number {
-        return isNaN(parseInt(localStorage.getItem(this.hiScoreKey))) ? 0 : parseInt(localStorage.getItem(this.hiScoreKey));
     }
 
     async drawCell({ y, x }: Coordinates, grid: Cell[][] = this.grid): Promise<void> {
@@ -360,11 +269,11 @@ export default class Game {
 
         p.push();
 
-        this.setTextSize(FontSize.MEDIUM);
-        this.setTextState(true);
-        this.setTextAlign(FontAlign.CENTER);
+        this.gameTexts.setTextSize(FontSize.MEDIUM);
+        this.gameTexts.setTextState(true);
+        this.gameTexts.setTextAlign(FontAlign.CENTER);
 
-        this.textOnDisplay('Game Brick', { x: 0.5, y: 0.5 });
+        this.gameTexts.textOnDisplay('Game Brick', { x: 0.5, y: 0.5 });
 
         p.pop();
     }
@@ -374,27 +283,61 @@ export default class Game {
 
         p.push();
 
-        this.setTextSize(FontSize.LARGE);
-        this.setTextState(true);
-        this.setTextAlign(FontAlign.CENTER);
+        this.gameTexts.setTextSize(FontSize.LARGE);
+        this.gameTexts.setTextState(true);
+        this.gameTexts.setTextAlign(FontAlign.CENTER);
 
-        this.textOnDisplay('Game Over', { x: 0.5, y: 0.5 });
+        this.gameTexts.textOnDisplay('Game Over', { x: 0.5, y: 0.5 });
 
         p.pop();
     }
 
+    async resetGrid(): Promise<void> {
+        this.grid = [];
+        for (let y = 0; y < GRID_Y; y++) {
+            this.grid[y] = [];
+            for (let x = 0; x < GRID_X; x++) {
+                this.grid[y][x] = this.gameUtils.emptyCell();
+            }
+        }
+
+        this.hudGrid = [];
+        for (let y = 0; y < HUD_GRID_Y; y++) {
+            this.hudGrid[y] = [];
+            for (let x = 0; x < HUD_GRID_X; x++) {
+                this.hudGrid[y][x] = this.gameUtils.emptyCell();
+            }
+        }
+    }
+
     gameOver() {
-        this.registerHiScore();
+        this.gameScore.registerHiScore();
         this.state.gameOver = true;
         this.state.running = false;
+    }
+
+    getRelativeValue(size: number): number {
+        return this.canvasWidth * size;
     }
 
     getGameSound(): GameSound {
         return this.gameSound;
     }
 
-    getControls(): GameControls {
-        return this.controls;
+    getGameCoordinates(): GameCoordinates {
+        return this.gameCoordinates;
+    }
+
+    getGameUtils(): GameUtils {
+        return this.gameUtils;
+    }
+
+    getGameScore(): GameScore {
+        return this.gameScore;
+    }
+
+    getGameControls(): GameControls {
+        return this.gameControls;
     }
 
     getBody(): GameBody {
@@ -413,16 +356,20 @@ export default class Game {
         return this.grid;
     }
 
-    emptyCell(): Cell {
-        return { color: Color.DEFAULT, value: 0 };
+    getDisplayWidth(): number {
+        return this.displayWidth;
     }
 
-    emptyRow() {
-        const emptyRow: Cell[] = [];
-        for (let x = 0; x < GRID_X; x++) {
-            emptyRow.push(this.emptyCell());
-        }
-        return emptyRow;
+    getDisplayHeight(): number {
+        return this.displayHeight;
+    }
+
+    getCanvasWidth(): number {
+        return this.canvasWidth;
+    }
+
+    getCanvasHeight(): number {
+        return this.canvasHeight;
     }
 
     changeGame(nameSpace: string, className: string): void {
@@ -431,7 +378,7 @@ export default class Game {
     }
 
     private unbound(): void {
-        this.controls.unbound(this);
+        this.gameControls.unbound(this);
         this.body.unbound();
         this.gameSound.stopAll();
     }
@@ -448,7 +395,7 @@ export default class Game {
 
         const obj = new gameClass(props);
 
-        obj.getControls().pressOnOff(obj);
+        obj.getGameControls().pressOnOff(obj);
         this.body.bound(obj);
 
         this.p.draw = () => {
@@ -469,8 +416,8 @@ export default class Game {
     protected processFrame(): void {}
     protected async draw(): Promise<void> {}
     reset(): void {
-        this.level = 1;
-        this.score = 0;
+        this.gameScore.level = 1;
+        this.gameScore.score = 0;
         this.resetGrid();
     }
 }

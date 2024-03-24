@@ -26,15 +26,13 @@ export default class Tetris extends Game {
 
     protected initialTickInterval: number = 25;
 
-    protected hiScoreKey: string = 'hiTetrisScore';
-
     constructor(props: GameProps) {
         super(props);
 
-        this.hiScoreValue = this.getHiScore();
+        this.gameScore.setKey('hiTetrisScore');
 
-        this.controls = new TetrisControls();
-        this.controls.bound(this);
+        this.gameControls = new TetrisControls();
+        this.gameControls.bound(this);
 
         this.generateNext();
     }
@@ -47,21 +45,21 @@ export default class Tetris extends Game {
     }
 
     async drawWelcome(): Promise<void> {
-        this.setTextSize(FontSize.EXTRA_LARGE);
-        this.setTextAlign(FontAlign.CENTER);
-        this.textOnDisplay('Tetris', { x: 0.5, y: 0.3 });
+        this.gameTexts.setTextSize(FontSize.EXTRA_LARGE);
+        this.gameTexts.setTextAlign(FontAlign.CENTER);
+        this.gameTexts.textOnDisplay('Tetris', { x: 0.5, y: 0.3 });
 
-        this.setTextSize(FontSize.SMALL);
-        this.textOnDisplay('Press start to play', { x: 0.5, y: 0.42 });
+        this.gameTexts.setTextSize(FontSize.SMALL);
+        this.gameTexts.textOnDisplay('Press start to play', { x: 0.5, y: 0.42 });
 
-        this.setTextSize(FontSize.EXTRA_SMALL);
-        this.setTextAlign(FontAlign.LEFT);
+        this.gameTexts.setTextSize(FontSize.EXTRA_SMALL);
+        this.gameTexts.setTextAlign(FontAlign.LEFT);
 
-        this.textOnDisplay('Up:     Rotate', { x: 0.075, y: 0.7 });
-        this.textOnDisplay('Down:   Move down faster', { x: 0.075, y: 0.75 });
-        this.textOnDisplay('Left:   Move left', { x: 0.075, y: 0.8 });
-        this.textOnDisplay('Right:  Move right', { x: 0.075, y: 0.85 });
-        this.textOnDisplay('Action: Rotate', { x: 0.075, y: 0.9 });
+        this.gameTexts.textOnDisplay('Up:     Rotate', { x: 0.075, y: 0.7 });
+        this.gameTexts.textOnDisplay('Down:   Move down faster', { x: 0.075, y: 0.75 });
+        this.gameTexts.textOnDisplay('Left:   Move left', { x: 0.075, y: 0.8 });
+        this.gameTexts.textOnDisplay('Right:  Move right', { x: 0.075, y: 0.85 });
+        this.gameTexts.textOnDisplay('Action: Rotate', { x: 0.075, y: 0.9 });
     }
 
     protected processTick(): void {
@@ -86,7 +84,7 @@ export default class Tetris extends Game {
             this.gameSound.play(Sound.EXPLOSION);
         }
 
-        this.tickInterval = this.initialTickInterval - this.level;
+        this.tickInterval = this.initialTickInterval - this.gameScore.level;
     }
 
     protected async draw(): Promise<void> {
@@ -169,13 +167,13 @@ export default class Tetris extends Game {
         if (linesCompletedList.length > 0) {
             //Incrementa o score de acordo com o numero de linhas completas
             if (linesCompletedList.length === 1) {
-                this.score += 10 * this.level;
+                this.gameScore.score += 10 * this.gameScore.level;
             } else if (linesCompletedList.length === 2) {
-                this.score += 25 * this.level;
+                this.gameScore.score += 25 * this.gameScore.level;
             } else if (linesCompletedList.length === 3) {
-                this.score += 40 * this.level;
+                this.gameScore.score += 40 * this.gameScore.level;
             } else if (linesCompletedList.length === 4) {
-                this.score += 60 * this.level;
+                this.gameScore.score += 60 * this.gameScore.level;
             }
 
             this.gameSound.play(Sound.SCORE_1);
@@ -185,16 +183,16 @@ export default class Tetris extends Game {
 
             //Adiciona linhas vazias
             while (this.grid.length !== GRID_Y) {
-                this.grid = [this.emptyRow(), ...this.grid];
+                this.grid = [this.gameUtils.emptyRow(), ...this.grid];
             }
 
             //Faz level up de acordo com o numero de linhas completas no geral
             this.linesCompleted += linesCompletedList.length;
-            if (this.level < this.maxLevel) {
-                this.level = Math.trunc(this.linesCompleted / this.linesToLevelUp) + 1;
+            if (this.gameScore.level < this.gameScore.getMaxLevel()) {
+                this.gameScore.level = Math.trunc(this.linesCompleted / this.linesToLevelUp) + 1;
 
-                if (this.level > this.maxLevel) {
-                    this.level = this.maxLevel;
+                if (this.gameScore.level > this.gameScore.getMaxLevel()) {
+                    this.gameScore.level = this.gameScore.getMaxLevel();
                 }
             }
         }

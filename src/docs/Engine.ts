@@ -7,6 +7,10 @@
 import Game from '../engine/Game';
 import GameSound from '../engine/GameSound';
 import GameControls from '../engine/GameControls';
+import GameCoordinates from '../engine/GameCoordinates';
+import GameScore from '../engine/GameScore';
+import GameTexts from '../engine/GameTexts';
+import GameUtils from '../engine/GameUtils';
 
 import Color from '../enum/Color';
 import FontAlign from '../enum/FontAlign';
@@ -20,7 +24,7 @@ import GameItem from '../interface/GameItem';
 import GameProps from '../interface/GameProps';
 import GameState from '../interface/GameState';
 
-export { Game, GameSound, GameControls };
+export { Game, GameSound, GameControls, GameCoordinates, GameScore, GameTexts, GameUtils };
 
 export { Color, FontAlign, FontSize, Sound };
 
