@@ -1,6 +1,11 @@
 /*!**************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js!./public/style/theme.css ***!
   \**************************************************************************/
+@font-face {
+    font-family: retro-gamming;
+    src: url(3576385aa1d294b9c795.ttf);
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -8,250 +13,16 @@
     user-select: none;
 }
 
-#modal {
-    box-shadow:
-        -0.75rem 0.75rem var(--dispersion) black,
-        -0.5rem 0.5rem var(--dispersion) var(--color-shadow-reflexion) inset,
-        0.4rem -0.4rem var(--dispersion) var(--color-shadow) inset;
-}
+body {
+    width: 100vw;
+    height: 100vh;
 
-#splash {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: black;
-    opacity: 0.85;
-    z-index: 999;
     display: flex;
     justify-content: center;
     align-items: center;
-}
 
-#modal-display {
-    box-shadow:
-        -0.3rem 0.3rem var(--dispersion) var(--color-shadow),
-        0.2rem -0.2rem var(--dispersion) var(--color-shadow-reflexion);
-}
-
-#source-code {
-    position: absolute;
-    top: 2%;
-    right: 2%;
-}
-
-#controls {
-    position: absolute;
-    top: 2%;
-    left: 2%;
-}
-
-#source-code,
-#controls {
-    background-color: var(--main-color);
-    padding: 0.75rem;
-    border-radius: 1.5rem;
-    cursor: pointer;
-    box-sizing: content-box;
-}
-
-#source-code > #source-code-button,
-#controls > #controls-button {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-#source-code > #source-code-button > img,
-#controls > #controls-button > img {
-    width: 2.5rem;
-    filter: invert();
-}
-
-#source-code:hover,
-#controls:hover {
-    background-color: var(--color-shadow-reflexion);
-}
-#source-code:active,
-#controls:active {
-    filter: brightness(1.15);
-}
-
-#source-code::after,
-#controls::after {
-    font-family: 'retro-gamming';
-    padding: 0.5rem;
-    width: 6rem;
-    background-color: white;
-    text-align: center;
-    border-radius: 0.25rem;
-    border: 1px black solid;
-    box-shadow: 0.25rem 0.25rem black;
-    opacity: 0;
-    transition: 0.25s opacity;
-}
-
-#source-code:hover::after,
-#controls:hover::after {
-    opacity: 1;
-}
-
-#source-code::after {
-    content: 'source code';
-    position: absolute;
-    top: 75px;
-    left: -65px;
-}
-
-#controls::after {
-    content: 'Controls';
-    position: absolute;
-    top: 75px;
-    left: 15px;
-}
-
-#controls-modal {
-    position: absolute;
-    top: 0;
-    right: 0;
-    left: 0;
-    bottom: 0;
-    background-color: rgba(0, 0, 0, 0.5);
-    z-index: 999;
-    display: none;
-}
-
-#controls-modal.visible {
-    display: flex !important;
-    justify-content: center;
-    align-items: center;
-}
-
-#controls-modal > #modal {
-    width: 80%;
-    max-width: 1000px;
-    height: 50%;
-    max-height: 600px;
-    border-radius: 1rem;
-    background-color: var(--main-color);
-    position: relative;
-    border: 3px solid black;
-    overflow: auto;
-}
-
-#controls-modal > #modal > #close-btn {
-    position: absolute;
-    top: 0.5rem;
-    right: 0.5rem;
-    background-color: var(--main-color);
-    width: 4rem;
-    height: 4rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 50%;
-    z-index: 2;
-}
-
-#modal-display {
-    border: 2px solid black;
-    position: absolute;
-    top: 4rem;
-    bottom: 4rem;
-    right: 4rem;
-    left: 4rem;
-    border-radius: 1rem;
-    background-color: rgb(172, 189, 173);
-    overflow: auto;
-    padding-left: 1.5rem;
-    padding-right: 1.5rem;
-}
-
-#controls-modal > #modal > #close-btn > img {
-    cursor: pointer;
-    width: 2.5rem;
-}
-
-#controls-modal > #modal > #close-btn > img:hover {
-    filter: contrast(0.8);
-}
-
-#controls-modal > #modal > #close-btn > img:active {
-    filter: contrast(0.7);
-}
-
-#modal-frame {
-    border: 3px solid black;
-    position: absolute;
-    top: 2rem;
-    bottom: 2rem;
-    right: 2rem;
-    left: 2rem;
-    border-radius: 2rem;
-    display: flex;
-    justify-content: center;
-}
-
-#modal-frame > label {
-    font-family: 'retro-gamming';
-    background-color: var(--main-color);
-    font-size: 2rem;
-    font-weight: bold;
-    position: relative;
-    top: -1rem;
-    width: 10rem;
-    text-align: center;
-}
-
-#controls-tutorial,
-#commands-tutorial {
-    width: 100%;
-    height: 50%;
-    margin: 0;
-
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-}
-
-#commands-tutorial .command {
-    width: 50% !important;
-}
-
-#controls-tutorial {
-    gap: 3rem;
-}
-
-#wasd {
-    display: flex;
-    flex-direction: row;
-    width: 13.5rem;
-    flex-wrap: wrap;
-}
-.w-key {
-    margin-right: 35% !important;
-    margin-left: 35% !important;
-}
-
-.key {
-    width: 4rem;
-    margin: 0.25rem;
-}
-
-.key-description {
-    font-family: 'retro-gamming';
-    font-size: 2rem;
-}
-
-.command {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: start;
-    gap: 1rem;
+    background: rgb(0, 158, 247);
+    background: linear-gradient(300deg, rgb(48, 179, 255) 0%, rgba(0, 158, 247, 1) 100%);
 }
 
 #version {
@@ -261,6 +32,60 @@
     position: absolute;
     bottom: 1rem;
     right: 1rem;
+}
+
+@media only screen and (max-width: 600px) {
+    #source-code,
+    #controls,
+    #version {
+        display: none;
+    }
+
+    body,
+    #container {
+        width: 100% !important;
+        height: 100vh !important;
+        /* height: 100dvh !important; */
+        border-radius: 0px !important;
+    }
+
+    #frame > canvas {
+        width: 85% !important;
+        height: auto !important;
+        aspect-ratio: 9/10 !important;
+    }
+
+    #frame {
+        width: 85% !important;
+        padding: 7.5%¨ !important;
+    }
+
+    #small-button-container {
+        margin-top: 3.5%;
+    }
+    #direction-vertical-container,
+    #direction-horizontal-container {
+        gap: calc(var(--width) * 0.13);
+    }
+
+    #large-button-container {
+        flex-shrink: 1.75;
+    }
+
+    .sm-btn {
+        width: var(--sm-button-size-mobile) !important;
+        height: var(--sm-button-size-mobile) !important;
+    }
+
+    .btn {
+        width: var(--button-size-mobile) !important;
+        height: var(--button-size-mobile) !important;
+    }
+
+    .lg-btn {
+        width: var(--lg-button-size-mobile) !important;
+        height: var(--lg-button-size-mobile) !important;
+    }
 }
 
 @media only screen and (max-width: 990px) {
@@ -307,26 +132,9 @@
     }
 }
 
-/*!******************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js!./public/style/brickgame.css ***!
-  \******************************************************************************/
-@font-face {
-    font-family: retro-gamming;
-    src: url(3576385aa1d294b9c795.ttf);
-}
-
-body {
-    width: 100vw;
-    height: 100vh;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    background: rgb(0, 158, 247);
-    background: linear-gradient(300deg, rgb(48, 179, 255) 0%, rgba(0, 158, 247, 1) 100%);
-}
-
+/*!*************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./public/style/body.css ***!
+  \*************************************************************************/
 /* MAIN BODY */
 
 #brick-game {
@@ -400,8 +208,192 @@ body {
     background-color: var(--main-color);
     padding-right: calc(var(--width) * 0.01);
     padding-left: calc(var(--width) * 0.01);
+
+    text-shadow:
+        calc(var(--width) * -0.003) calc(var(--width) * 0.003) 0 var(--color-shadow),
+        calc(var(--width) * 0.002) calc(var(--width) * -0.002) 0 var(--color-shadow-reflexion);
 }
 
+
+
+/*!**************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./public/style/modal.css ***!
+  \**************************************************************************/
+#modal {
+    box-shadow:
+        -0.75rem 0.75rem var(--dispersion) black,
+        -0.5rem 0.5rem var(--dispersion) var(--color-shadow-reflexion) inset,
+        0.4rem -0.4rem var(--dispersion) var(--color-shadow) inset;
+}
+
+#modal-display {
+    box-shadow:
+        -0.3rem 0.3rem var(--dispersion) var(--color-shadow),
+        0.2rem -0.2rem var(--dispersion) var(--color-shadow-reflexion);
+}
+
+#controls-modal {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+    display: none;
+}
+
+#controls-modal.visible {
+    display: flex !important;
+    opacity: 1 !important;
+    justify-content: center;
+    align-items: center;
+}
+
+#controls-modal > #modal {
+    width: 80%;
+    max-width: 1000px;
+    height: 50%;
+    max-height: 600px;
+    border-radius: 1rem;
+    background-color: var(--main-color);
+    position: relative;
+    border: 3px solid black;
+    overflow: auto;
+}
+
+#controls-modal > #modal > #close-btn {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    background-color: var(--main-color);
+    width: 4rem;
+    height: 4rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    z-index: 2;
+}
+
+#modal-display {
+    border: 2px solid black;
+    position: absolute;
+    top: 4rem;
+    bottom: 4rem;
+    right: 4rem;
+    left: 4rem;
+    border-radius: 1rem;
+    background-color: rgb(172, 189, 173);
+    overflow: auto;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+}
+#controls-modal > #modal > #close-btn > img {
+    cursor: pointer;
+    width: 2.5rem;
+}
+
+#controls-modal > #modal > #close-btn > img:hover {
+    filter: contrast(0.8);
+}
+
+#controls-modal > #modal > #close-btn > img:active {
+    filter: contrast(0.7);
+}
+#modal-frame {
+    border: 3px solid black;
+    position: absolute;
+    top: 2rem;
+    bottom: 2rem;
+    right: 2rem;
+    left: 2rem;
+    border-radius: 2rem;
+    display: flex;
+    justify-content: center;
+}
+
+#modal-frame > label {
+    font-family: 'retro-gamming';
+    background-color: var(--main-color);
+    font-size: 2rem;
+    font-weight: bold;
+    position: relative;
+    top: -1rem;
+    width: 10rem;
+    text-align: center;
+}
+
+#controls-tutorial,
+#commands-tutorial {
+    width: 100%;
+    height: 50%;
+    margin: 0;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+#commands-tutorial .command {
+    width: 50% !important;
+}
+
+#controls-tutorial {
+    gap: 3rem;
+}
+
+#wasd {
+    display: flex;
+    flex-direction: row;
+    width: 13.5rem;
+    flex-wrap: wrap;
+}
+.w-key {
+    margin-right: 35% !important;
+    margin-left: 35% !important;
+}
+
+.key {
+    width: 4rem;
+    margin: 0.25rem;
+}
+
+.key-description {
+    font-family: 'retro-gamming';
+    font-size: 2rem;
+}
+
+.command {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: start;
+    gap: 1rem;
+}
+
+/*!***************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./public/style/splash.css ***!
+  \***************************************************************************/
+#splash {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: black;
+    opacity: 0.85;
+    z-index: 999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/*!****************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./public/style/buttons.css ***!
+  \****************************************************************************/
 /* BUTTONS */
 
 .sm-btn,
@@ -504,6 +496,10 @@ body {
 
     line-height: calc(var(--width) * 0.03);
     height: calc(var(--width) * 0.06);
+
+    text-shadow:
+        calc(var(--width) * -0.003) calc(var(--width) * 0.003) 0 var(--color-shadow),
+        calc(var(--width) * 0.002) calc(var(--width) * -0.002) 0 var(--color-shadow-reflexion);
 }
 
 .btn-container {
@@ -544,8 +540,12 @@ body {
     font-size: calc(var(--width) * 0.045);
     font-weight: bold;
     color: white;
-    text-shadow: calc(var(--width) * 0.002) calc(var(--width) * 0.002) 0 rgba(0, 0, 0, 0.65) !important;
+    text-shadow:
+        calc(var(--width) * -0.003) calc(var(--width) * 0.003) 0 var(--button-color-shadow),
+        calc(var(--width) * 0.002) calc(var(--width) * -0.002) 0 var(--button-color-reflexion);
 }
+
+/* BUTTON CONTAINERS */
 
 #button-container,
 #small-button-container,
@@ -628,57 +628,83 @@ body {
     flex-direction: row;
 }
 
-/* MEDIA QUERIES */
-
-@media only screen and (max-width: 600px) {
-    #source-code,
-    #controls,
-    #version {
-        display: none;
-    }
-
-    #container {
-        width: 100% !important;
-        height: 100vh !important;
-        border-radius: 0px !important;
-    }
-
-    #frame > canvas {
-        width: 85% !important;
-        height: auto !important;
-        aspect-ratio: 9/10 !important;
-    }
-
-    #frame {
-        width: 85% !important;
-        padding: 7.5%¨ !important;
-    }
-
-    #small-button-container {
-        margin-top: 3.5%;
-    }
-    #direction-vertical-container,
-    #direction-horizontal-container {
-        gap: calc(var(--width) * 0.13);
-    }
-
-    #large-button-container {
-        flex-shrink: 1.75;
-    }
-
-    .sm-btn {
-        width: var(--sm-button-size-mobile) !important;
-        height: var(--sm-button-size-mobile) !important;
-    }
-
-    .btn {
-        width: var(--button-size-mobile) !important;
-        height: var(--button-size-mobile) !important;
-    }
-
-    .lg-btn {
-        width: var(--lg-button-size-mobile) !important;
-        height: var(--lg-button-size-mobile) !important;
-    }
+/*!******************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./public/style/sourceCodeAndCommands.css ***!
+  \******************************************************************************************/
+#source-code {
+    position: absolute;
+    top: 2%;
+    right: 2%;
 }
+
+#controls {
+    position: absolute;
+    top: 2%;
+    left: 2%;
+}
+
+#source-code,
+#controls {
+    background-color: var(--main-color);
+    padding: 0.75rem;
+    border-radius: 1.5rem;
+    cursor: pointer;
+    box-sizing: content-box;
+}
+
+#source-code > #source-code-button,
+#controls > #controls-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#source-code > #source-code-button > img,
+#controls > #controls-button > img {
+    width: 2.5rem;
+    filter: invert();
+}
+#source-code:hover,
+#controls:hover {
+    background-color: var(--color-shadow-reflexion);
+}
+#source-code:active,
+#controls:active {
+    filter: brightness(1.15);
+}
+
+#source-code::after,
+#controls::after {
+    font-family: 'retro-gamming';
+    padding: 0.5rem;
+    width: 6rem;
+    background-color: white;
+    text-align: center;
+    border-radius: 0.25rem;
+    border: 1px black solid;
+    box-shadow: 0.25rem 0.25rem black;
+    opacity: 0;
+    transition: 0.25s opacity;
+}
+
+#source-code:hover::after,
+#controls:hover::after {
+    opacity: 1;
+}
+
+#source-code::after {
+    content: 'source code';
+    position: absolute;
+    top: 75px;
+    left: -65px;
+}
+
+#controls::after {
+    content: 'Controls';
+    position: absolute;
+    top: 75px;
+    left: 15px;
+}
+
+
 
