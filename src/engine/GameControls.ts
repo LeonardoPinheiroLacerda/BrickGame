@@ -99,13 +99,13 @@ export default class GameControls {
         }
     }
     protected sound(game: Game) {
-        game.getGameSound().setMute(!game.getGameSound().getMute());
+        game.getGameSound().toogleMute();
     }
     protected reset(game: Game) {
         game.getState().gameOver = false;
         game.getState().start = false;
         game.getState().running = false;
-        game.getGameSound().setMute(false);
+        game.getGameSound().mute = false;
         game.getGameSound().stopAll();
         game.resetGrid();
 

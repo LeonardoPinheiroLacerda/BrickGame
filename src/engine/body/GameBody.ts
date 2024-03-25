@@ -1,5 +1,5 @@
 import * as P5 from 'p5';
-import BodyElements from './BodyElements';
+import GameBodyComponentsRenderer from './GameBodyComponentsRenderer';
 import Game from '../Game';
 import BodyProps from '../../interface/BodyProps';
 
@@ -11,7 +11,7 @@ import BodyProps from '../../interface/BodyProps';
  */
 
 export default class GameBody {
-    private elements: BodyElements;
+    private elements: GameBodyComponentsRenderer;
 
     private onOffBtn: P5.Element;
     private startPauseBtn: P5.Element;
@@ -42,7 +42,7 @@ export default class GameBody {
     private pressAction: (game: Game) => void;
 
     constructor(props: BodyProps) {
-        this.elements = new BodyElements({
+        this.elements = new GameBodyComponentsRenderer({
             p: props.p,
             parent: props.parent,
         });

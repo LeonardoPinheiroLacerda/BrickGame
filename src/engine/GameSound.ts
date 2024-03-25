@@ -1,11 +1,10 @@
 import Sound from '../enum/Sound';
 
 export default class GameSound {
-    private volume: number = 0.025;
-    private mute: boolean = false;
+    private _mute: boolean = false;
+    private _volume: number = 0.025;
 
     private activeSounds: HTMLAudioElement[] = [];
-
     private soundLibraryLoaded: boolean = false;
 
     async play(sound: Sound): Promise<void> {
@@ -48,15 +47,6 @@ export default class GameSound {
         });
     }
 
-    setMute(mute: boolean): void {
-        if (mute) this.stopAll();
-        this.mute = mute;
-    }
-
-    getMute(): boolean {
-        return this.mute;
-    }
-
     private loadAll() {
         const audioContext = new window.AudioContext();
         const load = (sound: Sound) => {
@@ -91,5 +81,24 @@ export default class GameSound {
 
     private soundId(sound: Sound) {
         return sound.replace('./sounds/', '').replace('.wav', '');
+    }
+
+    public toogleMute() {
+        this.mute = !this.mute;
+    }
+
+    public get mute(): boolean {
+        return this._mute;
+    }
+    public set mute(value: boolean) {
+        if (value) this.stopAll();
+        this._mute = value;
+    }
+
+    public get volume(): number {
+        return this._volume;
+    }
+    public set volume(value: number) {
+        this._volume = value;
     }
 }

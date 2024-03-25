@@ -21,8 +21,8 @@ export default class Tetris extends Game {
     private current: Piece;
     private actualId: number = 1;
 
-    linesCompleted: number = 0;
-    linesToLevelUp: number = 3;
+    private linesCompleted: number = 0;
+    private linesToLevelUp: number = 3;
 
     protected initialTickInterval: number = 25;
 
@@ -167,13 +167,13 @@ export default class Tetris extends Game {
         if (linesCompletedList.length > 0) {
             //Incrementa o score de acordo com o numero de linhas completas
             if (linesCompletedList.length === 1) {
-                this.gameScore.score += 10 * this.gameScore.level;
+                this.gameScore.incrementScore(10 * this.gameScore.level);
             } else if (linesCompletedList.length === 2) {
-                this.gameScore.score += 25 * this.gameScore.level;
+                this.gameScore.incrementScore(25 * this.gameScore.level);
             } else if (linesCompletedList.length === 3) {
-                this.gameScore.score += 40 * this.gameScore.level;
+                this.gameScore.incrementScore(40 * this.gameScore.level);
             } else if (linesCompletedList.length === 4) {
-                this.gameScore.score += 60 * this.gameScore.level;
+                this.gameScore.incrementScore(60 * this.gameScore.level);
             }
 
             this.gameSound.play(Sound.SCORE_1);
@@ -188,12 +188,10 @@ export default class Tetris extends Game {
 
             //Faz level up de acordo com o numero de linhas completas no geral
             this.linesCompleted += linesCompletedList.length;
-            if (this.gameScore.level < this.gameScore.getMaxLevel()) {
-                this.gameScore.level = Math.trunc(this.linesCompleted / this.linesToLevelUp) + 1;
-
-                if (this.gameScore.level > this.gameScore.getMaxLevel()) {
-                    this.gameScore.level = this.gameScore.getMaxLevel();
-                }
+            if (this.gameScore.level < this.gameScore.maxLevel) {
+                const level = Math.trunc(this.linesCompleted / this.linesToLevelUp) + 1;
+                const levelsToIncrement = level - this.gameScore.level;
+                this.gameScore.incrementLevel(levelsToIncrement);
             }
         }
     }

@@ -55,8 +55,8 @@ export default class Game {
     protected gameSound: GameSound = new GameSound();
     protected gameCoordinates: GameCoordinates = new GameCoordinates(this);
     protected gameTexts: GameTexts = new GameTexts(this);
-    protected gameUtils: GameUtils = new GameUtils(this);
-    protected gameScore: GameScore = new GameScore(this);
+    protected gameUtils: GameUtils = new GameUtils();
+    protected gameScore: GameScore = new GameScore();
     protected gameControls: GameControls = new GameControls();
     protected body: GameBody;
 
@@ -132,7 +132,7 @@ export default class Game {
         this.gameTexts.textOnHud(this.gameScore.hiScoreValue, { x: 0.05, y: 0.3 });
 
         this.gameTexts.textOnHud('Level', { x: 0.05, y: 0.72 });
-        const levelValue = `${this.gameScore.level < 10 ? '0' + this.gameScore.level : this.gameScore.level} - ${this.gameScore.getMaxLevel()}`;
+        const levelValue = `${this.gameScore.level < 10 ? '0' + this.gameScore.level : this.gameScore.level} - ${this.gameScore.maxLevel}`;
         this.gameTexts.textOnHud(levelValue, { x: 0.05, y: 0.8 });
 
         this.gameTexts.setTextAlign(FontAlign.CENTER);
@@ -143,7 +143,7 @@ export default class Game {
             this.gameTexts.textOnHud('Paused', { x: 0.5, y: 0.9 });
 
             //Muted text
-            this.gameTexts.setTextState(this.gameSound.getMute() && this.state.on);
+            this.gameTexts.setTextState(this.gameSound.mute && this.state.on);
             this.gameTexts.textOnHud('Muted', { x: 0.5, y: 0.97 });
         } else {
             this.gameTexts.setTextState(false);
@@ -311,7 +311,7 @@ export default class Game {
     }
 
     gameOver() {
-        this.gameScore.registerHiScore();
+        this.gameScore.updateHiScore();
         this.state.gameOver = true;
         this.state.running = false;
     }
@@ -416,8 +416,8 @@ export default class Game {
     protected processFrame(): void {}
     protected async draw(): Promise<void> {}
     reset(): void {
-        this.gameScore.level = 1;
-        this.gameScore.score = 0;
+        this.gameScore.resetLevel();
+        this.gameScore.resetScore();
         this.resetGrid();
     }
 }

@@ -5,9 +5,9 @@
  */
 
 import GameBody from '../engine/body/GameBody';
-import BodyElements from '../engine/body/BodyElements';
+import GameBodyComponentsRenderer from '../engine/body/GameBodyComponentsRenderer';
 
-export { GameBody, BodyElements };
+export { GameBody, GameBodyComponentsRenderer };
 
 import BodyProps from '../interface/BodyProps';
 

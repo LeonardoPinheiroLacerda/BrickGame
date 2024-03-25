@@ -1,7 +1,6 @@
 import Game from '../Game';
 
 import * as gamesJson from '../../../resources/games.json';
-import GameControls from '../GameControls';
 import GameMenuControls from './GameMenuControls';
 import GameItem from '../../interface/GameItem';
 import Sound from '../../enum/Sound';
@@ -13,7 +12,6 @@ export default class GameMenu extends Game {
     public selectedGame: number = 0;
     public games: GameItem[] = gamesJson;
     public playedStartTheme: boolean = false;
-    protected gameControls: GameControls;
 
     constructor(props: GameProps) {
         super(props);
