@@ -23,7 +23,7 @@ export default class GameTexts {
     }
 
     public defineFont(): void {
-        this.game.getP().textFont(this.defaultFontFamily);
+        this.game.p.textFont(this.defaultFontFamily);
 
         //Define o tamanho das fontes
         this.fontSizes = [];
@@ -35,22 +35,22 @@ export default class GameTexts {
     }
 
     public setTextState(state: boolean): void {
-        this.game.getP().fill(state ? FONT_COLOR : FONT_TURNED_OFF_COLOR);
+        this.game.p.fill(state ? FONT_COLOR : FONT_TURNED_OFF_COLOR);
     }
 
     public setTextSize(fontSize: FontSize): void {
-        this.game.getP().textSize(this.fontSizes[fontSize]);
+        this.game.p.textSize(this.fontSizes[fontSize]);
     }
 
     public setTextAlign(fontAlign: FontAlign): void {
-        this.game.getP().textAlign(fontAlign, this.game.getP().BASELINE);
+        this.game.p.textAlign(fontAlign, this.game.p.BASELINE);
     }
 
     public textOnHud(text: any, coord: Coordinates) {
-        this.game.getP().text(text, this.game.getGameCoordinates().getHudPosX(coord.x), this.game.getGameCoordinates().getHudPosY(coord.y));
+        this.game.p.text(text, this.game.gameCoordinates.getHudPosX(coord.x), this.game.gameCoordinates.getHudPosY(coord.y));
     }
 
     public textOnDisplay(text: any, coord: Coordinates) {
-        this.game.getP().text(text, this.game.getGameCoordinates().getDisplayPosX(coord.x), this.game.getGameCoordinates().getDisplayPosY(coord.y));
+        this.game.p.text(text, this.game.gameCoordinates.getDisplayPosX(coord.x), this.game.gameCoordinates.getDisplayPosY(coord.y));
     }
 }

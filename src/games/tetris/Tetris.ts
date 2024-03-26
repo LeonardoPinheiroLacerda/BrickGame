@@ -24,7 +24,7 @@ export default class Tetris extends Game {
     private linesCompleted: number = 0;
     private linesToLevelUp: number = 3;
 
-    protected initialTickInterval: number = 25;
+    protected _initialTickInterval: number = 25;
 
     constructor(props: GameProps) {
         super(props);

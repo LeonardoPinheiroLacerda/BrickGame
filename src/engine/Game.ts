@@ -31,18 +31,18 @@ import GameUtils from './GameUtils';
 import GameScore from './GameScore';
 
 export default class Game {
-    protected p: P5;
+    private _p: P5;
 
-    protected canvasWidth: number;
-    protected canvasHeight: number;
+    private _canvasWidth: number;
+    private _canvasHeight: number;
 
-    protected displayWidth: number;
-    protected displayHeight: number;
+    private _displayWidth: number;
+    private _displayHeight: number;
 
-    protected grid: Cell[][];
-    protected hudGrid: Cell[][];
+    private _grid: Cell[][];
+    private _hudGrid: Cell[][];
 
-    protected state: GameState = {
+    private _state: GameState = {
         on: false,
         start: false,
         gameOver: false,
@@ -50,18 +50,19 @@ export default class Game {
         running: false,
     };
 
-    protected cellSize: number;
+    private _cellSize: number;
 
-    protected gameSound: GameSound = new GameSound();
-    protected gameCoordinates: GameCoordinates = new GameCoordinates(this);
-    protected gameTexts: GameTexts = new GameTexts(this);
-    protected gameUtils: GameUtils = new GameUtils();
-    protected gameScore: GameScore = new GameScore();
-    protected gameControls: GameControls = new GameControls();
-    protected body: GameBody;
+    private _body: GameBody;
 
-    protected initialTickInterval: number = 30;
-    protected tickInterval: number = this.initialTickInterval;
+    protected _initialTickInterval: number = 30;
+    protected _tickInterval: number = this.initialTickInterval;
+
+    private _gameSound: GameSound = new GameSound();
+    private _gameCoordinates: GameCoordinates = new GameCoordinates(this);
+    private _gameTexts: GameTexts = new GameTexts(this);
+    private _gameUtils: GameUtils = new GameUtils();
+    private _gameScore: GameScore = new GameScore();
+    protected _gameControls: GameControls = new GameControls();
 
     constructor(props: GameProps) {
         this.p = props.p;
@@ -220,7 +221,7 @@ export default class Game {
         this.drawCellElement({ w, h, posX, posY, color });
     }
 
-    async drawCellElement(cellElement: CellElement): Promise<void> {
+    private async drawCellElement(cellElement: CellElement): Promise<void> {
         const { p } = this;
 
         const { w, h, posX, posY, color } = cellElement;
@@ -320,58 +321,6 @@ export default class Game {
         return this.canvasWidth * size;
     }
 
-    getGameSound(): GameSound {
-        return this.gameSound;
-    }
-
-    getGameCoordinates(): GameCoordinates {
-        return this.gameCoordinates;
-    }
-
-    getGameUtils(): GameUtils {
-        return this.gameUtils;
-    }
-
-    getGameScore(): GameScore {
-        return this.gameScore;
-    }
-
-    getGameControls(): GameControls {
-        return this.gameControls;
-    }
-
-    getBody(): GameBody {
-        return this.body;
-    }
-
-    getP(): P5 {
-        return this.p;
-    }
-
-    getState(): GameState {
-        return this.state;
-    }
-
-    getGrid(): Cell[][] {
-        return this.grid;
-    }
-
-    getDisplayWidth(): number {
-        return this.displayWidth;
-    }
-
-    getDisplayHeight(): number {
-        return this.displayHeight;
-    }
-
-    getCanvasWidth(): number {
-        return this.canvasWidth;
-    }
-
-    getCanvasHeight(): number {
-        return this.canvasHeight;
-    }
-
     changeGame(nameSpace: string, className: string): void {
         this.unbound();
         this.bound(nameSpace, className);
@@ -419,5 +368,131 @@ export default class Game {
         this.gameScore.resetLevel();
         this.gameScore.resetScore();
         this.resetGrid();
+    }
+
+    public get canvasWidth(): number {
+        return this._canvasWidth;
+    }
+    private set canvasWidth(value: number) {
+        this._canvasWidth = value;
+    }
+
+    public get canvasHeight(): number {
+        return this._canvasHeight;
+    }
+    private set canvasHeight(value: number) {
+        this._canvasHeight = value;
+    }
+
+    public get displayWidth(): number {
+        return this._displayWidth;
+    }
+    private set displayWidth(value: number) {
+        this._displayWidth = value;
+    }
+
+    public get displayHeight(): number {
+        return this._displayHeight;
+    }
+    private set displayHeight(value: number) {
+        this._displayHeight = value;
+    }
+
+    public get p(): P5 {
+        return this._p;
+    }
+    private set p(value: P5) {
+        this._p = value;
+    }
+
+    public get grid(): Cell[][] {
+        return this._grid;
+    }
+    protected set grid(value: Cell[][]) {
+        this._grid = value;
+    }
+
+    public get hudGrid(): Cell[][] {
+        return this._hudGrid;
+    }
+    protected set hudGrid(value: Cell[][]) {
+        this._hudGrid = value;
+    }
+
+    public get state(): GameState {
+        return this._state;
+    }
+    private set state(value: GameState) {
+        this._state = value;
+    }
+
+    public get cellSize(): number {
+        return this._cellSize;
+    }
+    private set cellSize(value: number) {
+        this._cellSize = value;
+    }
+
+    public get body(): GameBody {
+        return this._body;
+    }
+    private set body(value: GameBody) {
+        this._body = value;
+    }
+
+    protected get initialTickInterval(): number {
+        return this._initialTickInterval;
+    }
+    protected set initialTickInterval(value: number) {
+        this._initialTickInterval = value;
+    }
+
+    public get tickInterval(): number {
+        return this._tickInterval;
+    }
+    protected set tickInterval(value: number) {
+        this._tickInterval = value;
+    }
+
+    public get gameSound(): GameSound {
+        return this._gameSound;
+    }
+    private set gameSound(value: GameSound) {
+        this._gameSound = value;
+    }
+
+    public get gameCoordinates(): GameCoordinates {
+        return this._gameCoordinates;
+    }
+    private set gameCoordinates(value: GameCoordinates) {
+        this._gameCoordinates = value;
+    }
+
+    public get gameTexts(): GameTexts {
+        return this._gameTexts;
+    }
+    private set gameTexts(value: GameTexts) {
+        this._gameTexts = value;
+    }
+
+    public get gameUtils(): GameUtils {
+        return this._gameUtils;
+    }
+    private set gameUtils(value: GameUtils) {
+        this._gameUtils = value;
+    }
+
+    public get gameScore(): GameScore {
+        return this._gameScore;
+    }
+    private set gameScore(value: GameScore) {
+        this._gameScore = value;
+    }
+
+    public get gameControls(): GameControls {
+        return this._gameControls;
+    }
+    protected set gameControls(value: GameControls) {
+        this._gameControls = value;
     }
 }

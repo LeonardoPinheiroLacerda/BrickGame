@@ -9,18 +9,18 @@ export default class GameCoordinates {
     }
 
     getDisplayPosX(x: number): number {
-        return this.game.getDisplayWidth() * x + this.game.getRelativeValue(DISPLAY_MARGIN);
+        return this.game.displayWidth * x + this.game.getRelativeValue(DISPLAY_MARGIN);
     }
     getDisplayPosY(y: number): number {
-        return this.game.getDisplayHeight() * y + this.game.getRelativeValue(DISPLAY_MARGIN);
+        return this.game.displayHeight * y + this.game.getRelativeValue(DISPLAY_MARGIN);
     }
 
     getHudPosX(x: number): number {
-        const zero = this.game.getDisplayWidth() + this.game.getRelativeValue(DISPLAY_MARGIN) * 2;
-        const width = this.game.getCanvasWidth() - zero - this.game.getRelativeValue(DISPLAY_MARGIN);
+        const zero = this.game.displayWidth + this.game.getRelativeValue(DISPLAY_MARGIN) * 2;
+        const width = this.game.canvasWidth - zero - this.game.getRelativeValue(DISPLAY_MARGIN);
         return width * x + zero;
     }
     getHudPosY(y: number): number {
-        return this.game.getRelativeValue(DISPLAY_MARGIN) + this.game.getDisplayHeight() * y;
+        return this.game.getRelativeValue(DISPLAY_MARGIN) + this.game.displayHeight * y;
     }
 }

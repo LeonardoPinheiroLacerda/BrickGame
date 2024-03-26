@@ -83,41 +83,41 @@ export default class GameControls {
     }
 
     protected onOff(game: Game) {
-        game.getState().on = !game.getState().on;
+        game.state.on = !game.state.on;
         this.reset(game);
     }
     protected startPause(game: Game) {
-        if (game.getState().on) {
-            game.getState().start = !game.getState().start;
+        if (game.state.on) {
+            game.state.start = !game.state.start;
         }
-        if (game.getState().start) {
-            game.getState().running = true;
+        if (game.state.start) {
+            game.state.running = true;
         }
-        if (game.getState().gameOver) {
-            game.getState().gameOver = false;
+        if (game.state.gameOver) {
+            game.state.gameOver = false;
             this.reset(game);
         }
     }
     protected sound(game: Game) {
-        game.getGameSound().toogleMute();
+        game.gameSound.toogleMute();
     }
     protected reset(game: Game) {
-        game.getState().gameOver = false;
-        game.getState().start = false;
-        game.getState().running = false;
-        game.getGameSound().mute = false;
-        game.getGameSound().stopAll();
+        game.state.gameOver = false;
+        game.state.start = false;
+        game.state.running = false;
+        game.gameSound.mute = false;
+        game.gameSound.stopAll();
         game.resetGrid();
 
         game.reset();
     }
     protected exit(game: Game) {
-        if (game.getState().on) {
+        if (game.state.on) {
             game.changeGame('engine/menu', 'GameMenu');
         }
     }
     protected enableColor(game: Game) {
-        game.getState().colorEnabled = !game.getState().colorEnabled;
+        game.state.colorEnabled = !game.state.colorEnabled;
     }
 
     protected up(game: Game) {
@@ -138,73 +138,73 @@ export default class GameControls {
     }
 
     pressOnOff(game: Game) {
-        game.getGameControls().beforeOnOff(game);
-        game.getGameControls().onOff(game);
-        game.getGameControls().afterOnOff(game);
+        game.gameControls.beforeOnOff(game);
+        game.gameControls.onOff(game);
+        game.gameControls.afterOnOff(game);
     }
     pressStartPause(game: Game) {
-        if (!game.getState().on) return;
-        game.getGameControls().beforeStartPause(game);
-        game.getGameControls().startPause(game);
-        game.getGameControls().afterStartPause(game);
+        if (!game.state.on) return;
+        game.gameControls.beforeStartPause(game);
+        game.gameControls.startPause(game);
+        game.gameControls.afterStartPause(game);
     }
     pressSound(game: Game) {
-        if (!game.getState().on) return;
-        game.getGameControls().beforeSound(game);
-        game.getGameControls().sound(game);
-        game.getGameControls().afterSound(game);
+        if (!game.state.on) return;
+        game.gameControls.beforeSound(game);
+        game.gameControls.sound(game);
+        game.gameControls.afterSound(game);
     }
     pressReset(game: Game) {
-        if (!game.getState().on) return;
-        game.getGameControls().beforeReset(game);
-        game.getGameControls().reset(game);
-        game.getGameControls().afterReset(game);
+        if (!game.state.on) return;
+        game.gameControls.beforeReset(game);
+        game.gameControls.reset(game);
+        game.gameControls.afterReset(game);
     }
     pressExit(game: Game) {
-        if (!game.getState().on) return;
-        game.getGameControls().beforeExit(game);
-        game.getGameControls().exit(game);
-        game.getGameControls().afterExit(game);
+        if (!game.state.on) return;
+        game.gameControls.beforeExit(game);
+        game.gameControls.exit(game);
+        game.gameControls.afterExit(game);
     }
     pressEnableColor(game: Game) {
-        if (!game.getState().on) return;
-        game.getGameControls().beforeEnableColor(game);
-        game.getGameControls().enableColor(game);
-        game.getGameControls().afterEnableColor(game);
+        if (!game.state.on) return;
+        game.gameControls.beforeEnableColor(game);
+        game.gameControls.enableColor(game);
+        game.gameControls.afterEnableColor(game);
     }
     pressUp(game: Game) {
-        if (!game.getState().on) return;
-        game.getGameControls().beforeUp(game);
-        game.getGameControls().up(game);
-        game.getGameControls().afterUp(game);
+        if (!game.state.on) return;
+        game.gameControls.beforeUp(game);
+        game.gameControls.up(game);
+        game.gameControls.afterUp(game);
     }
     pressDown(game: Game) {
-        if (!game.getState().on) return;
-        game.getGameControls().beforeDown(game);
-        game.getGameControls().down(game);
-        game.getGameControls().afterDown(game);
+        if (!game.state.on) return;
+        game.gameControls.beforeDown(game);
+        game.gameControls.down(game);
+        game.gameControls.afterDown(game);
     }
     pressRight(game: Game) {
-        if (!game.getState().on) return;
-        game.getGameControls().beforeRight(game);
-        game.getGameControls().right(game);
-        game.getGameControls().afterRight(game);
+        if (!game.state.on) return;
+        game.gameControls.beforeRight(game);
+        game.gameControls.right(game);
+        game.gameControls.afterRight(game);
     }
     pressLeft(game: Game) {
-        if (!game.getState().on) return;
-        game.getGameControls().beforeLeft(game);
-        game.getGameControls().left(game);
-        game.getGameControls().afterLeft(game);
+        if (!game.state.on) return;
+        game.gameControls.beforeLeft(game);
+        game.gameControls.left(game);
+        game.gameControls.afterLeft(game);
     }
     pressAction(game: Game) {
-        if (!game.getState().on) return;
-        game.getGameControls().beforeAction(game);
-        game.getGameControls().action(game);
-        game.getGameControls().afterAction(game);
+        if (!game.state.on) return;
+        game.gameControls.beforeAction(game);
+        game.gameControls.action(game);
+        game.gameControls.afterAction(game);
     }
 
     bound(game: Game) {
-        game.getP().keyReleased = key => {
+        game.p.keyReleased = key => {
             const event: any = key;
 
             switch (event.key) {
@@ -235,7 +235,7 @@ export default class GameControls {
             }
         };
 
-        game.getP().keyTyped = key => {
+        game.p.keyTyped = key => {
             const event: any = key;
 
             switch (event.key) {
@@ -306,8 +306,8 @@ export default class GameControls {
     }
 
     unbound(game: Game) {
-        game.getP().keyPressed = () => {};
-        game.getP().keyTyped = () => {};
-        game.getP().keyReleased = () => {};
+        game.p.keyPressed = () => {};
+        game.p.keyTyped = () => {};
+        game.p.keyReleased = () => {};
     }
 }

@@ -57,7 +57,7 @@ export default class Piece {
             for (let i = 0; i < tmpParts.length; i++) {
                 const { x, y } = tmpParts[i];
 
-                if (game.getGrid()[y][x].value !== 0 && game.getGrid()[y][x].value !== this.id) {
+                if (game.grid[y][x].value !== 0 && game.grid[y][x].value !== this.id) {
                     canMove = false;
                     break;
                 }
@@ -68,13 +68,13 @@ export default class Piece {
                 this.centerPoint.y -= vector.y;
             } else {
                 this.parts.forEach(({ y, x }) => {
-                    game.getGrid()[y][x] = game.getGameUtils().emptyCell();
+                    game.grid[y][x] = game.gameUtils.emptyCell();
                 });
 
                 this.parts = tmpParts;
 
                 this.parts.forEach(({ y, x }) => {
-                    game.getGrid()[y][x] = { color: this.color, value: this.id };
+                    game.grid[y][x] = { color: this.color, value: this.id };
                 });
             }
 
@@ -95,7 +95,7 @@ export default class Piece {
 
         try {
             for (let i = 0; i < tmpParts.length; i++) {
-                const cell = game.getGrid()[tmpParts[i].y][tmpParts[i].x];
+                const cell = game.grid[tmpParts[i].y][tmpParts[i].x];
                 if (cell.value != 0 && cell.value != this.id) {
                     canRotate = false;
                     break;
@@ -108,10 +108,10 @@ export default class Piece {
         if (!canRotate) {
             this.state = this.state === 0 ? this.maxState : this.state - 1;
         } else {
-            game.getGrid().forEach(row => {
+            game.grid.forEach(row => {
                 row.forEach(col => {
                     if (col.value === this.id) {
-                        const { color, value } = game.getGameUtils().emptyCell();
+                        const { color, value } = game.gameUtils.emptyCell();
                         col.color = color;
                         col.value = value;
                     }
