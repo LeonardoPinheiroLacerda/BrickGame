@@ -79,6 +79,7 @@ body {
     .btn {
         width: var(--button-size-mobile) !important;
         height: var(--button-size-mobile) !important;
+        margin: var(--button-size-mobile-spacing) !important;
     }
 
     .lg-btn {
