@@ -192,22 +192,31 @@ body {
     align-items: center;
 }
 
-#frame p {
+#frame div p {
     position: absolute;
     top: calc(var(--height) * -0.015);
     left: 27.5%;
 
     width: 45%;
     height: calc(var(--height) * 0.03);
+
+    border: 1px solid black;
+
+    background-color: var(--main-color);
+    padding-right: calc(var(--width) * 0.01);
+    padding-left: calc(var(--width) * 0.01);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#frame p {
     text-align: center;
 
     font-family: 'retro-gamming';
     font-weight: bold;
     font-size: calc(var(--height) * 0.03);
-
-    background-color: var(--main-color);
-    padding-right: calc(var(--width) * 0.01);
-    padding-left: calc(var(--width) * 0.01);
 
     text-shadow:
         calc(var(--width) * -0.003) calc(var(--width) * 0.003) 0 var(--color-shadow),
