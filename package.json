@@ -1,6 +1,6 @@
 {
   "name": "brick-game",
-  "version": "0.5.5",
+  "version": "0.5.8",
   "description": "Brick game simulator.",
   "scripts": {
     "start": "npm run docs && webpack serve --open",

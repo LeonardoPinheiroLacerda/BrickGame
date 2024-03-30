@@ -33,8 +33,7 @@ body {
 
 @media only screen and (max-width: 600px) {
     #source-code,
-    #controls,
-    #version {
+    #controls {
         display: none;
     }
 
@@ -77,6 +76,7 @@ body {
     .btn {
         width: var(--button-size-mobile) !important;
         height: var(--button-size-mobile) !important;
+        margin: var(--button-size-mobile-spacing) !important;
     }
 
     .lg-btn {

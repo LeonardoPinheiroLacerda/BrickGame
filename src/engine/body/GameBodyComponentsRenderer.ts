@@ -61,9 +61,11 @@ export default class BodyElements {
         root.style.setProperty('--button-size', `${this.width * 0.18}px`);
         root.style.setProperty('--lg-button-size', `${this.width * 0.25}px`);
 
-        root.style.setProperty('--sm-button-size-mobile', `${this.width * 0.09}px`);
-        root.style.setProperty('--button-size-mobile', `${this.width * 0.21}px`);
-        root.style.setProperty('--lg-button-size-mobile', `${this.width * 0.3}px`);
+        root.style.setProperty('--sm-button-size-mobile', `${this.width * 0.11}px`);
+        root.style.setProperty('--button-size-mobile', `${this.width * 0.23}px`);
+        root.style.setProperty('--lg-button-size-mobile', `${this.width * 0.32}px`);
+
+        root.style.setProperty('--button-size-mobile-spacing', `${this.width * 0.015}px`);
 
         root.style.setProperty('--button-border', `${this.width * 0.0045}px solid black`);
         root.style.setProperty('--button-animation-duration', `0.15s`);
@@ -74,19 +76,19 @@ export default class BodyElements {
         container.parent(PARENT_SELECTOR);
         container.id('container');
 
+        if (this.parent.clientWidth <= 600) {
+            this.width = this.parent.clientWidth;
+            this.height = this.parent.clientHeight;
+
+            return container;
+        }
+
         let percentage = 100;
 
         do {
             this.width = this.parent.clientWidth * (percentage / 100);
 
-            if (this.width <= 300) {
-                this.width *= 1.25;
-            } else if (this.width <= 500) {
-                this.width *= 1.1;
-            }
-
             this.height = this.width * BODY_HEIGHT_WIDTH_MULTIPLIER;
-
             percentage -= 1;
         } while (this.height * 1.05 > this.parent.clientHeight);
         //TODO: encontrar uma forma melhor de fazer isso
@@ -134,6 +136,14 @@ export default class BodyElements {
         canvas.parent(container);
         canvas.id('brick-game-canvas');
 
+        //         alert(`body-width: ${document.body.clientWidth}
+        // body-height: ${document.body.clientHeight}
+        // container-width: ${this.width}
+        // container-height: ${this.height}
+        // canvas-width: ${this.canvasWidth}
+        // canvas-height: ${this.canvasHeight}
+        // pixel-ratio: ${window.devicePixelRatio}`);
+
         return { canvasWidth: this.canvasWidth, canvasHeight: this.canvasHeight };
     }
 
@@ -142,8 +152,11 @@ export default class BodyElements {
         frame.parent(container);
         frame.id('frame');
 
+        const div = this.p.createDiv();
+        div.parent(frame);
+
         const p = this.p.createP('Brick Game');
-        p.parent(frame);
+        p.parent(div);
 
         return frame;
     }

@@ -23,7 +23,7 @@ export default class GameScore {
         this.score = 0;
     }
     resetLevel() {
-        this.level = 0;
+        this.level = 1;
     }
 
     incrementScore(value: number): void {
@@ -38,8 +38,8 @@ export default class GameScore {
         }
     }
 
-    setKey(value: string):void{
-        this.key = value
+    setKey(value: string): void {
+        this.key = value;
     }
 
     public get score(): number {
