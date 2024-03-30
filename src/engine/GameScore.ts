@@ -21,6 +21,7 @@ export default class GameScore {
 
     resetScore() {
         this.score = 0;
+        this.updateHiScore();
     }
     resetLevel() {
         this.level = 1;
