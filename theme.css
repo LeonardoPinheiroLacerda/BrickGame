@@ -194,18 +194,18 @@ body {
 
 #frame p {
     position: absolute;
-    top: calc(var(--width) * -0.035);
+    top: calc(var(--height) * -0.015);
     left: 27.5%;
 
     width: 45%;
-    height: auto;
+    height: calc(var(--height) * 0.03);
     text-align: center;
 
     border: 1px black solid;
 
     font-family: 'retro-gamming';
     font-weight: bold;
-    font-size: calc(var(--width) * 0.07);
+    font-size: calc(var(--height) * 0.03);
 
     background-color: var(--main-color);
     padding-right: calc(var(--width) * 0.01);
