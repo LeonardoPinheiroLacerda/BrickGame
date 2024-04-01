@@ -61,11 +61,17 @@ export default class BodyElements {
         root.style.setProperty('--button-size', `${this.width * 0.18}px`);
         root.style.setProperty('--lg-button-size', `${this.width * 0.25}px`);
 
-        root.style.setProperty('--sm-button-size-mobile', `${this.width * 0.11}px`);
-        root.style.setProperty('--button-size-mobile', `${this.width * 0.23}px`);
-        root.style.setProperty('--lg-button-size-mobile', `${this.width * 0.32}px`);
+        root.style.setProperty('--sm-button-size-mobile', `${this.width * 0.13}px`);
+        root.style.setProperty('--button-size-mobile', `${this.width * 0.26}px`);
+        root.style.setProperty('--lg-button-size-mobile', `${this.width * 0.35}px`);
 
-        root.style.setProperty('--button-size-mobile-spacing', `${this.width * 0.015}px`);
+        root.style.setProperty('--sm-button-size-mobile-font-size', `${this.width * 0.04}px`);
+        root.style.setProperty('--sm-button-size-mobile-line-height', `${this.width * 0.04}px`);
+
+        root.style.setProperty('--button-size-mobile-font-size', `${this.width * 0.05}px`);
+        root.style.setProperty('--lg-button-size-mobile-font-size', `${this.width * 0.055}px`);
+
+        root.style.setProperty('--button-size-mobile-spacing', `${this.width * 0.018}px`);
 
         root.style.setProperty('--button-border', `${this.width * 0.0045}px solid black`);
         root.style.setProperty('--button-animation-duration', `0.15s`);

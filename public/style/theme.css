@@ -77,11 +77,18 @@ body {
         width: var(--button-size-mobile) !important;
         height: var(--button-size-mobile) !important;
         margin: var(--button-size-mobile-spacing) !important;
+        font-size: var(--button-size-mobile-font-size) !important;
     }
 
     .lg-btn {
         width: var(--lg-button-size-mobile) !important;
         height: var(--lg-button-size-mobile) !important;
+        font-size: var(--lg-button-size-mobile-font-size) !important;
+    }
+
+    .sm-btn-p {
+        font-size: var(--sm-button-size-mobile-font-size) !important;
+        line-height: var(--sm-button-size-mobile-line-height) !important;
     }
 }
 
