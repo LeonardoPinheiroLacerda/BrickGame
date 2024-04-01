@@ -344,7 +344,7 @@ export default class Game {
 
         const obj = new gameClass(props);
 
-        obj.getGameControls().pressOnOff(obj);
+        obj.gameControls.pressOnOff(obj);
         this.body.bound(obj);
 
         this.p.draw = () => {
