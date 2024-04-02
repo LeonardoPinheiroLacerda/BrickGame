@@ -3,6 +3,7 @@ import Coordinates from '../../../interface/Coordinates';
 import Tetris from '../Tetris';
 import Vector from '../interfaces/Vector';
 import Cell from '../../../interface/Cell';
+import { GRID_X } from '../../../constants';
 
 export default class Piece {
     public parts: Coordinates[] = [];
@@ -14,7 +15,7 @@ export default class Piece {
     public state: number;
     public maxState: number;
 
-    protected centerPoint: Coordinates;
+    protected centerPoint: Coordinates = { y: 0, x: Math.floor(GRID_X / 2) };
     protected previewCenterPoint: Coordinates;
 
     constructor(id: number) {
@@ -128,5 +129,14 @@ export default class Piece {
         const min = Math.ceil(0);
         const max = Math.floor(this.maxState);
         return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+
+    getTopCoordinates(parts: Coordinates[]) {
+        while (parts.some(({ y }) => y < 0)) {
+            parts = parts.map(({ y, x }) => {
+                return { x, y: y + 1 };
+            });
+        }
+        return parts;
     }
 }

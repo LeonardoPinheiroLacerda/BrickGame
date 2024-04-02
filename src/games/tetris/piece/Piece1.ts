@@ -1,5 +1,4 @@
 import Piece from './Piece';
-import { GRID_X } from '../../../constants';
 import Coordinates from '../../../interface/Coordinates';
 import Color from '../../../enum/Color';
 
@@ -7,7 +6,6 @@ export default class Piece1 extends Piece {
     public maxState: number = 3;
     public state: number = this.getRandomState();
     public pieceId: number = 1;
-    protected centerPoint: Coordinates = this.state === 1 ? { y: 0, x: Math.floor(GRID_X / 2) } : { y: 1, x: Math.floor(GRID_X / 2) };
     protected previewCenterPoint: Coordinates = { y: 2, x: 2 };
 
     public color: Color = Color.PURPLE;
@@ -47,6 +45,6 @@ export default class Piece1 extends Piece {
                 break;
         }
 
-        return parts;
+        return this.getTopCoordinates(parts);
     }
 }

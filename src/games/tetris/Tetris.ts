@@ -22,9 +22,11 @@ export default class Tetris extends Game {
     private actualId: number = 1;
 
     private linesCompleted: number = 0;
-    private linesToLevelUp: number = 5;
+    private linesToLevelUp: number = 10;
 
-    protected _initialTickInterval: number = 30;
+    protected _initialTickInterval: number = 60;
+
+    private tickIntervalDecreaseOnLevelUp = 5;
 
     constructor(props: GameProps) {
         super(props);
@@ -84,7 +86,7 @@ export default class Tetris extends Game {
             this.gameSound.play(Sound.EXPLOSION);
         }
 
-        this.tickInterval = this.initialTickInterval - this.gameScore.level;
+        this.tickInterval = this.initialTickInterval - this.gameScore.level * this.tickIntervalDecreaseOnLevelUp;
     }
 
     protected async draw(): Promise<void> {
