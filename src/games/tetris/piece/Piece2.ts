@@ -22,28 +22,28 @@ export default class Piece2 extends Piece {
         const parts = [];
         switch (this.state) {
             case 0:
-                parts[0] = { x: centerPoint.x + 1, y: centerPoint.y - 1 };
-                parts[1] = { x: centerPoint.x + 1, y: centerPoint.y };
-                parts[2] = { x: centerPoint.x + 1, y: centerPoint.y + 1 };
-                parts[3] = { x: centerPoint.x, y: centerPoint.y + 1 };
+                parts[0] = { x: centerPoint.x - 1, y: centerPoint.y - 1 };
+                parts[1] = { x: centerPoint.x, y: centerPoint.y - 1 };
+                parts[2] = { x: centerPoint.x + 1, y: centerPoint.y - 1 };
+                parts[3] = { x: centerPoint.x + 1, y: centerPoint.y };
                 break;
             case 1:
-                parts[0] = { x: centerPoint.x - 1, y: centerPoint.y + 1 };
-                parts[1] = { x: centerPoint.x, y: centerPoint.y + 1 };
-                parts[2] = { x: centerPoint.x + 1, y: centerPoint.y + 1 };
-                parts[3] = { x: centerPoint.x - 1, y: centerPoint.y };
-                break;
-            case 2:
                 parts[0] = { x: centerPoint.x - 1, y: centerPoint.y - 1 };
                 parts[1] = { x: centerPoint.x - 1, y: centerPoint.y };
                 parts[2] = { x: centerPoint.x - 1, y: centerPoint.y + 1 };
                 parts[3] = { x: centerPoint.x, y: centerPoint.y - 1 };
                 break;
+            case 2:
+                parts[0] = { x: centerPoint.x - 1, y: centerPoint.y + 1 };
+                parts[1] = { x: centerPoint.x, y: centerPoint.y + 1 };
+                parts[2] = { x: centerPoint.x + 1, y: centerPoint.y + 1 };
+                parts[3] = { x: centerPoint.x - 1, y: centerPoint.y };
+                break;
             case 3:
-                parts[0] = { x: centerPoint.x - 1, y: centerPoint.y - 1 };
-                parts[1] = { x: centerPoint.x, y: centerPoint.y - 1 };
-                parts[2] = { x: centerPoint.x + 1, y: centerPoint.y - 1 };
-                parts[3] = { x: centerPoint.x + 1, y: centerPoint.y };
+                parts[0] = { x: centerPoint.x + 1, y: centerPoint.y - 1 };
+                parts[1] = { x: centerPoint.x + 1, y: centerPoint.y };
+                parts[2] = { x: centerPoint.x + 1, y: centerPoint.y + 1 };
+                parts[3] = { x: centerPoint.x, y: centerPoint.y + 1 };
                 break;
         }
 

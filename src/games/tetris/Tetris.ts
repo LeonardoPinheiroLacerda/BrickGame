@@ -22,9 +22,9 @@ export default class Tetris extends Game {
     private actualId: number = 1;
 
     private linesCompleted: number = 0;
-    private linesToLevelUp: number = 3;
+    private linesToLevelUp: number = 5;
 
-    protected _initialTickInterval: number = 25;
+    protected _initialTickInterval: number = 30;
 
     constructor(props: GameProps) {
         super(props);
