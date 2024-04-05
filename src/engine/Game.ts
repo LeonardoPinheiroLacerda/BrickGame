@@ -16,7 +16,7 @@ import {
 import Cell from '../interface/Cell';
 import Color from '../enum/Color';
 import Coordinates from '../interface/Coordinates';
-import GameState from '../interface/GameState';
+import GameState from '../engine/GameState';
 
 import GameBody from './body/GameBody';
 import GameControls from './GameControls';
@@ -42,13 +42,7 @@ export default class Game {
     private _grid: Cell[][];
     private _hudGrid: Cell[][];
 
-    private _state: GameState = {
-        on: false,
-        start: false,
-        gameOver: false,
-        colorEnabled: true,
-        running: false,
-    };
+    private _state: GameState = new GameState(this);
 
     private _cellSize: number;
 
