@@ -173,31 +173,31 @@ export default class GameControls {
         game.gameControls.afterEnableColor(game);
     }
     pressUp(game: Game) {
-        if (!game.state.on || !game.state.start || game.state.running) return;
+        if (!game.state.on || !game.state.start || !game.state.running) return;
         game.gameControls.beforeUp(game);
         game.gameControls.up(game);
         game.gameControls.afterUp(game);
     }
     pressDown(game: Game) {
-        if (!game.state.on || !game.state.start || game.state.running) return;
+        if (!game.state.on || !game.state.start || !game.state.running) return;
         game.gameControls.beforeDown(game);
         game.gameControls.down(game);
         game.gameControls.afterDown(game);
     }
     pressRight(game: Game) {
-        if (!game.state.on || !game.state.start || game.state.running) return;
+        if (!game.state.on || !game.state.start || !game.state.running) return;
         game.gameControls.beforeRight(game);
         game.gameControls.right(game);
         game.gameControls.afterRight(game);
     }
     pressLeft(game: Game) {
-        if (!game.state.on || !game.state.start || game.state.running) return;
+        if (!game.state.on || !game.state.start || !game.state.running) return;
         game.gameControls.beforeLeft(game);
         game.gameControls.left(game);
         game.gameControls.afterLeft(game);
     }
     pressAction(game: Game) {
-        if (!game.state.on || !game.state.start || game.state.running) return;
+        if (!game.state.on || !game.state.start || !game.state.running) return;
         game.gameControls.beforeAction(game);
         game.gameControls.action(game);
         game.gameControls.afterAction(game);
