@@ -6,17 +6,19 @@ import Cell from '../../../interface/Cell';
 import { GRID_X } from '../../../constants';
 
 export default class Piece {
-    public parts: Coordinates[] = [];
-    public preview: Cell[][] = [];
-    public color: Color;
-    public id: number;
-    public pieceId: number;
+    protected _parts: Coordinates[] = [];
+    protected _preview: Cell[][] = [];
 
-    public state: number;
-    public maxState: number;
+    protected _color: Color;
 
-    protected centerPoint: Coordinates = { y: 0, x: Math.floor(GRID_X / 2) };
-    protected previewCenterPoint: Coordinates;
+    protected _id: number;
+    protected _pieceId: number;
+
+    protected _state: number;
+    protected _maxState: number;
+
+    private _centerPoint: Coordinates = { y: 0, x: Math.floor(GRID_X / 2) };
+    protected _previewCenterPoint: Coordinates;
 
     constructor(id: number) {
         this.id = id;
@@ -28,6 +30,8 @@ export default class Piece {
 
     generatePreview() {
         const coordinates = this.generateParts(this.previewCenterPoint);
+
+        console.log(this.previewCenterPoint);
 
         const preview: Cell[][] = [];
 
@@ -138,5 +142,61 @@ export default class Piece {
             });
         }
         return parts;
+    }
+
+    public get parts(): Coordinates[] {
+        return this._parts;
+    }
+    protected set parts(value: Coordinates[]) {
+        this._parts = value;
+    }
+    public get preview(): Cell[][] {
+        return this._preview;
+    }
+    protected set preview(value: Cell[][]) {
+        this._preview = value;
+    }
+    public get color(): Color {
+        return this._color;
+    }
+    protected set color(value: Color) {
+        this._color = value;
+    }
+    public get id(): number {
+        return this._id;
+    }
+    protected set id(value: number) {
+        this._id = value;
+    }
+    public get pieceId(): number {
+        return this._pieceId;
+    }
+    protected set pieceId(value: number) {
+        this._pieceId = value;
+    }
+
+    protected get state(): number {
+        return this._state;
+    }
+    protected set state(value: number) {
+        this._state = value;
+    }
+    protected get maxState(): number {
+        return this._maxState;
+    }
+    protected set maxState(value: number) {
+        this._maxState = value;
+    }
+    protected get centerPoint(): Coordinates {
+        return this._centerPoint;
+    }
+    protected set centerPoint(value: Coordinates) {
+        this._centerPoint = value;
+    }
+    protected get previewCenterPoint(): Coordinates {
+        return this._previewCenterPoint;
+    }
+    protected set previewCenterPoint(value: Coordinates) {
+        this._previewCenterPoint = value;
     }
 }

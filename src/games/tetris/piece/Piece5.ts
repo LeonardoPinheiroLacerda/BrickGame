@@ -3,12 +3,12 @@ import Coordinates from '../../../interface/Coordinates';
 import Color from '../../../enum/Color';
 
 export default class Piece5 extends Piece {
-    public maxState: number = 1;
-    public state: number = this.getRandomState();
-    public pieceId: number = 5;
-    protected previewCenterPoint: Coordinates = this.state === 0 ? { y: 2, x: 2 } : { y: 2, x: 2 };
+    protected _maxState: number = 1;
+    protected _state: number = this.getRandomState();
+    protected _pieceId: number = 5;
+    protected _previewCenterPoint: Coordinates = this.state === 0 ? { y: 2, x: 2 } : { y: 2, x: 2 };
 
-    public color: Color = Color.GREEN;
+    protected _color: Color = Color.GREEN;
 
     constructor(id: number) {
         super(id);

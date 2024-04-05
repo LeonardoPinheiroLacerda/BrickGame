@@ -17,16 +17,15 @@ import FontSize from '../../enum/FontSize';
 import FontAlign from '../../enum/FontAlign';
 
 export default class Tetris extends Game {
-    private next: Piece;
-    private current: Piece;
-    private actualId: number = 1;
+    private _next: Piece;
+    private _current: Piece;
+    private _actualId: number = 1;
 
-    private linesCompleted: number = 0;
-    private linesToLevelUp: number = 10;
+    private _linesCompleted: number = 0;
+    private _linesToLevelUp: number = 10;
 
     protected _initialTickInterval: number = 60;
-
-    private tickIntervalDecreaseOnLevelUp = 5;
+    private _tickIntervalDecreaseOnLevelUp = 5;
 
     constructor(props: GameProps) {
         super(props);
@@ -196,5 +195,42 @@ export default class Tetris extends Game {
                 this.gameScore.incrementLevel(levelsToIncrement);
             }
         }
+    }
+
+    private get next(): Piece {
+        return this._next;
+    }
+    private set next(value: Piece) {
+        this._next = value;
+    }
+    private get current(): Piece {
+        return this._current;
+    }
+    private set current(value: Piece) {
+        this._current = value;
+    }
+    private get actualId(): number {
+        return this._actualId;
+    }
+    private set actualId(value: number) {
+        this._actualId = value;
+    }
+    private get linesCompleted(): number {
+        return this._linesCompleted;
+    }
+    private set linesCompleted(value: number) {
+        this._linesCompleted = value;
+    }
+    private get linesToLevelUp(): number {
+        return this._linesToLevelUp;
+    }
+    private set linesToLevelUp(value: number) {
+        this._linesToLevelUp = value;
+    }
+    private get tickIntervalDecreaseOnLevelUp() {
+        return this._tickIntervalDecreaseOnLevelUp;
+    }
+    private set tickIntervalDecreaseOnLevelUp(value) {
+        this._tickIntervalDecreaseOnLevelUp = value;
     }
 }
