@@ -6,12 +6,12 @@ import Cell from '../../../interface/Cell';
 import { GRID_X } from '../../../constants';
 
 export default class Piece {
-    protected _parts: Coordinates[] = [];
-    protected _preview: Cell[][] = [];
+    private _parts: Coordinates[] = [];
+    private _preview: Cell[][] = [];
 
     protected _color: Color;
 
-    protected _id: number;
+    private _id: number;
     protected _pieceId: number;
 
     protected _state: number;
