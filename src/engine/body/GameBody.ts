@@ -49,6 +49,8 @@ export default class GameBody {
     }
 
     build() {
+        this.elements.defineColors();
+
         //Container
         const container = this.elements.createContainer();
 
@@ -76,7 +78,7 @@ export default class GameBody {
 
         this.actionBtn = this.elements.createBigButton(largeButtonContainer, 'Action');
 
-        this.elements.defineValues();
+        this.elements.defineSizes();
 
         return { canvasWidth, canvasHeight };
     }

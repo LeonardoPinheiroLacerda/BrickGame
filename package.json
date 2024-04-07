@@ -1,6 +1,6 @@
 {
   "name": "brick-game",
-  "version": "0.5.10",
+  "version": "0.5.11",
   "description": "Brick game simulator.",
   "scripts": {
     "start": "npm run docs && webpack serve --open",
@@ -41,6 +41,7 @@
     "prettier": "^3.2.4",
     "ts-loader": "^9.5.1",
     "typedoc": "^0.25.10",
+    "typedoc-material-theme": "^1.0.2",
     "typedoc-plugin-rename-defaults": "^0.7.0",
     "typescript": "^5.3.3",
     "webpack": "^5.90.0",
@@ -48,7 +49,7 @@
     "webpack-dev-server": "^4.15.1"
   },
   "dependencies": {
-    "p5": "^1.9.0",
-    "typedoc-material-theme": "^1.0.2"
+    "colord": "^2.9.3",
+    "p5": "^1.9.0"
   }
 }

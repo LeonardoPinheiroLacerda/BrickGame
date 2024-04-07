@@ -3,14 +3,14 @@ import {
     PARENT_SELECTOR,
     BODY_HEIGHT_WIDTH_MULTIPLIER,
     BODY_MAIN_COLOR,
-    BODY_SHADOW,
-    BODY_REFLECTION,
     BODY_BUTTON_COLOR,
-    BODY_BUTTON_REFLECTION,
     SHADOW_DISPERSION,
-    BODY_BUTTON_SHADOW,
+    MAIN_COLOR_QUERY_PARAM,
+    BUTTON_COLOR_QUERY_PARAM,
 } from '../../constants';
 import BodyProps from '../../interface/BodyProps';
+
+import { colord } from 'colord';
 
 /**
  *
@@ -35,18 +35,29 @@ export default class BodyElements {
         this.p = props.p;
     }
 
-    defineValues() {
+    async defineColors() {
         const root: HTMLElement = document.querySelector(':root');
 
-        root.style.setProperty('--color-shadow', BODY_SHADOW);
-        root.style.setProperty('--color-shadow-reflexion', BODY_REFLECTION);
+        const paramsString = window.location.href.substring(window.location.href.indexOf('?') + 1);
+        const searchParams = new URLSearchParams(paramsString);
+
+        const mainColor = searchParams.has(MAIN_COLOR_QUERY_PARAM) ? searchParams.get(MAIN_COLOR_QUERY_PARAM) : BODY_MAIN_COLOR;
+        const buttonColor = searchParams.has(BUTTON_COLOR_QUERY_PARAM) ? searchParams.get(BUTTON_COLOR_QUERY_PARAM) : BODY_BUTTON_COLOR;
+
+        root.style.setProperty('--main-color', mainColor);
+        root.style.setProperty('--button-color', buttonColor);
+
+        root.style.setProperty('--color-shadow', colord(mainColor).darken(0.15).toHex());
+        root.style.setProperty('--color-shadow-reflexion', colord(mainColor).lighten(0.15).toHex());
+
+        root.style.setProperty('--button-color-reflexion', colord(buttonColor).lighten(0.15).toHex());
+        root.style.setProperty('--button-color-shadow', colord(buttonColor).darken(0.15).toHex());
+    }
+
+    defineSizes() {
+        const root: HTMLElement = document.querySelector(':root');
+
         root.style.setProperty('--dispersion', SHADOW_DISPERSION);
-
-        root.style.setProperty('--main-color', BODY_MAIN_COLOR);
-
-        root.style.setProperty('--button-color', BODY_BUTTON_COLOR);
-        root.style.setProperty('--button-color-reflexion', BODY_BUTTON_REFLECTION);
-        root.style.setProperty('--button-color-shadow', BODY_BUTTON_SHADOW);
 
         root.style.setProperty('--width', `${this.width}px`);
         root.style.setProperty('--height', `${this.height}px`);

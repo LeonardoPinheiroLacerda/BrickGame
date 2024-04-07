@@ -4,14 +4,14 @@ export const FONT_COLOR = 'rgb(19, 26, 18)';
 export const FONT_TURNED_OFF_COLOR = 'rgb(161, 178, 160)';
 
 export const BODY_MAIN_COLOR = 'rgb(0, 68, 187)';
-export const BODY_SHADOW = 'rgb(1, 28, 74)';
-export const BODY_REFLECTION = 'rgb(3, 94, 255)';
-
 export const BODY_BUTTON_COLOR = 'rgb(247, 222, 57)';
-export const BODY_BUTTON_REFLECTION = 'rgb(250, 241, 185)';
-export const BODY_BUTTON_SHADOW = 'rgb(176, 170, 130)';
 
 export const SHADOW_DISPERSION = '3px';
+
+//Query params
+
+export const MAIN_COLOR_QUERY_PARAM = 'body-color';
+export const BUTTON_COLOR_QUERY_PARAM = 'button-color';
 
 //Size
 export const GRID_X = 11;
