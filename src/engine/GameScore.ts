@@ -5,6 +5,11 @@ export default class GameScore {
     private _maxLevel: number = 10;
     private _key: string;
 
+    constructor(score = 0, level = 1) {
+        this.score = score;
+        this.level = level;
+    }
+
     private getHiScoreFromLocalStorage(): number {
         return isNaN(parseInt(localStorage.getItem(this.key))) ? 0 : parseInt(localStorage.getItem(this.key));
     }

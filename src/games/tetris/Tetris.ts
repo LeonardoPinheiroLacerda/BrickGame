@@ -30,12 +30,59 @@ export default class Tetris extends Game {
     constructor(props: GameProps) {
         super(props);
 
+        this.askLastSession();
+
         this.gameScore.setKey('hiTetrisScore');
 
         this.gameControls = new TetrisControls();
         this.gameControls.bound(this);
 
         this.generateNext();
+    }
+
+    protected async saveSession(): Promise<void> {
+        super.saveSession();
+
+        localStorage.setItem('ACUTAL_ID', this.actualId.toString());
+        localStorage.setItem('LINES_COMPLETED', this.linesCompleted.toString());
+    }
+
+    protected async clearSession(): Promise<void> {
+        super.clearSession();
+
+        localStorage.removeItem('ACUTAL_ID');
+        localStorage.removeItem('LINES_COMPLETED');
+    }
+
+    protected checkSession(): boolean {
+        return super.checkSession() && JSON.parse(localStorage.getItem('ACUTAL_ID')) != null && JSON.parse(localStorage.getItem('LINES_COMPLETED')) != null;
+    }
+
+    protected loadSession(): void {
+        super.loadSession();
+
+        this.actualId = Number.parseInt(localStorage.getItem('ACUTAL_ID'));
+        this.linesCompleted = Number.parseInt(localStorage.getItem('LINES_COMPLETED'));
+
+        //Remove ultima peça
+        let biggestId = 0;
+
+        this.grid.forEach(row => {
+            row.forEach(column => {
+                if (column.value > biggestId) {
+                    biggestId = column.value;
+                }
+            });
+        });
+
+        this.grid.forEach(row => {
+            row.forEach(column => {
+                if (column.value === biggestId) {
+                    column.color = this.gameUtils.emptyCell().color;
+                    column.value = this.gameUtils.emptyCell().value;
+                }
+            });
+        });
     }
 
     reset() {

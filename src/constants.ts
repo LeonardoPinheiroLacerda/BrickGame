@@ -42,3 +42,8 @@ export const CELL_STROKE_WEIGHT = 0.075;
 //LocalStorage keys
 export const MUTED_KEY = 'MUTED';
 export const COLOR_ENABLED_KEY = 'COLOR_ENABLED';
+
+export const GRID_KEY = 'GRID';
+export const HUD_GRID_KEY = 'HUD_GRID';
+export const TICK_INTERVAL_KEY = 'TICK_INTERVAL';
+export const SCORE_KEY = 'SCORE';

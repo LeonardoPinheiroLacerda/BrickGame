@@ -107,7 +107,7 @@ export default class GameControls {
         game.state.running = false;
         //game.gameSound.mute = false;
         game.gameSound.stopAll();
-        game.resetGrid();
+        //game.resetGrid();
 
         game.reset();
     }

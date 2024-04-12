@@ -12,6 +12,10 @@ import {
     FONT_TURNED_OFF_COLOR,
     HUD_GRID_Y,
     HUD_GRID_X,
+    GRID_KEY,
+    HUD_GRID_KEY,
+    SCORE_KEY,
+    TICK_INTERVAL_KEY,
 } from '../constants';
 import Cell from '../interface/Cell';
 import Color from '../enum/Color';
@@ -42,7 +46,7 @@ export default class Game {
     private _grid: Cell[][];
     private _hudGrid: Cell[][];
 
-    private _state: GameState = new GameState(this);
+    private _state: GameState = new GameState();
 
     private _cellSize: number;
 
@@ -75,6 +79,52 @@ export default class Game {
 
         //Define fonte padrão
         this.gameTexts.defineFont();
+    }
+
+    protected async askLastSession(): Promise<void> {
+        if (this.checkSession()) {
+            if (confirm('Do you want to continue your last game?')) {
+                this.loadSession();
+            } else {
+                this.clearSession();
+            }
+        }
+    }
+
+    protected async saveSession(): Promise<void> {
+        localStorage.setItem(GRID_KEY, JSON.stringify(this.grid));
+        localStorage.setItem(HUD_GRID_KEY, JSON.stringify(this.hudGrid));
+        localStorage.setItem(SCORE_KEY, JSON.stringify(this.gameScore));
+        localStorage.setItem(TICK_INTERVAL_KEY, JSON.stringify(this.tickInterval));
+    }
+
+    protected async clearSession(): Promise<void> {
+        localStorage.removeItem(GRID_KEY);
+        localStorage.removeItem(HUD_GRID_KEY);
+        localStorage.removeItem(SCORE_KEY);
+        localStorage.removeItem(TICK_INTERVAL_KEY);
+    }
+
+    protected checkSession(): boolean {
+        return (
+            JSON.parse(localStorage.getItem(GRID_KEY)) != null &&
+            JSON.parse(localStorage.getItem(HUD_GRID_KEY)) != null &&
+            JSON.parse(localStorage.getItem(SCORE_KEY)) != null &&
+            JSON.parse(localStorage.getItem(TICK_INTERVAL_KEY)) != null
+        );
+    }
+
+    protected loadSession(): void {
+        const tmpScore: any = JSON.parse(localStorage.getItem(SCORE_KEY));
+
+        this.state.on = true;
+        this.state.start = true;
+        this.state.running = true;
+
+        this.grid = JSON.parse(localStorage.getItem(GRID_KEY));
+        this.hudGrid = JSON.parse(localStorage.getItem(HUD_GRID_KEY));
+        this.gameScore = new GameScore(tmpScore._score, tmpScore._level);
+        this.tickInterval = JSON.parse(localStorage.getItem(TICK_INTERVAL_KEY));
     }
 
     async drawDisplay(): Promise<void> {
@@ -212,10 +262,13 @@ export default class Game {
         }
 
         //Draw cell
-        this.drawCellElement({ w, h, posX, posY, color });
+        this.drawCellElement(
+            { w, h, posX, posY, color },
+            // , this.grid[y][x]
+        );
     }
 
-    private async drawCellElement(cellElement: CellElement): Promise<void> {
+    private async drawCellElement(cellElement: CellElement, value: Cell = null): Promise<void> {
         const { p } = this;
 
         const { w, h, posX, posY, color } = cellElement;
@@ -237,6 +290,15 @@ export default class Game {
         p.rect(posX + innerMargin, posY + innerMargin, w - innerMargin * 2, h - innerMargin * 2);
 
         p.pop();
+
+        if (value) {
+            p.push();
+            this.gameTexts.setTextAlign(FontAlign.CENTER);
+            this.gameTexts.setTextSize(FontSize.EXTRA_SMALL);
+            this.p.stroke('white');
+            p.text(value.value, posX + w / 2, posY + h / 2 + margin * 3);
+            p.pop();
+        }
     }
 
     async drawFrame(): Promise<void> {
@@ -247,6 +309,8 @@ export default class Game {
         if (!this.state.on) return;
 
         if (!this.state.gameOver && this.state.start && this.state.running) {
+            this.saveSession();
+
             if (this.p.frameCount % this.tickInterval === 0) {
                 this.verifyGrids();
                 this.processTick();
@@ -309,6 +373,8 @@ export default class Game {
         this.gameScore.updateHiScore();
         this.state.gameOver = true;
         this.state.running = false;
+        this.clearSession();
+        this.reset();
     }
 
     getRelativeValue(size: number): number {
@@ -324,6 +390,7 @@ export default class Game {
         this.gameControls.unbound(this);
         this.body.unbound();
         this.gameSound.stopAll();
+        this.clearSession();
     }
 
     private bound(nameSpace: string, className: string): void {
@@ -359,9 +426,11 @@ export default class Game {
     protected processFrame(): void {}
     protected async draw(): Promise<void> {}
     reset(): void {
-        this.gameScore.resetLevel();
-        this.gameScore.resetScore();
-        this.resetGrid();
+        if (!this.checkSession()) {
+            this.gameScore.resetLevel();
+            this.gameScore.resetScore();
+            this.resetGrid();
+        }
     }
 
     public get canvasWidth(): number {
