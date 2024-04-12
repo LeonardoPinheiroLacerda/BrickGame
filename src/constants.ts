@@ -38,3 +38,7 @@ export const PARENT_SELECTOR = '#brick-game';
 export const CELL_OUTER_MARGIN = 0.1;
 export const CELL_INNER_MARGIN = 0.3;
 export const CELL_STROKE_WEIGHT = 0.075;
+
+//LocalStorage keys
+export const MUTED_KEY = 'MUTED';
+export const COLOR_ENABLED_KEY = 'COLOR_ENABLED';

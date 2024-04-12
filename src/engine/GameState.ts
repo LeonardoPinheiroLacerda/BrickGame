@@ -1,4 +1,5 @@
 import Game from './Game';
+import { COLOR_ENABLED_KEY } from './../constants';
 
 export default class GameState {
     protected game: Game;
@@ -8,7 +9,8 @@ export default class GameState {
     private _gameOver: boolean = false;
     private _running: boolean = false;
 
-    private _colorEnabled: boolean = true;
+    private _colorEnabled: boolean =
+        JSON.parse(localStorage.getItem(COLOR_ENABLED_KEY)) != undefined ? JSON.parse(localStorage.getItem(COLOR_ENABLED_KEY)) : true;
 
     constructor(game: Game) {
         this.game = game;
@@ -33,6 +35,7 @@ export default class GameState {
     }
     public set colorEnabled(value: boolean) {
         this._colorEnabled = value;
+        localStorage.setItem(COLOR_ENABLED_KEY, JSON.stringify(value));
     }
 
     public get gameOver(): boolean {

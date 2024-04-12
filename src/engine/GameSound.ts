@@ -1,7 +1,8 @@
 import Sound from '../enum/Sound';
+import { MUTED_KEY } from './../constants';
 
 export default class GameSound {
-    private _mute: boolean = false;
+    private _mute: boolean = JSON.parse(localStorage.getItem(MUTED_KEY)) != undefined ? JSON.parse(localStorage.getItem(MUTED_KEY)) : false;
     private _volume: number = 0.025;
 
     private activeSounds: HTMLAudioElement[] = [];
@@ -93,6 +94,7 @@ export default class GameSound {
     public set mute(value: boolean) {
         if (value) this.stopAll();
         this._mute = value;
+        localStorage.setItem(MUTED_KEY, JSON.stringify(value));
     }
 
     public get volume(): number {
