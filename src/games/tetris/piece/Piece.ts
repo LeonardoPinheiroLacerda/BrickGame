@@ -31,8 +31,6 @@ export default class Piece {
     generatePreview() {
         const coordinates = this.generateParts(this.previewCenterPoint);
 
-        console.log(this.previewCenterPoint);
-
         const preview: Cell[][] = [];
 
         for (let y = 0; y < 4; y++) {

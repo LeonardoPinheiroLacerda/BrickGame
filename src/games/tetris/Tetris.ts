@@ -161,7 +161,6 @@ export default class Tetris extends Game {
         grid.forEach(row => {
             if (row.filter(col => col.value === 0).length === 0) {
                 linesCompletedList.push(row);
-                console.log(row);
             }
         });
 
