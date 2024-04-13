@@ -415,6 +415,8 @@ export default class Game {
     }
 
     private bound(nameSpace: string, className: string): void {
+        this.clearSession();
+
         const gameClass = require(`../${nameSpace}/${className}`).default;
 
         const props: GameProps = {
