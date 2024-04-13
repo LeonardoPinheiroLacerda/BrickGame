@@ -30,14 +30,14 @@ export default class Tetris extends Game {
     constructor(props: GameProps) {
         super(props);
 
-        this.gameScore.setKey('hiTetrisScore');
+        this.askLastSession().then(() => {
+            this.gameScore.setKey('hiTetrisScore');
 
-        this.askLastSession();
+            this.gameControls = new TetrisControls();
+            this.gameControls.bound(this);
 
-        this.gameControls = new TetrisControls();
-        this.gameControls.bound(this);
-
-        this.generateNext();
+            this.generateNext();
+        });
     }
 
     protected async saveSession(): Promise<void> {

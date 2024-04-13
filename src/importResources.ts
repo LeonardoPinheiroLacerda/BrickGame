@@ -4,6 +4,7 @@ import '../public/style/modal.css';
 import '../public/style/splash.css';
 import '../public/style/buttons.css';
 import '../public/style/sourceCodeAndCommands.css';
+import '../public/style/sessionModal.css';
 
 import '../public/sounds/sound_01.wav';
 import '../public/sounds/sound_02.wav';

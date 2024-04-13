@@ -33,6 +33,9 @@ export const EXTRA_LARGE_FONT_SIZE = 0.15;
 
 //QuerySelectors
 export const PARENT_SELECTOR = '#brick-game';
+export const SESSION_SELECTION = '#session-modal';
+export const SESSION_CONTINUE_YES = '#session-modal-yes';
+export const SESSION_CONTINUE_NO = '#session-modal-no';
 
 //Cell
 export const CELL_OUTER_MARGIN = 0.1;

@@ -16,6 +16,9 @@ import {
     HUD_GRID_KEY,
     SCORE_KEY,
     TICK_INTERVAL_KEY,
+    SESSION_SELECTION,
+    SESSION_CONTINUE_YES,
+    SESSION_CONTINUE_NO,
 } from '../constants';
 import Cell from '../interface/Cell';
 import Color from '../enum/Color';
@@ -81,14 +84,32 @@ export default class Game {
         this.gameTexts.defineFont();
     }
 
-    protected async askLastSession(): Promise<void> {
-        if (this.checkSession()) {
-            if (confirm('Do you want to continue your last game?')) {
-                this.loadSession();
-            } else {
-                this.clearSession();
+    protected askLastSession(): Promise<boolean> {
+        return new Promise(resolve => {
+            if (this.checkSession()) {
+                this.p.noLoop();
+                const modal = document.querySelector(SESSION_SELECTION);
+                const yesButton = document.querySelector(SESSION_CONTINUE_YES);
+                const noButton = document.querySelector(SESSION_CONTINUE_NO);
+                modal.classList.remove('invisible');
+                const yes = () => {
+                    this.loadSession();
+                    modal.classList.add('invisible');
+                    this.p.loop();
+                    yesButton.removeEventListener('click', yes);
+                    resolve(true);
+                };
+                const no = () => {
+                    this.clearSession();
+                    modal.classList.add('invisible');
+                    this.p.loop();
+                    noButton.removeEventListener('click', no);
+                    resolve(false);
+                };
+                yesButton.addEventListener('click', yes);
+                noButton.addEventListener('click', no);
             }
-        }
+        });
     }
 
     protected async saveSession(): Promise<void> {
