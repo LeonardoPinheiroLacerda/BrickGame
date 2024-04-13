@@ -8,6 +8,7 @@ export default class GameScore {
     constructor(score = 0, level = 1) {
         this.score = score;
         this.level = level;
+        this.updateHiScore();
     }
 
     private getHiScoreFromLocalStorage(): number {
