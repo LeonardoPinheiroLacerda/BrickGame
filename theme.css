@@ -771,6 +771,10 @@ body {
     background-color: rgb(172, 189, 173);
     display: flex;
     align-items: center;
+
+    box-shadow:
+        calc(var(--width) * -0.005) calc(var(--width) * 0.005) var(--dispersion) var(--color-shadow),
+        calc(var(--width) * 0.005) calc(var(--width) * -0.005) var(--dispersion) var(--color-shadow-reflexion);
 }
 
 #session-modal-display > p {
@@ -838,6 +842,12 @@ body {
 
     #session-modal-display {
         background-size: 7.5% !important;
+    }
+
+    #session-modal-display {
+        box-shadow:
+            calc(var(--width) * -0.01) calc(var(--width) * 0.01) var(--dispersion) var(--color-shadow),
+            calc(var(--width) * 0.01) calc(var(--width) * -0.01) var(--dispersion) var(--color-shadow-reflexion);
     }
 
     #session-modal > div {
