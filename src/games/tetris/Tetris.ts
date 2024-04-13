@@ -30,9 +30,9 @@ export default class Tetris extends Game {
     constructor(props: GameProps) {
         super(props);
 
-        this.askLastSession();
-
         this.gameScore.setKey('hiTetrisScore');
+
+        this.askLastSession();
 
         this.gameControls = new TetrisControls();
         this.gameControls.bound(this);
