@@ -108,6 +108,8 @@ export default class Game {
                 };
                 yesButton.addEventListener('click', yes);
                 noButton.addEventListener('click', no);
+            } else {
+                resolve(true);
             }
         });
     }
