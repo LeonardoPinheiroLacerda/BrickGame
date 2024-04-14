@@ -12,13 +12,6 @@ import {
     FONT_TURNED_OFF_COLOR,
     HUD_GRID_Y,
     HUD_GRID_X,
-    GRID_KEY,
-    HUD_GRID_KEY,
-    SCORE_KEY,
-    TICK_INTERVAL_KEY,
-    SESSION_SELECTION,
-    SESSION_CONTINUE_YES,
-    SESSION_CONTINUE_NO,
 } from '../constants';
 import Cell from '../interface/Cell';
 import Color from '../enum/Color';
@@ -36,6 +29,7 @@ import GameCoordinates from './GameCoordinates';
 import GameTexts from './GameTexts';
 import GameUtils from './GameUtils';
 import GameScore from './GameScore';
+import GameSession from './GameSession';
 
 export default class Game {
     private _p: P5;
@@ -63,6 +57,8 @@ export default class Game {
     private _gameTexts: GameTexts = new GameTexts(this);
     private _gameUtils: GameUtils = new GameUtils();
     private _gameScore: GameScore = new GameScore();
+
+    protected _gameSession: GameSession<any>;
     protected _gameControls: GameControls = new GameControls();
 
     constructor(props: GameProps) {
@@ -82,72 +78,6 @@ export default class Game {
 
         //Define fonte padrão
         this.gameTexts.defineFont();
-    }
-
-    protected askLastSession(): Promise<boolean> {
-        return new Promise(resolve => {
-            if (this.checkSession()) {
-                this.p.noLoop();
-                const modal = document.querySelector(SESSION_SELECTION);
-                const yesButton = document.querySelector(SESSION_CONTINUE_YES);
-                const noButton = document.querySelector(SESSION_CONTINUE_NO);
-                modal.classList.remove('invisible');
-                const yes = () => {
-                    this.loadSession();
-                    modal.classList.add('invisible');
-                    this.p.loop();
-                    yesButton.removeEventListener('click', yes);
-                    resolve(true);
-                };
-                const no = () => {
-                    this.clearSession();
-                    modal.classList.add('invisible');
-                    this.p.loop();
-                    noButton.removeEventListener('click', no);
-                    resolve(false);
-                };
-                yesButton.addEventListener('click', yes);
-                noButton.addEventListener('click', no);
-            } else {
-                resolve(true);
-            }
-        });
-    }
-
-    protected async saveSession(): Promise<void> {
-        localStorage.setItem(GRID_KEY, JSON.stringify(this.grid));
-        localStorage.setItem(HUD_GRID_KEY, JSON.stringify(this.hudGrid));
-        localStorage.setItem(SCORE_KEY, JSON.stringify(this.gameScore));
-        localStorage.setItem(TICK_INTERVAL_KEY, JSON.stringify(this.tickInterval));
-    }
-
-    protected async clearSession(): Promise<void> {
-        localStorage.removeItem(GRID_KEY);
-        localStorage.removeItem(HUD_GRID_KEY);
-        localStorage.removeItem(SCORE_KEY);
-        localStorage.removeItem(TICK_INTERVAL_KEY);
-    }
-
-    protected checkSession(): boolean {
-        return (
-            JSON.parse(localStorage.getItem(GRID_KEY)) != null &&
-            JSON.parse(localStorage.getItem(HUD_GRID_KEY)) != null &&
-            JSON.parse(localStorage.getItem(SCORE_KEY)) != null &&
-            JSON.parse(localStorage.getItem(TICK_INTERVAL_KEY)) != null
-        );
-    }
-
-    protected loadSession(): void {
-        const tmpScore: any = JSON.parse(localStorage.getItem(SCORE_KEY));
-
-        this.state.on = true;
-        this.state.start = true;
-        this.state.running = true;
-
-        this.grid = JSON.parse(localStorage.getItem(GRID_KEY));
-        this.hudGrid = JSON.parse(localStorage.getItem(HUD_GRID_KEY));
-        this.gameScore = new GameScore(tmpScore._score, tmpScore._level);
-        this.tickInterval = JSON.parse(localStorage.getItem(TICK_INTERVAL_KEY));
     }
 
     async drawDisplay(): Promise<void> {
@@ -332,7 +262,7 @@ export default class Game {
         if (!this.state.on) return;
 
         if (!this.state.gameOver && this.state.start && this.state.running) {
-            this.saveSession();
+            this.gameSession?.saveSession();
 
             if (this.p.frameCount % this.tickInterval === 0) {
                 this.verifyGrids();
@@ -396,7 +326,7 @@ export default class Game {
         this.gameScore.updateHiScore();
         this.state.gameOver = true;
         this.state.running = false;
-        this.clearSession();
+        this.gameSession?.clearSession();
         this.reset();
     }
 
@@ -413,12 +343,9 @@ export default class Game {
         this.gameControls.unbound(this);
         this.body.unbound();
         this.gameSound.stopAll();
-        this.clearSession();
     }
 
     private bound(nameSpace: string, className: string): void {
-        this.clearSession();
-
         const gameClass = require(`../${nameSpace}/${className}`).default;
 
         const props: GameProps = {
@@ -451,7 +378,7 @@ export default class Game {
     protected processFrame(): void {}
     protected async draw(): Promise<void> {}
     reset(): void {
-        if (!this.checkSession()) {
+        if (!this.gameSession?.checkSession()) {
             this.gameScore.resetLevel();
             this.gameScore.resetScore();
             this.resetGrid();
@@ -496,14 +423,14 @@ export default class Game {
     public get grid(): Cell[][] {
         return this._grid;
     }
-    protected set grid(value: Cell[][]) {
+    public set grid(value: Cell[][]) {
         this._grid = value;
     }
 
     public get hudGrid(): Cell[][] {
         return this._hudGrid;
     }
-    protected set hudGrid(value: Cell[][]) {
+    public set hudGrid(value: Cell[][]) {
         this._hudGrid = value;
     }
 
@@ -538,7 +465,7 @@ export default class Game {
     public get tickInterval(): number {
         return this._tickInterval;
     }
-    protected set tickInterval(value: number) {
+    public set tickInterval(value: number) {
         this._tickInterval = value;
     }
 
@@ -573,8 +500,15 @@ export default class Game {
     public get gameScore(): GameScore {
         return this._gameScore;
     }
-    private set gameScore(value: GameScore) {
+    public set gameScore(value: GameScore) {
         this._gameScore = value;
+    }
+
+    protected get gameSession(): GameSession<Game> {
+        return this._gameSession;
+    }
+    protected set gameSession(value: GameSession<Game>) {
+        this._gameSession = value;
     }
 
     public get gameControls(): GameControls {

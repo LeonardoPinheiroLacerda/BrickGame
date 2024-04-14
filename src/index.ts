@@ -5,7 +5,7 @@ import GameBody from './engine/body/GameBody';
 import Game from './engine/Game';
 
 import './importResources';
-import Tetris from './games/tetris/Tetris';
+import GameMenu from './engine/menu/GameMenu';
 
 export default new P5((p: P5) => {
     //Inicializando algumas variaveis
@@ -25,7 +25,7 @@ export default new P5((p: P5) => {
 
     p.setup = () => {
         const { canvasWidth, canvasHeight } = body.build();
-        game = new Tetris({ p, canvasWidth, canvasHeight, body });
+        game = new GameMenu({ p, canvasWidth, canvasHeight, body });
         body.bound(game);
 
         //Limpando splash screen

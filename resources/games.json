@@ -1,10 +1,5 @@
 [
     {
-        "name": "Menu",
-        "nameSpace": "engine/menu",
-        "className": "GameMenu"
-    },
-    {
         "name": "Tetris",
         "nameSpace": "games/tetris",
         "className": "Tetris"
