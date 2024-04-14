@@ -15,71 +15,71 @@ export default class GameControls {
     protected timeout: number = this.delay / 5;
 
     protected beforeOnOff(game: Game) {
-        console.log('beforeOnOff', game);
+        //console.log('beforeOnOff', game);
     }
     protected beforeStartPause(game: Game) {
-        console.log('beforeStartPause', game);
+        //console.log('beforeStartPause', game);
     }
     protected beforeSound(game: Game) {
-        console.log('beforeSound', game);
+        //console.log('beforeSound', game);
     }
     protected beforeReset(game: Game) {
-        console.log('beforeReset', game);
+        //console.log('beforeReset', game);
     }
     protected beforeExit(game: Game) {
-        console.log('beforeExit', game);
+        //console.log('beforeExit', game);
     }
     protected beforeEnableColor(game: Game) {
-        console.log('beforeEnableColor', game);
+        //console.log('beforeEnableColor', game);
     }
     protected beforeUp(game: Game) {
-        console.log('beforeUp', game);
+        //console.log('beforeUp', game);
     }
     protected beforeDown(game: Game) {
-        console.log('beforeDown', game);
+        //console.log('beforeDown', game);
     }
     protected beforeRight(game: Game) {
-        console.log('beforeRight', game);
+        //console.log('beforeRight', game);
     }
     protected beforeLeft(game: Game) {
-        console.log('beforeLeft', game);
+        //console.log('beforeLeft', game);
     }
     protected beforeAction(game: Game) {
-        console.log('beforeAction', game);
+        //console.log('beforeAction', game);
     }
 
     protected afterOnOff(game: Game) {
-        console.log('afterOnOff', game);
+        //console.log('afterOnOff', game);
     }
     protected afterStartPause(game: Game) {
-        console.log('afterStartPause', game);
+        //console.log('afterStartPause', game);
     }
     protected afterSound(game: Game) {
-        console.log('afterSound', game);
+        //console.log('afterSound', game);
     }
     protected afterReset(game: Game) {
-        console.log('afterReset', game);
+        //console.log('afterReset', game);
     }
     protected afterExit(game: Game) {
-        console.log('afterExit', game);
+        //console.log('afterExit', game);
     }
     protected afterEnableColor(game: Game) {
-        console.log('afterEnableColor', game);
+        //console.log('afterEnableColor', game);
     }
     protected afterUp(game: Game) {
-        console.log('afterUp', game);
+        //console.log('afterUp', game);
     }
     protected afterDown(game: Game) {
-        console.log('afterDown', game);
+        //console.log('afterDown', game);
     }
     protected afterRight(game: Game) {
-        console.log('afterRight', game);
+        //console.log('afterRight', game);
     }
     protected afterLeft(game: Game) {
-        console.log('afterLeft', game);
+        //console.log('afterLeft', game);
     }
     protected afterAction(game: Game) {
-        console.log('afterAction', game);
+        //console.log('afterAction', game);
     }
 
     protected onOff(game: Game) {
@@ -122,20 +122,20 @@ export default class GameControls {
     }
 
     protected up(game: Game) {
-        console.log('up', game);
+        //console.log('up', game);
     }
     protected down(game: Game) {
-        console.log('down', game);
+        //console.log('down', game);
     }
     protected right(game: Game) {
-        console.log('right', game);
+        //console.log('right', game);
     }
     protected left(game: Game) {
-        console.log('left', game);
+        //console.log('left', game);
     }
 
     protected action(game: Game) {
-        console.log('action', game);
+        //console.log('action', game);
     }
 
     pressOnOff(game: Game) {
