@@ -46,7 +46,7 @@ export default class GameSession<T extends Game> {
         return false;
     }
 
-    public loadSession(): void {}
+    protected loadSession(): void {}
 
     protected get game(): T {
         return this._game;

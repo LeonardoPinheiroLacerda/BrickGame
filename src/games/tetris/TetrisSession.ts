@@ -35,7 +35,7 @@ export default class TetrisSession extends GameSession<Tetris> {
         );
     }
 
-    public loadSession(): void {
+    protected loadSession(): void {
         const tmpScore: any = JSON.parse(localStorage.getItem(SCORE_KEY));
 
         this.game.state.on = true;
