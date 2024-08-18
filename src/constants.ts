@@ -12,6 +12,7 @@ export const SHADOW_DISPERSION = '3px';
 
 export const MAIN_COLOR_QUERY_PARAM = 'body-color';
 export const BUTTON_COLOR_QUERY_PARAM = 'button-color';
+export const RUNNING_ON_APP_QUERY_PARAM = 'mobile';
 
 //Size
 export const GRID_X = 11;

@@ -1,5 +1,11 @@
 import Sound from '../enum/Sound';
-import { MUTED_KEY } from './../constants';
+import { MUTED_KEY, RUNNING_ON_APP_QUERY_PARAM } from './../constants';
+
+declare global {
+    interface Window {
+        ReactNativeWebView: any;
+    }
+}
 
 export default class GameSound {
     private _mute: boolean = JSON.parse(localStorage.getItem(MUTED_KEY)) != undefined ? JSON.parse(localStorage.getItem(MUTED_KEY)) : false;
@@ -7,12 +13,26 @@ export default class GameSound {
 
     private soundLibraryLoaded: boolean = false;
 
+    private shouldPlaySoundOnMobile: boolean;
+
+    constructor() {
+        const paramsString = window.location.href.substring(window.location.href.indexOf('?') + 1);
+        const searchParams = new URLSearchParams(paramsString);
+
+        this.shouldPlaySoundOnMobile = searchParams.get(RUNNING_ON_APP_QUERY_PARAM) === 'true' && window.ReactNativeWebView;
+    }
+
     async play(sound: Sound): Promise<void> {
         if (this.soundLibraryLoaded === false) {
             this.loadAll();
         }
 
         if (!this.mute) {
+            if (this.shouldPlaySoundOnMobile) {
+                window?.ReactNativeWebView?.postMessage(`PLAY;${this.soundId(sound)}`);
+                return;
+            }
+
             try {
                 const audio: HTMLAudioElement = this.audioElementFromSound(sound);
 
@@ -27,11 +47,21 @@ export default class GameSound {
     }
 
     async stop(sound: Sound): Promise<void> {
+        if (this.shouldPlaySoundOnMobile) {
+            window?.ReactNativeWebView?.postMessage(`STOP;${this.soundId(sound)}`);
+            return;
+        }
+
         const element: HTMLAudioElement = this.audioElementFromSound(sound);
         element?.pause();
     }
 
     async stopAll(): Promise<void> {
+        if (this.shouldPlaySoundOnMobile) {
+            window?.ReactNativeWebView?.postMessage(`STOP_ALL;)}`);
+            return;
+        }
+
         Object.values(Sound).forEach(sound => {
             const element: HTMLAudioElement = this.audioElementFromSound(sound);
             element?.pause();
