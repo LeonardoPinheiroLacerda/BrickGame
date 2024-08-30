@@ -58,7 +58,7 @@ export default class GameSound {
 
     async stopAll(): Promise<void> {
         if (this.shouldPlaySoundOnMobile) {
-            window?.ReactNativeWebView?.postMessage(`STOP_ALL;)}`);
+            window?.ReactNativeWebView?.postMessage(`STOP_ALL;`);
             return;
         }
 
